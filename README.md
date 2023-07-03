@@ -11,7 +11,7 @@ johtaniが個人的に検索エンジンの利用方法などを調べるため�
 python3 -m venv .venv
 source .venv/bin/activate
 pip install poetry
-poetry install
+poetry install --no-root
 ```
 
 ## データについて
