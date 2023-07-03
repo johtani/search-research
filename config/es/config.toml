@@ -2,3 +2,5 @@
 "url" = "http://192.168.1.240:9200"
 # インデックス名
 "index" = "esci-raw-data"
+# スキーマファイルのパス
+"schema_path" = "./schema/es/product-raw-index-schema.json"
