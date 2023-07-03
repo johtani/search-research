@@ -11,8 +11,6 @@ from backend.models import Product, EsProduct
 
 # JSONL形式のデータファイル
 FILE = pathlib.Path("./esci-raw-jsonl/products/esci-data-products-jp.json")
-# スキーマファイル
-SCHEMA_FILE = pathlib.Path("./schema/es/product-raw-index-schema.json")
 # 既存インデックスを削除してからデータ登録する場合はTrue
 DELETE_IF_EXISTS = False
 BULK_SIZE = 500
