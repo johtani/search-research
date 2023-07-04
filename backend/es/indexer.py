@@ -2,7 +2,8 @@ from backend.indexer import IndexRepository
 from elasticsearch import Elasticsearch
 import json
 from backend.es.config import Config
-
+from elasticsearch.helpers import streaming_bulk
+from typing import Iterable, Any, Callable
 
 class EsIndexRepository(IndexRepository):
     config: Config
@@ -36,3 +37,12 @@ class EsIndexRepository(IndexRepository):
 
     def delete_index(self):
         self.esclient.indices.delete(index=self.config.index)
+
+    def bulk_index(self, actions: Iterable[Any], progress: Callable[[None],None]) -> int:
+        successes = 0
+        for ok, action in streaming_bulk(
+                client=self.esclient, index=self.get_index_name(), actions=actions
+        ):
+            progress()
+            successes += ok
+        return successes

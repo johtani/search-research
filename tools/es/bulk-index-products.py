@@ -41,12 +41,7 @@ def main():
         progress = tqdm.tqdm(unit="docs", total=number_of_docs)
 
         df_data_jsonl = pd.read_json(FILE, orient="records", lines=True)
-        successes = 0
-        for ok, action in streaming_bulk(
-            client=repository.esclient, index=repository.get_index_name(), actions=generate_bulk_actions(df_data_jsonl)
-        ):
-            progress.update(1)
-            successes += ok
+        successes = indexer.bulk_index(generate_bulk_actions(df_data_jsonl), lambda :progress.update(1))
 
         LOGGER.info(" Indexed %d/%d documents" % (successes, number_of_docs))
 

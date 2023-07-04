@@ -1,5 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
+from typing import Iterable, Any, Callable
 class IndexRepository(ABC):
 
     @abstractmethod
@@ -17,6 +18,14 @@ class IndexRepository(ABC):
     @abstractmethod
     def delete_index(self):
         pass
+
+    @abstractmethod
+    def bulk_index(self, actions: Iterable[Any], progress: Callable[[None], None]):
+        """
+        TODO 他の検索エンジンでこれでいいかは要検討
+        """
+        pass
+
 
 class Indexer:
     repository: IndexRepository
@@ -44,3 +53,6 @@ class Indexer:
             self.logger.info(f"Error {err}")
             error = True
         return error
+
+    def bulk_index(self, actions: Iterable[Any], progress: Callable[[None],None]) -> int:
+        return self.repository.bulk_index(actions, progress)
