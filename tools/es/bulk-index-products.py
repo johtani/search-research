@@ -2,14 +2,13 @@ import logging
 import pathlib
 import pandas as pd
 import tqdm
-
-from elasticsearch.helpers import streaming_bulk
 from pandas import DataFrame
-
 import backend.es.config
 from backend.indexer import Indexer
 from backend.es.indexer import EsIndexRepository
+from backend.es.pipelines import raw_es_pipeline
 from backend.models import Product, EsProduct
+from backend.processor import PipelineManager
 
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 LOGGER = logging.getLogger(__name__)
@@ -21,9 +20,10 @@ FILE = pathlib.Path("./esci-raw-jsonl/products/esci-data-products-jp.json")
 DELETE_IF_EXISTS = False
 BULK_SIZE = 500
 
-def generate_bulk_actions(df: DataFrame):
+def generate_bulk_actions(df: DataFrame, pipeline: PipelineManager):
     for row in df.itertuples():
-        doc:EsProduct = backend.models.to_es_product(Product(row._asdict()))
+        product = Product(row._asdict())
+        doc = pipeline.apply_pipelines(product)
         yield doc
 
 def main():
@@ -32,6 +32,8 @@ def main():
     repository = backend.es.indexer.EsIndexRepository(config)
     indexer = Indexer(repository=repository)
     error = indexer.create_index(DELETE_IF_EXISTS)
+    pipeline = PipelineManager(raw_es_pipeline())
+
 
     if not error:
         LOGGER.info(" Indexing documents...")
@@ -41,7 +43,7 @@ def main():
         progress = tqdm.tqdm(unit="docs", total=number_of_docs)
 
         df_data_jsonl = pd.read_json(FILE, orient="records", lines=True)
-        successes = indexer.bulk_index(generate_bulk_actions(df_data_jsonl), lambda :progress.update(1))
+        successes = indexer.bulk_index(generate_bulk_actions(df_data_jsonl, pipeline), lambda :progress.update(1))
 
         LOGGER.info(" Indexed %d/%d documents" % (successes, number_of_docs))
 

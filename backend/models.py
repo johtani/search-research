@@ -19,5 +19,3 @@ class EsProduct(Product):
     _id: str
 
 
-def to_es_product(data: Product) -> EsProduct:
-    return EsProduct(data | {"_id": data["product_id"]})
