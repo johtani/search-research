@@ -1,3 +1,4 @@
+import logging
 import pathlib
 import pandas as pd
 import tqdm
@@ -9,6 +10,10 @@ import backend.es.config
 from backend.es.indexer import EsIndexer
 from backend.models import Product, EsProduct
 
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.INFO)
+
 # JSONL形式のデータファイル
 FILE = pathlib.Path("./esci-raw-jsonl/products/esci-data-products-jp.json")
 # 既存インデックスを削除してからデータ登録する場合はTrue
@@ -18,7 +23,7 @@ BULK_SIZE = 500
 def generate_bulk_actions(file: pathlib.Path):
     df_data_jsonl = pd.read_json(file, orient="records", lines=True)
     for row in df_data_jsonl.itertuples():
-        doc = backend.models.to_es_product(Product(row._asdict()))
+        doc:EsProduct = backend.models.to_es_product(Product(row._asdict()))
         yield doc
 
 def create_index(indexer: EsIndexer) -> bool:
@@ -27,28 +32,28 @@ def create_index(indexer: EsIndexer) -> bool:
         is_exists = indexer.is_exist_index()
         if DELETE_IF_EXISTS:
             if is_exists:
-                print(" Deleting existing %s" % indexer.config.index)
+                LOGGER.info(" Deleting existing %s" % indexer.config.index)
                 indexer.delete_index()
             is_exists = indexer.is_exist_index()
         if not is_exists:
-            print(" Creating index %s" % indexer.config.index)
+            LOGGER.info(" Creating index %s" % indexer.config.index)
             indexer.create_index()
         else:
-            print(" Already exists %s, then skip to create the index" % indexer.config.index)
+            LOGGER.info(" Already exists %s, then skip to create the index" % indexer.config.index)
 
     except (ApiError, TransportError) as err:
-        print(f"Error {err}")
+        LOGGER.info(f"Error {err}")
         error = True
     return error
 
 
 def main():
-    print("Start bulk indexing to raw index...")
+    LOGGER.info("Start bulk indexing to raw index...")
     config = backend.es.config.load_config()
     indexer = backend.es.indexer.EsIndexer(config)
     create_index(indexer)
 
-    print(" Indexing documents...")
+    LOGGER.info(" Indexing documents...")
     # TODO 総件数はデータから計算したほうがいいかも
     number_of_docs = 339059
     # プログレスバー表示用
@@ -60,8 +65,8 @@ def main():
         progress.update(1)
         successes += ok
 
-    print(" Indexed %d/%d documents" % (successes, number_of_docs))
-    print("Finish bulk index")
+    LOGGER.info(" Indexed %d/%d documents" % (successes, number_of_docs))
+    LOGGER.info("Finish bulk index")
 
 if __name__ == '__main__':
     main()
