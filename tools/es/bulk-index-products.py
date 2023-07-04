@@ -3,11 +3,12 @@ import pathlib
 import pandas as pd
 import tqdm
 
-from elasticsearch import TransportError, ApiError, Elasticsearch
 from elasticsearch.helpers import streaming_bulk
+from pandas import DataFrame
 
 import backend.es.config
-from backend.es.indexer import EsIndexer
+from backend.indexer import Indexer
+from backend.es.indexer import EsIndexRepository
 from backend.models import Product, EsProduct
 
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -20,52 +21,37 @@ FILE = pathlib.Path("./esci-raw-jsonl/products/esci-data-products-jp.json")
 DELETE_IF_EXISTS = False
 BULK_SIZE = 500
 
-def generate_bulk_actions(file: pathlib.Path):
-    df_data_jsonl = pd.read_json(file, orient="records", lines=True)
-    for row in df_data_jsonl.itertuples():
+def generate_bulk_actions(df: DataFrame):
+    for row in df.itertuples():
         doc:EsProduct = backend.models.to_es_product(Product(row._asdict()))
         yield doc
-
-def create_index(indexer: EsIndexer) -> bool:
-    error = False
-    try:
-        is_exists = indexer.is_exist_index()
-        if DELETE_IF_EXISTS:
-            if is_exists:
-                LOGGER.info(" Deleting existing %s" % indexer.config.index)
-                indexer.delete_index()
-            is_exists = indexer.is_exist_index()
-        if not is_exists:
-            LOGGER.info(" Creating index %s" % indexer.config.index)
-            indexer.create_index()
-        else:
-            LOGGER.info(" Already exists %s, then skip to create the index" % indexer.config.index)
-
-    except (ApiError, TransportError) as err:
-        LOGGER.info(f"Error {err}")
-        error = True
-    return error
-
 
 def main():
     LOGGER.info("Start bulk indexing to raw index...")
     config = backend.es.config.load_config()
-    indexer = backend.es.indexer.EsIndexer(config)
-    create_index(indexer)
+    repository = backend.es.indexer.EsIndexRepository(config)
+    indexer = Indexer(repository=repository)
+    error = indexer.create_index(DELETE_IF_EXISTS)
 
-    LOGGER.info(" Indexing documents...")
-    # TODO 総件数はデータから計算したほうがいいかも
-    number_of_docs = 339059
-    # プログレスバー表示用
-    progress = tqdm.tqdm(unit="docs", total=number_of_docs)
-    successes = 0
-    for ok, action in streaming_bulk(
-        client=indexer.esclient, index=indexer.config.index, actions=generate_bulk_actions(FILE)
-    ):
-        progress.update(1)
-        successes += ok
+    if not error:
+        LOGGER.info(" Indexing documents...")
+        # TODO 総件数はデータから計算したほうがいいかも
+        number_of_docs = 339059
+        # プログレスバー表示用
+        progress = tqdm.tqdm(unit="docs", total=number_of_docs)
 
-    LOGGER.info(" Indexed %d/%d documents" % (successes, number_of_docs))
+        df_data_jsonl = pd.read_json(FILE, orient="records", lines=True)
+        successes = 0
+        for ok, action in streaming_bulk(
+            client=repository.esclient, index=repository.get_index_name(), actions=generate_bulk_actions(df_data_jsonl)
+        ):
+            progress.update(1)
+            successes += ok
+
+        LOGGER.info(" Indexed %d/%d documents" % (successes, number_of_docs))
+
+    else:
+        LOGGER.info(" Error during create_index...")
     LOGGER.info("Finish bulk index")
 
 if __name__ == '__main__':

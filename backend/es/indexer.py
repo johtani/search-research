@@ -1,11 +1,10 @@
+from backend.indexer import IndexRepository
 from elasticsearch import Elasticsearch
 import json
-
-import backend
 from backend.es.config import Config
 
 
-class EsIndexer:
+class EsIndexRepository(IndexRepository):
     config: Config
     esclient: Elasticsearch
 
@@ -14,6 +13,9 @@ class EsIndexer:
         self.esclient = Elasticsearch(
             config.url
         )
+
+    def get_index_name(self):
+        return self.config.index
 
     def create_index(self):
         schema = self.load_schema_from_file()
