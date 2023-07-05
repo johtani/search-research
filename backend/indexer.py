@@ -1,8 +1,9 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import Iterable, Any, Callable
-class IndexRepository(ABC):
+from typing import Any, Callable, Iterable
 
+
+class IndexRepository(ABC):
     @abstractmethod
     def get_index_name(self):
         pass
@@ -20,7 +21,7 @@ class IndexRepository(ABC):
         pass
 
     @abstractmethod
-    def bulk_index(self, actions: Iterable[Any], progress: Callable[[None], None]):
+    def bulk_index(self, actions: Iterable[Any], progress: Callable):
         """
         TODO 他の検索エンジンでこれでいいかは要検討
         """
@@ -54,5 +55,5 @@ class Indexer:
             error = True
         return error
 
-    def bulk_index(self, actions: Iterable[Any], progress: Callable[[None],None]) -> int:
+    def bulk_index(self, actions: Iterable[Any], progress: Callable) -> int:
         return self.repository.bulk_index(actions, progress)

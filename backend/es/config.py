@@ -9,6 +9,7 @@ class Config:
     index: インデックス名
     schema_path: スキーマファイル（schema/es/product-raw-index-schema.json）
     """
+
     url: str
     index: str
     schema_path: str

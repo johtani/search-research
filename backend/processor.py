@@ -1,15 +1,15 @@
 import logging
-from backend.models import Product
-from typing import List
-from abc import ABC, abstractmethod
+from abc import abstractmethod
+from typing import Any, List, Mapping
 
-class Processor(ABC):
+
+class Processor:
     @abstractmethod
-    def apply(self, doc: Product) -> Product:
+    def apply(self, doc: Mapping[str, Any]) -> Mapping[str, Any]:
         pass
 
-class PipelineManager:
 
+class PipelineManager:
     processors: List[Processor]
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
@@ -17,7 +17,7 @@ class PipelineManager:
     def __init__(self, processors: List[Processor]):
         self.processors = processors
 
-    def apply_pipelines(self, doc: Product) -> Product:
+    def apply_pipelines(self, doc: Mapping[str, Any]) -> Mapping[str, Any]:
         for processor in self.processors:
             doc = processor.apply(doc)
         return doc

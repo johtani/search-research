@@ -1,11 +1,11 @@
-import dataclasses
-from typing import TypedDict, Optional
+from typing import Optional, TypedDict
 
 
 class Product(TypedDict):
     """
     productのデータ
     """
+
     product_id: str
     product_title: str
     product_description: Optional[str]
@@ -13,9 +13,3 @@ class Product(TypedDict):
     product_brand: Optional[str]
     product_color: Optional[str]
     product_locale: str
-
-
-class EsProduct(Product):
-    _id: str
-
-
