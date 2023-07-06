@@ -26,14 +26,19 @@ git clone https://github.com/amazon-science/esci-data.git
 
 [shuttie/esci-s： Extra product metadata for the Amazon ESCI dataset](https://github.com/shuttie/esci-s)も利用予定です。
 
-
 ## 対象検索エンジン
 
-* [TODO]インストール、起動方法など未検討
+検索エンジンは[docker-compose.yml](./docker-compose.yml)でそれぞれサービスとして定義します。
+
+```
+docker compose up <サービス名>
+```
+で起動します。
 
 ### 対応済み
 
-* Elasticsearch
+* Elasticsearch：サービス名 `es`
+  * kuromojiプラグインをインストール済み
 
 ### 対応予定？ 
  
@@ -45,7 +50,12 @@ git clone https://github.com/amazon-science/esci-data.git
 
 ## データの準備 
 
+Elasticsearchにデータを登録する処理は以下の通りです。
+現時点では、esci-dataのpruductデータのうち、`product_locale=jp`のものだけが登録されます。
 
+```
+python -m tools.es.bulk-index-products
+```
 
 ## License
 

@@ -1,5 +1,5 @@
 # 接続文字列。現在はURL形式のみサポート See https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/connecting.html
-"url" = "http://192.168.1.240:9200"
+"url" = "http://localhost:9200"
 # インデックス名
 "index" = "esci-raw-data"
 # スキーマファイルのパス

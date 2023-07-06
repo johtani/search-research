@@ -1,7 +1,11 @@
 .venv
 .git
 .idea
-
-esci-data
-esci-raw-jsonl
+.mypy_cache
+**/.ipynb_checkpoints
 **/__pycache__
+
+# esciのリポジトリ
+esci-data
+# esci-dataのデータから生成したJSONファイルの保存ディレクトリ
+esci-raw-jsonl
