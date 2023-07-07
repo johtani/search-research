@@ -19,6 +19,7 @@ jupyterlab = "^4.0.2"
 [tool.poetry.group.dev.dependencies]
 ipywidgets = "^8.0.6"
 pre-commit = "^3.3.3"
+mypy = "^1.4.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -39,3 +40,4 @@ max_line_length = 120
 
 [tool.mypy]
 ignore_missing_imports = true
+files = ["backend", "tools"]

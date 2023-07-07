@@ -29,7 +29,7 @@ class EsIndexRepository(IndexRepository):
         return schema
 
     def is_exist_index(self) -> bool:
-        return self.esclient.indices.exists(index=self.config.index)
+        return self.esclient.indices.exists(index=self.config.index).body
 
     def delete_index(self):
         self.esclient.indices.delete(index=self.config.index)
