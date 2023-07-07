@@ -1,5 +1,5 @@
 import json
-from typing import Any, Callable, Iterable
+from typing import Any, Callable, Iterable, Mapping
 
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import streaming_bulk
@@ -34,9 +34,20 @@ class EsIndexRepository(IndexRepository):
     def delete_index(self):
         self.esclient.indices.delete(index=self.config.index)
 
+    def _update_index_settings(self, settings: Mapping[str, Any]):
+        self.esclient.indices.put_settings(index=self.config.index, settings=settings)
+
+    def _refresh(self):
+        self.esclient.indices.refresh(index=self.config.index)
+
     def bulk_index(self, actions: Iterable[Any], progress: Callable) -> int:
         successes = 0
+        settings: Mapping[str, Any] = {"index": {"refresh_interval": "-1"}}
+        self._update_index_settings(settings=settings)
         for ok, action in streaming_bulk(client=self.esclient, index=self.get_index_name(), actions=actions):
             progress()
             successes += ok
+        self._refresh()
+        settings = {"index": {"refresh_interval": None}}
+        self._update_index_settings(settings=settings)
         return successes

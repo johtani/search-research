@@ -40,14 +40,11 @@ def main():
 
     if not error:
         LOGGER.info(" Indexing documents...")
-        # TODO 総件数はデータから計算したほうがいいかも
-        number_of_docs = 339059
+        df_data_jsonl = pd.read_json(FILE, orient="records", lines=True)
+        number_of_docs = len(df_data_jsonl)
         # プログレスバー表示用
         progress = tqdm.tqdm(unit="docs", total=number_of_docs)
-
-        df_data_jsonl = pd.read_json(FILE, orient="records", lines=True)
         successes = indexer.bulk_index(generate_bulk_actions(df_data_jsonl, pipeline), lambda: progress.update(1))
-
         LOGGER.info(" Indexed %d/%d documents" % (successes, number_of_docs))
 
     else:
