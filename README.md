@@ -3,7 +3,7 @@
 johtaniが個人的に検索エンジンの利用方法などを調べるための個人プロジェクトのリポジトリ。
 ベクトル検索などを試す予定です。
 
-## setup
+## セットアップ
 
 おもにPythonを利用します。
 
@@ -29,10 +29,12 @@ git clone https://github.com/amazon-science/esci-data.git
 ## 対象検索エンジン
 
 検索エンジンは[docker-compose.yml](./docker-compose.yml)でそれぞれサービスとして定義します。
+Docker Desktop、docker composeがインストールされていることを想定しています。
 
 ```
 docker compose up <サービス名>
 ```
+
 で起動します。
 
 ### 対応済み
