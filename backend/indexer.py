@@ -1,9 +1,9 @@
 import logging
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from typing import Any, Callable, Iterable
 
 
-class IndexRepository(ABC):
+class IndexRepository:
     @abstractmethod
     def get_index_name(self):
         pass
