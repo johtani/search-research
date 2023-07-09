@@ -12,7 +12,10 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install poetry
 poetry install --no-root
+pip install japanese-clip
 ```
+
+> `pip install japanese-clip`は依存関係にあるモジュールのインストールがpoetryだけではできなかったので暫定対処として実行する必要があります。
 
 ## データについて
 

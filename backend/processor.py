@@ -1,11 +1,11 @@
 import logging
 from abc import abstractmethod
-from typing import Any, List, Mapping
+from typing import Any, Dict, List
 
 
 class Processor:
     @abstractmethod
-    def apply(self, doc: Mapping[str, Any]) -> Mapping[str, Any]:
+    def apply(self, doc: Dict[str, Any]) -> Dict[str, Any]:
         pass
 
 
@@ -17,7 +17,7 @@ class PipelineManager:
     def __init__(self, processors: List[Processor]):
         self.processors = processors
 
-    def apply_pipelines(self, doc: Mapping[str, Any]) -> Mapping[str, Any]:
+    def apply_pipelines(self, doc: Dict[str, Any]) -> Dict[str, Any]:
         for processor in self.processors:
             doc = processor.apply(doc)
         return doc

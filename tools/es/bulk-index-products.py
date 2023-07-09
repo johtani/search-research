@@ -7,9 +7,8 @@ from pandas import DataFrame
 
 import backend.es.config
 from backend.es.indexer import EsIndexRepository
-from backend.es.pipelines import raw_es_pipeline
+from backend.es.pipelines import ja_clip_es_pipeline
 from backend.indexer import Indexer
-from backend.models import Product
 from backend.processor import PipelineManager
 
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
@@ -19,13 +18,13 @@ LOGGER.setLevel(logging.INFO)
 # JSONL形式のデータファイル
 FILE = pathlib.Path("./esci-raw-jsonl/products/esci-data-products-jp.json")
 # 既存インデックスを削除してからデータ登録する場合はTrue
-DELETE_IF_EXISTS = False
+DELETE_IF_EXISTS = True
 BULK_SIZE = 500
 
 
 def generate_bulk_actions(df: DataFrame, pipeline: PipelineManager):
     for row in df.itertuples():
-        product: Product = row._asdict()
+        product = row._asdict()
         doc = pipeline.apply_pipelines(product)
         yield doc
 
@@ -36,7 +35,8 @@ def main():
     repository = EsIndexRepository(config)
     indexer = Indexer(repository=repository)
     error = indexer.create_index(DELETE_IF_EXISTS)
-    pipeline = PipelineManager(raw_es_pipeline())
+    # pipeline = PipelineManager(raw_es_pipeline())
+    pipeline = PipelineManager(ja_clip_es_pipeline())
 
     if not error:
         LOGGER.info(" Indexing documents...")

@@ -7,7 +7,7 @@ class Config:
     """
     url: 接続文字列。「https://url」の形式の文字列
     index: インデックス名
-    schema_path: スキーマファイル（schema/es/product-raw-index-schema.json）
+    schema_path: スキーマファイル（schema/es/product-index-schema.json）
     """
 
     url: str

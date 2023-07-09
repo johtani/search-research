@@ -15,6 +15,7 @@ transformers = "^4.30.2"
 sentence-transformers = "^2.2.2"
 elasticsearch = "^8.8.0"
 jupyterlab = "^4.0.2"
+japanese-clip = {git = "https://github.com/rinnakk/japanese-clip.git"}
 
 [tool.poetry.group.dev.dependencies]
 ipywidgets = "^8.0.6"

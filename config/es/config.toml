@@ -1,6 +1,6 @@
 # 接続文字列。現在はURL形式のみサポート See https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/connecting.html
 "url" = "http://localhost:9200"
 # インデックス名
-"index" = "esci-raw-data"
+"index" = "esci-products"
 # スキーマファイルのパス
-"schema_path" = "./schema/es/product-raw-index-schema.json"
+"schema_path" = "./schema/es/product-index-schema.json"

@@ -54,6 +54,12 @@
       },
       "product_locale": {
         "type": "keyword"
+      },
+      "products_dense_vector": {
+        "type": "dense_vector",
+        "dims": 512,
+        "index": true,
+        "similarity": "cosine"
       }
     }
   },
