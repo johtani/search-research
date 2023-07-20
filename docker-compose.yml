@@ -1,6 +1,18 @@
 version: "2.2"
 
 services:
+  backend:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    init: true
+    environment:
+      - TZ=Asia/Tokyo
+    command: sleep infinity
+    volumes:
+      - .:/workspace/search-research:cached
+      - venv-search-research-backend:/workspace/search-research/.venv
+
   es:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.8.2
     container_name: elasticsearch
@@ -16,3 +28,5 @@ services:
     entrypoint: >
       sh -c "./bin/elasticsearch-plugin list | grep -q analysis-kuromoji || ./bin/elasticsearch-plugin install analysis-kuromoji; /usr/local/bin/docker-entrypoint.sh"
 
+volumes:
+  venv-search-research-backend:
