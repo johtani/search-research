@@ -1,17 +1,9 @@
 {
   "name": "search-research",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11-bookworm",
-  "containerEnv": {
-    "TZ": "Asia/Tokyo"
-  },
-  "runArgs": ["--init"],
-  "features": {
-    "ghcr.io/devcontainers-contrib/features/poetry:2": {}
-  },
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "backend",
+  "workspaceFolder": "/workspace/search-research",
   "postCreateCommand": "/bin/sh ./.devcontainer/postCreateCommand.sh",
-  "mounts": [
-    "source=venv-${devcontainerId},target=${containerWorkspaceFolder}/.venv,type=volume"
-  ],
   "customizations": {
     "vscode": {
       "settings": {
@@ -29,7 +21,8 @@
         "esbenp.prettier-vscode",
         "ms-python.python",
         "njpwerner.autodocstring",
-        "KevinRose.vsc-python-indent"
+        "KevinRose.vsc-python-indent",
+        "ms-toolsai.jupyter"
       ]
     }
   }
