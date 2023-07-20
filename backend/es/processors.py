@@ -1,3 +1,4 @@
+import logging
 from typing import Any, Dict
 
 import japanese_clip as ja_clip
@@ -21,10 +22,13 @@ class JaClipEncodeProcessor(Processor):
     設定先は、target_fieldで指定
     """
 
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
     _MODEL_NAME = "rinna/japanese-clip-vit-b-16"
 
     def __init__(self, target_field: str):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.logger.info(f"device is {self.device}")
         self.model, preprocess = ja_clip.load(self._MODEL_NAME, device=self.device)
         self.tokenizer = ja_clip.load_tokenizer()
         self.target_field = target_field

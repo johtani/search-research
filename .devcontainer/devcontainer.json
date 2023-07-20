@@ -2,8 +2,12 @@
   "name": "search-research",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "backend",
+  "runServices": ["backend"],
   "workspaceFolder": "/workspace/search-research",
   "postCreateCommand": "/bin/sh ./.devcontainer/postCreateCommand.sh",
+  "features": {
+    "ghcr.io/devcontainers/features/nvidia-cuda:1": {}
+  },
   "customizations": {
     "vscode": {
       "settings": {

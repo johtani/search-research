@@ -1,4 +1,4 @@
-version: "2.2"
+version: "3.8"
 
 services:
   backend:
@@ -9,6 +9,13 @@ services:
     environment:
       - TZ=Asia/Tokyo
     command: sleep infinity
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     volumes:
       - .:/workspace/search-research:cached
       - venv-search-research-backend:/workspace/search-research/.venv
