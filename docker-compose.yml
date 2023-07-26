@@ -21,7 +21,7 @@ services:
       - venv-search-research-backend:/workspace/search-research/.venv
 
   es:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
     container_name: elasticsearch
     ports:
       - 9200:9200
