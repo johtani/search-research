@@ -39,6 +39,7 @@ def parse_args() -> Args:
         action="store_true",
         help="If true, delete the index before indexing if the index exists.",
     )
+
     return Args(**vars(parser.parse_args()))
 
 
@@ -63,10 +64,10 @@ def main():
     elif args.pipeline == "with_vector_by_ja_clip":
         pipeline = PipelineManager(ja_clip_es_pipeline())
     else:
-        LOGGER.error(f"Does not support {args.search_engine} yet...")
+        LOGGER.error(f"Does not support {args.pipeline} yet...")
         quit()
-    LOGGER.info(f"Pipeline is [{args.pipeline}]")
-    LOGGER.info(f"'delete_if_exists' is {args.delete_if_exists}")
+    LOGGER.info(f"{args.pipeline=}")
+    LOGGER.info(f"{args.delete_if_exists=}")
 
     LOGGER.info("Start bulk indexing to raw index...")
     indexer = Indexer(repository=repository)
