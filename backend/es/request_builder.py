@@ -1,6 +1,8 @@
+import json
 import logging
 
 from backend.es.searcher import EsReqeust
+from backend.es.templates.default_query_template import DefaultTemplate
 from backend.models import SearchOptions, SearchQuery, SearchRequest
 
 logger = logging.getLogger("es_request_builder")
@@ -8,7 +10,10 @@ logger = logging.getLogger("es_request_builder")
 
 def build_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
     if request.query.search_term is not None:
-        logger.error("not implemented yet")
+        template = DefaultTemplate()
+        query = template.template.render(query=request.query, fields=template.fields(request.options))
+        logger.debug(query)
+        es_request.query = json.loads(query)
     return es_request
 
 
