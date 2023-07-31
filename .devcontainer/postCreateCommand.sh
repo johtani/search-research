@@ -17,4 +17,10 @@ poetry run pre-commit install
 VENV=`poetry env info -p`
 echo "source ${VENV}/bin/activate" >> ~/.bashrc
 
+# for frontend
+cd frontend
+. ${NVM_DIR}/nvm.sh
+nvm install
+yarn
+
 echo "FINISH Install"

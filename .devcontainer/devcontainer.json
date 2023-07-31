@@ -6,7 +6,10 @@
   "workspaceFolder": "/workspace/search-research",
   "postCreateCommand": "/bin/sh ./.devcontainer/postCreateCommand.sh",
   "features": {
-    "ghcr.io/devcontainers/features/nvidia-cuda:1": {}
+    "ghcr.io/devcontainers/features/nvidia-cuda:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "16"
+    }
   },
   "customizations": {
     "vscode": {
