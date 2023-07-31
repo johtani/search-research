@@ -1,8 +1,10 @@
+import json
+
 import pytest
 
-from backend.es.request_builder import build_size_offset, build_source
+from backend.es.request_builder import build_query, build_size_offset, build_source
 from backend.es.searcher import EsReqeust, EsRequestSource
-from backend.models import SearchOptions, SearchQuery
+from backend.models import SearchOptions, SearchQuery, SearchRequest
 
 
 @pytest.mark.parametrize(
@@ -30,4 +32,55 @@ def test_build_size_offset(input, expected):
 def test_build_source(input, expected):
     tmp = EsReqeust()
     result = build_source(input, tmp)
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    ("input", "expected"),
+    [
+        (
+            SearchRequest(
+                query=SearchQuery(search_term="マスク　チェーン"),
+                options=SearchOptions(search_fields={"a": {"weight": 3}, "b": {}, "c": {}}),
+            ),
+            EsReqeust(
+                query=json.loads(
+                    """
+                {
+                    "bool": {
+                        "should": [
+                            {
+                                "multi_match": {
+                                    "query": "マスク　チェーン",
+                                    "fields": ["a^3", "b^1", "c^1"],
+                                    "type": "best_fields",
+                                    "operator": "and"
+                                }
+                            },
+                            {
+                                "multi_match": {
+                                    "query": "マスク　チェーン",
+                                    "fields": ["a^3", "b^1", "c^1"],
+                                    "type": "cross_fields"
+                                }
+                            },
+                            {"multi_match": {"query": "マスク　チェーン", "fields": ["a^3", "b^1", "c^1"], "type": "phrase"}},
+                            {
+                                "multi_match": {
+                                    "query": "マスク　チェーン",
+                                    "fields": ["a^3", "b^1", "c^1"],
+                                    "type": "phrase_prefix"
+                                }
+                            }
+                        ]
+                    }
+                }"""
+                )
+            ),
+        )
+    ],
+)
+def test_build_query(input, expected):
+    tmp = EsReqeust()
+    result = build_query(input, tmp)
     assert result == expected
