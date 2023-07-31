@@ -1,7 +1,7 @@
 import pytest
 
 from backend.es.request_builder import build_size_offset, build_source
-from backend.es.searcher import EsReqeust
+from backend.es.searcher import EsReqeust, EsRequestSource
 from backend.models import SearchOptions, SearchQuery
 
 
@@ -22,8 +22,8 @@ def test_build_size_offset(input, expected):
     ("input", "expected"),
     [
         (
-            SearchOptions(search_fields={"a": {"weight": 3}, "b": {}, "c": {}}),
-            EsReqeust(source={"includes": ["a", "b", "c"]}),
+            SearchOptions(result_fields={"a": {}, "b": {"snippet": {"size": 3, "fallback": True}}, "c": {}}),
+            EsReqeust(source=EsRequestSource(includes=["a", "b", "c"])),
         )
     ],
 )

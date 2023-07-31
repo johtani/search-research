@@ -1,9 +1,15 @@
 import dataclasses
-from typing import Any
+from dataclasses import field
+from typing import Any, List
 
 from elasticsearch import Elasticsearch
 
 from backend.es.config import Config
+
+
+@dataclasses.dataclass
+class EsRequestSource:
+    includes: List[str] = field(default_factory=list)
 
 
 @dataclasses.dataclass
@@ -14,7 +20,7 @@ class EsReqeust:
     size: int = 20
     sort: Any | None = None
     highlight: Any | None = None
-    source: Any | None = None
+    source: EsRequestSource = field(default_factory=EsRequestSource)
 
 
 class EsSearchRepository:
@@ -33,7 +39,7 @@ class EsSearchRepository:
             from_=request.from_,
             size=request.size,
             highlight=request.highlight,
-            source=request.source,
+            source=dataclasses.asdict(request.source),
         )
         return res.body
 

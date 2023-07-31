@@ -32,5 +32,6 @@ def build_size_offset(query: SearchQuery, es_request: EsReqeust) -> EsReqeust:
 
 def build_source(options: SearchOptions, es_request: EsReqeust) -> EsReqeust:
     if options.result_fields is not None:
-        logger.error("not implemented yet")
+        for field in options.result_fields.keys():
+            es_request.source.includes.append(field)
     return es_request
