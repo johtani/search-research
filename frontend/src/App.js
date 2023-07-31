@@ -1,7 +1,5 @@
 import React from "react";
-
-import AppSearchAPIConnector from "@elastic/search-ui-app-search-connector";
-
+import CustomConnector from "./connector"
 import {
   ErrorBoundary,
   Facet,
@@ -17,28 +15,41 @@ import {
 import { Layout } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 
-import {
-  buildAutocompleteQueryConfig,
-  buildFacetConfigFromConfig,
-  buildSearchOptionsFromConfig,
-  buildSortOptionsFromConfig,
-  getConfig,
-  getFacetFields
-} from "./config/config-helper";
+const connector = new CustomConnector();
 
-const { hostIdentifier, searchKey, endpointBase, engineName } = getConfig();
-const connector = new AppSearchAPIConnector({
-  searchKey,
-  engineName,
-  hostIdentifier,
-  endpointBase
-});
 const config = {
   searchQuery: {
-    facets: buildFacetConfigFromConfig(),
-    ...buildSearchOptionsFromConfig()
+    search_fields: {
+      "product_title.ja": {
+        weight: 3
+      },
+      "product_description.ja": {},
+      "product_bullet_point.ja": {}
+    },
+    result_fields: {
+      product_id: {},
+      product_brand: {},
+      product_title: {},
+      "product_title.ja": {
+        snippet: {
+          size: 3,
+          fallback: true
+        }
+      },
+      "product_description.ja": {
+        snippet: {
+          size: 100,
+          fallback: true
+        }
+      }
+    },
+    disjunctiveFacets: ["product_color", "product_brand", "product_locale"],
+    facets: {
+      "product_locale": { type: "value" },
+      "product_brand": { type: "value" },
+      "product_color": { type: "value" }
+    }
   },
-  autocompleteQuery: buildAutocompleteQueryConfig(),
   apiConnector: connector,
   alwaysSearchOnInitialLoad: true
 };
@@ -52,25 +63,23 @@ export default function App() {
             <div className="App">
               <ErrorBoundary>
                 <Layout
-                  header={<SearchBox autocompleteSuggestions={true} />}
+                  header={<SearchBox autocompleteSuggestions={false} />}
                   sideContent={
                     <div>
                       {wasSearched && (
                         <Sorting
                           label={"Sort by"}
-                          sortOptions={buildSortOptionsFromConfig()}
+                          sortOptions={[]}
                         />
                       )}
-                      {getFacetFields().map(field => (
-                        <Facet key={field} field={field} label={field} />
-                      ))}
+                      <Facet key={"1"} field={"product_locale"} label={"locales"} />
+                      <Facet key={"2"} field={"product_brand"} label={"brands"} />
+                      <Facet key={"3"} field={"product_color"} label={"colors"} />
                     </div>
                   }
                   bodyContent={
                     <Results
-                      titleField={getConfig().titleField}
-                      urlField={getConfig().urlField}
-                      thumbnailField={getConfig().thumbnailField}
+                      titleField={"product_title.ja"}
                       shouldTrackClickThrough={true}
                     />
                   }
