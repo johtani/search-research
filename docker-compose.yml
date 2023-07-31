@@ -19,6 +19,7 @@ services:
     volumes:
       - .:/workspace/search-research:cached
       - venv-search-research-backend:/workspace/search-research/.venv
+      - node-modules-search-research:/workspace/search-research/frontend/node_modules
 
   es:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
@@ -29,6 +30,11 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - http.host=0.0.0.0
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - http.cors.allow-methods=*
+      - http.cors.allow-headers=*
     volumes:
       - ./search-engine/es/data:/usr/share/elasticsearch/data
     user: elasticsearch
@@ -37,3 +43,4 @@ services:
 
 volumes:
   venv-search-research-backend:
+  node-modules-search-research:
