@@ -3,7 +3,8 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.search_engine_translator import EsTranslator, SearchRequest
+from backend.models import SearchRequest
+from backend.search_engine_translator import EsTranslator
 
 app = FastAPI()
 
@@ -33,7 +34,7 @@ translator = EsTranslator()
 @app.post("/search")
 async def search(request: SearchRequest):
     logger.info(f"{request=}")
-    return translator.translateAndSearch(request)
+    return translator.translate_and_search(request)
 
 
 @app.post("/autocomplete")
