@@ -5,7 +5,7 @@ from backend.es.searcher import EsReqeust
 from backend.es.templates.default_query_template import DefaultTemplate
 from backend.models import SearchOptions, SearchQuery, SearchRequest
 
-logger = logging.getLogger("es_request_builder")
+logger = logging.getLogger(__file__)
 
 
 def build_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
@@ -14,6 +14,8 @@ def build_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
         query = template.template.render(query=request.query, fields=template.fields(request.options))
         logger.debug(query)
         es_request.query = json.loads(query)
+    else:
+        es_request.query = "*"
     return es_request
 
 
