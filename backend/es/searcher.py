@@ -1,6 +1,7 @@
 import dataclasses
+import json
 from dataclasses import field
-from typing import Any, List
+from typing import Any, Dict, List, Optional, TypedDict, Union
 
 from elasticsearch import Elasticsearch
 
@@ -23,6 +24,31 @@ class EsReqeust:
     source: EsRequestSource = field(default_factory=EsRequestSource)
 
 
+class HitItem(TypedDict):
+    _index: str
+    _id: str
+    _score: float
+    _source: Dict[str, Any]
+    highlight: Dict[str, List[str]]
+
+
+class HitsData(TypedDict):
+    total: int | Dict[str, Union[int, str]]
+    max_score: float
+    hits: List[HitItem]
+
+
+class AggregationsData(TypedDict):
+    facet_bucket_all: Dict[str, Any]
+
+
+class EsResponse(TypedDict):
+    timed_out: bool
+    took: int
+    hits: HitsData
+    aggregations: Optional[AggregationsData]
+
+
 class EsSearchRepository:
     config: Config
     esclient: Elasticsearch
@@ -31,7 +57,7 @@ class EsSearchRepository:
         self.config = config
         self.esclient = Elasticsearch(config.url)
 
-    def search(self, request: EsReqeust):
+    def search(self, request: EsReqeust) -> EsResponse:
         res = self.esclient.search(
             index=self.config.index,
             query=request.query,
@@ -41,7 +67,8 @@ class EsSearchRepository:
             highlight=request.highlight,
             source=dataclasses.asdict(request.source),
         )
-        return res.body
+        es_res: EsResponse = json.loads(res.body)
+        return es_res
 
     def autocomplete(self, request):
         return None

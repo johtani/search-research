@@ -16,7 +16,7 @@ from backend.models import SearchOptions, SearchQuery, SearchRequest
 )
 def test_build_size_offset(input, expected):
     tmp = EsReqeust()
-    result = build_size_offset(input, tmp)
+    result = build_size_offset(query=input, es_request=tmp)
     assert result == expected
 
 
@@ -31,7 +31,7 @@ def test_build_size_offset(input, expected):
 )
 def test_build_source(input, expected):
     tmp = EsReqeust()
-    result = build_source(input, tmp)
+    result = build_source(options=input, es_request=tmp)
     assert result == expected
 
 
@@ -82,5 +82,5 @@ def test_build_source(input, expected):
 )
 def test_build_query(input, expected):
     tmp = EsReqeust()
-    result = build_query(input, tmp)
+    result = build_query(request=input, es_request=tmp)
     assert result == expected
