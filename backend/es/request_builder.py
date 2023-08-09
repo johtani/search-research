@@ -2,20 +2,23 @@ import json
 import logging
 
 from backend.es.searcher import EsReqeust
-from backend.es.templates.default_query_template import DefaultTemplate
+from backend.es.templates.query_template import (
+    MatchAllQueryTemplate,
+    SearchUIQueryTemplate,
+)
 from backend.models import SearchOptions, SearchQuery, SearchRequest
 
 logger = logging.getLogger(__file__)
 
 
 def build_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
-    if request.query.search_term is not None:
-        template = DefaultTemplate()
-        query = template.template.render(query=request.query, fields=template.fields(request.options))
+    if request.query.search_term:
+        template = SearchUIQueryTemplate()
+        query = template.render(request)
         logger.debug(query)
         es_request.query = json.loads(query)
     else:
-        es_request.query = "*"
+        es_request.query = json.loads(MatchAllQueryTemplate().render())
     return es_request
 
 
