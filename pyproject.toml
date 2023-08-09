@@ -43,7 +43,7 @@ filter_files = true
 multi_line_output = 3
 
 [tool.flake8]
-max_line_length = 120
+max_line_length = 180
 
 [tool.mypy]
 ignore_missing_imports = true

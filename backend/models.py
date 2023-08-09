@@ -65,28 +65,8 @@ class HighlightData(BaseReqResModel):
     snippet: List[str]
 
 
-class SourceData(BaseReqResModel):
-    product_id: str
-    product_title: str
-    product_brand: str
-
-
-class RawHitItem(BaseReqResModel):
-    _index: str
-    _id: str
-    _score: float
-    _source: SourceData
-    highlight: Dict[str, HighlightData]
-
-
-class ResultItem(BaseReqResModel):
-    id: Dict[str, str]
-    _meta: Dict[str, RawHitItem]
-    product_id: Dict[str, str]
-    product_title: Dict[str, str]
-    product_brand: Dict[str, str]
-    product_title_ja: HighlightData
-    product_description_ja: HighlightData
+class RawData(BaseReqResModel):
+    raw: str
 
 
 class SearchResult(BaseReqResModel):
@@ -97,6 +77,6 @@ class SearchResult(BaseReqResModel):
     was_searched: bool = False
     total_results: int = 0
     facets: Dict[str, List[FacetItem]] = {}
-    results: List[ResultItem] = []
+    results: List[Dict[str, str | Dict[str, Any] | RawData | HighlightData]] = []
     request_id: str | None = None
     raw_response: Any | None = None

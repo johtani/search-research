@@ -3,8 +3,8 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from backend.es.search_engine_translator import EsTranslator
 from backend.models import SearchRequest
-from backend.search_engine_translator import EsTranslator
 
 app = FastAPI()
 

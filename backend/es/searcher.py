@@ -24,11 +24,12 @@ class EsReqeust:
     source: EsRequestSource = field(default_factory=EsRequestSource)
 
 
-class HitItem(TypedDict):
+class HitItem(TypedDict, total=False):
     _index: str
     _id: str
     _score: float
     _source: Dict[str, Any]
+    _ignored: Optional[List[str]]
     highlight: Dict[str, List[str]]
 
 
