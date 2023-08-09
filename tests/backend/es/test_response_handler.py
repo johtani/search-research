@@ -16,6 +16,7 @@ from backend.models import SearchOptions, SearchQuery, SearchRequest, SearchResu
             EsResponse(
                 took=36,
                 timed_out=False,
+                _shards={},
                 hits=HitsData(total={"value": 5885}, max_score=100, hits=[]),
                 aggregations=None,
             ),
@@ -33,7 +34,11 @@ from backend.models import SearchOptions, SearchQuery, SearchRequest, SearchResu
         ),
         (
             EsResponse(
-                took=36, timed_out=False, hits=HitsData(total={"value": 59}, max_score=100, hits=[]), aggregations=None
+                took=36,
+                timed_out=False,
+                _shards={},
+                hits=HitsData(total={"value": 59}, max_score=100, hits=[]),
+                aggregations=None,
             ),
             SearchRequest(
                 query=SearchQuery(search_term="グローブ", current=3, results_per_page=20), options=SearchOptions()
@@ -63,6 +68,7 @@ def test_translate_summary(es_res, search_req, expected):
                 timed_out=False,
                 took=0,
                 aggregations=None,
+                _shards={},
                 hits=HitsData(
                     total=0,
                     max_score=0,
@@ -83,6 +89,16 @@ def test_translate_summary(es_res, search_req, expected):
                                 "product_description.ja": [
                                     "ジュエリー修復、手作りアクセサリー、ハンドメイド作品への飾り付け、DIYなど様々な用途にお使いいただけます メガネチャーム、<em>マスク</em>チャーム、ネックレスの修理などにも最適です"
                                 ],
+                            },
+                        ),
+                        HitItem(
+                            _index="esci-products",
+                            _id="B08X3LS1V5",
+                            _score=565.36646,
+                            _source={
+                                "product_id": "B08X3LS1V5",
+                                "product_title": "M’ｓカニカン 12ｍｍ 100個 シルバー マスクチェーン ネックレス メガネチェーン ハンドメイド チャーム",
+                                "product_brand": "ノーブランド品",
                             },
                         ),
                         HitItem(
@@ -147,6 +163,25 @@ def test_translate_summary(es_res, search_req, expected):
                                 "ジュエリー修復、手作りアクセサリー、ハンドメイド作品への飾り付け、DIYなど様々な用途にお使いいただけます メガネチャーム、<em>マスク</em>チャーム、ネックレスの修理などにも最適です"
                             ]
                         },
+                    },
+                    {
+                        "id": {"raw": "B08X3LS1V5"},
+                        "_meta": {
+                            "id": "B08X3LS1V5",
+                            "rawHit": {
+                                "_id": "B08X3LS1V5",
+                                "_index": "esci-products",
+                                "_score": 565.36646,
+                                "_source": {
+                                    "product_id": "B08X3LS1V5",
+                                    "product_title": "M’ｓカニカン 12ｍｍ 100個 シルバー マスクチェーン ネックレス メガネチェーン ハンドメイド チャーム",
+                                    "product_brand": "ノーブランド品",
+                                },
+                            },
+                        },
+                        "product_id": {"raw": "B08X3LS1V5"},
+                        "product_title": {"raw": "M’ｓカニカン 12ｍｍ 100個 シルバー マスクチェーン ネックレス メガネチェーン ハンドメイド チャーム"},
+                        "product_brand": {"raw": "ノーブランド品"},
                     },
                     {
                         "id": {"raw": "B071J4TRNW"},

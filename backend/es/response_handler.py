@@ -31,9 +31,13 @@ def hits2doc(hit: HitItem) -> DocFields:
     fields: Dict[str, Field] = {}
     # highlightsと_sourceに取得するべきフィールドは入っているものとして処理をする。
     source_keys = hit["_source"].keys()
-    highlight_keys = hit["highlight"].keys()
+    if "highlight" in hit and hit["highlight"] is not None:
+        highlights = hit["highlight"]
+    else:
+        highlights = {}
+    highlight_keys = highlights.keys()
     for key in source_keys | highlight_keys:
-        fields[key] = Field(raw=hit["_source"].get(key, ""), snippets=hit["highlight"].get(key, []))
+        fields[key] = Field(raw=hit["_source"].get(key, ""), snippets=highlights.get(key, []))
     return DocFields(id=hit["_id"], raw=hit, fields=fields)
 
 

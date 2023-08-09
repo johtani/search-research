@@ -1,5 +1,4 @@
 import dataclasses
-import json
 from dataclasses import field
 from typing import Any, Dict, List, Optional, TypedDict, Union
 
@@ -30,7 +29,7 @@ class HitItem(TypedDict, total=False):
     _score: float
     _source: Dict[str, Any]
     _ignored: Optional[List[str]]
-    highlight: Dict[str, List[str]]
+    highlight: Optional[Dict[str, List[str]]]
 
 
 class HitsData(TypedDict):
@@ -46,6 +45,7 @@ class AggregationsData(TypedDict):
 class EsResponse(TypedDict):
     timed_out: bool
     took: int
+    _shards: Dict[str, Any]
     hits: HitsData
     aggregations: Optional[AggregationsData]
 
@@ -68,7 +68,7 @@ class EsSearchRepository:
             highlight=request.highlight,
             source=dataclasses.asdict(request.source),
         )
-        es_res: EsResponse = json.loads(res.body)
+        es_res: EsResponse = res.body
         return es_res
 
     def autocomplete(self, request):
