@@ -77,7 +77,20 @@ def test_build_source(input, expected):
                 }"""
                 )
             ),
-        )
+        ),
+        (
+            SearchRequest(
+                query=SearchQuery(search_term=""),
+                options=SearchOptions(search_fields={"a": {"weight": 3}, "b": {}, "c": {}}),
+            ),
+            EsReqeust(
+                query=json.loads(
+                    """
+    { "match_all": {}}
+    """
+                )
+            ),
+        ),
     ],
 )
 def test_build_query(input, expected):

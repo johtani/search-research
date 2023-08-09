@@ -2,10 +2,19 @@ from typing import List
 
 from jinja2 import Template
 
-from backend.models import SearchOptions
+from backend.models import SearchOptions, SearchRequest
 
 
-class DefaultTemplate:
+class MatchAllQueryTemplate:
+    query: str = """
+    { "match_all": {}}
+    """
+
+    def render(self) -> str:
+        return self.query
+
+
+class SearchUIQueryTemplate:
     template: Template = Template(
         source="""
   {
@@ -46,7 +55,7 @@ class DefaultTemplate:
     """
     )
 
-    def fields(self, options: SearchOptions) -> List[str]:
+    def _fields(self, options: SearchOptions) -> List[str]:
         fields = []
         for field, value in options.search_fields.items():
             if value is not None and "weight" in value:
@@ -55,3 +64,6 @@ class DefaultTemplate:
             else:
                 fields.append(f"{field}^1")
         return fields
+
+    def render(self, request: SearchRequest) -> str:
+        return self.template.render(query=request.query, fields=self._fields(request.options))
