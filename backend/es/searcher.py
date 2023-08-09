@@ -13,13 +13,18 @@ class EsRequestSource:
 
 
 @dataclasses.dataclass
+class EsHighlight:
+    fields: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclasses.dataclass
 class EsReqeust:
     query: Any | None = None
     aggs: Any | None = None
     from_: int = 0
     size: int = 20
     sort: Any | None = None
-    highlight: Any | None = None
+    highlight: EsHighlight | None = None
     source: EsRequestSource = field(default_factory=EsRequestSource)
 
 
@@ -65,7 +70,7 @@ class EsSearchRepository:
             aggs=request.aggs,
             from_=request.from_,
             size=request.size,
-            highlight=request.highlight,
+            highlight=None if request.highlight is None else dataclasses.asdict(request.highlight),
             source=dataclasses.asdict(request.source),
         )
         es_res: EsResponse = res.body

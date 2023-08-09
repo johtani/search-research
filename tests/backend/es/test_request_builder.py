@@ -3,7 +3,7 @@ import json
 import pytest
 
 from backend.es.request_builder import build_query, build_size_offset, build_source
-from backend.es.searcher import EsReqeust, EsRequestSource
+from backend.es.searcher import EsHighlight, EsReqeust, EsRequestSource
 from backend.models import SearchOptions, SearchQuery, SearchRequest
 
 
@@ -25,7 +25,7 @@ def test_build_size_offset(input, expected):
     [
         (
             SearchOptions(result_fields={"a": {}, "b": {"snippet": {"size": 3, "fallback": True}}, "c": {}}),
-            EsReqeust(source=EsRequestSource(includes=["a", "b", "c"])),
+            EsReqeust(source=EsRequestSource(includes=["a", "b", "c"]), highlight=EsHighlight(fields={"b": {}})),
         )
     ],
 )
