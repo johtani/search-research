@@ -33,6 +33,8 @@ class EsTranslator:
         es_req = rb.build_size_offset(query=request.query, es_request=es_req)
         # source
         es_req = rb.build_source(options=request.options, es_request=es_req)
+        # sort
+        es_req = rb.build_sort(query=request.query, es_request=es_req)
         return es_req
 
     def _translate_response(self, request: SearchRequest, es_response: EsResponse) -> SearchResult:
