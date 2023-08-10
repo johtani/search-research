@@ -55,5 +55,5 @@ def translate_results(es_res: EsResponse, search_result: SearchResult) -> Search
 
 
 def translate_facets(es_res: EsResponse, search_request: SearchRequest, search_result: SearchResult) -> SearchResult:
-    logger.debug("not implemented yet")
+    logger.debug("translate_facets not implemented yet")
     return search_result
