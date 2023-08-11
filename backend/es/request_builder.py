@@ -2,6 +2,7 @@ import json
 import logging
 
 from backend.es.searcher import EsHighlight, EsReqeust
+from backend.es.templates.aggs_template import BucketAllTemplate
 from backend.es.templates.query_template import (
     MatchAllQueryTemplate,
     SearchUIQueryTemplate,
@@ -23,14 +24,18 @@ def build_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
 
 
 def build_filter_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
-    if request.query.filters is not None:
+    if request.query.filters:
         logger.error("build_filter_query not implemented yet")
     return es_request
 
 
 def build_aggs(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
-    if request.options.facets is not None:
-        logger.error("build_aggs not implemented yet")
+    if request.options.facets:
+        template = BucketAllTemplate()
+        aggs = template.render(request.options)
+        logger.debug(aggs)
+        es_request.aggs = json.loads(aggs)
+        logger.debug(aggs)
     return es_request
 
 
@@ -41,7 +46,7 @@ def build_size_offset(query: SearchQuery, es_request: EsReqeust) -> EsReqeust:
 
 
 def build_source(options: SearchOptions, es_request: EsReqeust) -> EsReqeust:
-    if options.result_fields is not None:
+    if options.result_fields:
         for field in options.result_fields.keys():
             es_request.source.includes.append(field)
             if type(options.result_fields[field]) is ResultField and options.result_fields[field].snippet:
