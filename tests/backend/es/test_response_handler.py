@@ -6,7 +6,14 @@ from backend.es.response_handler import (
     translate_summary,
 )
 from backend.es.searcher import EsResponse, HitItem, HitsData
-from backend.models import SearchOptions, SearchQuery, SearchRequest, SearchResult
+from backend.models import (
+    FacetData,
+    FacetItem,
+    SearchOptions,
+    SearchQuery,
+    SearchRequest,
+    SearchResult,
+)
 
 
 @pytest.mark.parametrize(
@@ -238,8 +245,89 @@ def test_translate_results(es_res, expected):
     assert result == expected
 
 
-@pytest.mark.parametrize(("expected"), [(None)])
-def test_translate_facets(expected):
+@pytest.mark.parametrize(
+    ("es_res", "expected"),
+    [
+        (
+            EsResponse(
+                timed_out=False,
+                took=0,
+                _shards={},
+                hits=HitsData(total=0, max_score=0, hits=[]),
+                aggregations={
+                    "facet_bucket_all": {
+                        "doc_count": 5885,
+                        "product_locale": {
+                            "doc_count_error_upper_bound": 0,
+                            "sum_other_doc_count": 0,
+                            "buckets": [{"key": "jp", "doc_count": 5885}],
+                        },
+                        "product_color": {
+                            "doc_count_error_upper_bound": 0,
+                            "sum_other_doc_count": 1985,
+                            "buckets": [
+                                {"key": "ブラック", "doc_count": 434},
+                                {"key": "ホワイト", "doc_count": 416},
+                                {"key": "シルバー", "doc_count": 164},
+                                {"key": "グレー", "doc_count": 118},
+                                {"key": "ピンク", "doc_count": 110},
+                                {"key": "白", "doc_count": 97},
+                                {"key": "ブルー", "doc_count": 68},
+                                {"key": "ゴールド", "doc_count": 59},
+                                {"key": "クリア", "doc_count": 48},
+                                {"key": "レッド", "doc_count": 47},
+                                {"key": "ネイビー", "doc_count": 40},
+                                {"key": "ベージュ", "doc_count": 34},
+                                {"key": "グリーン", "doc_count": 31},
+                                {"key": "黒", "doc_count": 29},
+                                {"key": "クリスタル · クリア", "doc_count": 25},
+                                {"key": "パープル", "doc_count": 24},
+                                {"key": "ブラウン", "doc_count": 22},
+                                {"key": "イエロー", "doc_count": 21},
+                                {"key": "オレンジ", "doc_count": 17},
+                                {"key": "赤", "doc_count": 16},
+                            ],
+                        },
+                    },
+                },
+            ),
+            SearchResult(
+                facets={
+                    "product_locale": [FacetItem(data=[FacetData(value="jp", count=5885)], type="value")],
+                    "product_color": [
+                        FacetItem(
+                            data=[
+                                FacetData(value="ブラック", count=434),
+                                FacetData(value="ホワイト", count=416),
+                                FacetData(value="シルバー", count=164),
+                                FacetData(value="グレー", count=118),
+                                FacetData(value="ピンク", count=110),
+                                FacetData(value="白", count=97),
+                                FacetData(value="ブルー", count=68),
+                                FacetData(value="ゴールド", count=59),
+                                FacetData(value="クリア", count=48),
+                                FacetData(value="レッド", count=47),
+                                FacetData(value="ネイビー", count=40),
+                                FacetData(value="ベージュ", count=34),
+                                FacetData(value="グリーン", count=31),
+                                FacetData(value="黒", count=29),
+                                FacetData(value="クリスタル · クリア", count=25),
+                                FacetData(value="パープル", count=24),
+                                FacetData(value="ブラウン", count=22),
+                                FacetData(value="イエロー", count=21),
+                                FacetData(value="オレンジ", count=17),
+                                FacetData(value="赤", count=16),
+                            ],
+                            type="value",
+                        )
+                    ],
+                }
+            ),
+        )
+    ],
+)
+def test_translate_facets(es_res, expected):
     print(f"not impremented {expected}")
     tmp = SearchResult()
-    translate_facets(es_res=None, search_request=None, search_result=tmp)
+    result = translate_facets(es_res=es_res, search_request=None, search_result=tmp)
+    assert result == expected
