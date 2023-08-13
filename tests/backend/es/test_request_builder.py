@@ -3,13 +3,13 @@ import json
 import pytest
 
 from backend.es.request_builder import (
-    build_aggs,
+    build_aggs_and_post_filter,
     build_query,
     build_size_offset,
     build_source,
 )
 from backend.es.searcher import EsHighlight, EsReqeust, EsRequestSource
-from backend.models import SearchOptions, SearchQuery, SearchRequest
+from backend.models import Filter, SearchOptions, SearchQuery, SearchRequest
 
 
 @pytest.mark.parametrize(
@@ -162,9 +162,112 @@ def test_build_query(input, expected):
                 )
             ),
         ),
+        (
+            SearchRequest(
+                query=SearchQuery(
+                    filters=[
+                        Filter(field="a", values=["e"], type="all"),
+                        Filter(field="c", values=["d"], type="all"),
+                    ]
+                ),
+                options=SearchOptions(
+                    facets={
+                        "a": {"type": "value"},
+                        "b": {"type": "value", "sort": {"key": "asc"}},
+                        "c": {"type": "value", "size": 30},
+                    }
+                ),
+            ),
+            EsReqeust(
+                post_filter=json.loads(
+                    """
+                    {
+                        "bool": {
+                            "must": [
+                                { "bool": { "should": [{ "term": { "a": "e" } }] } },
+                                { "bool": { "should": [{ "term": { "c": "d" } }] } }
+                            ]
+                        }
+                    }
+                    """
+                ),
+                aggs=json.loads(
+                    """
+                    {
+                        "facet_bucket_all": {
+                            "aggs": {},
+                            "filter": {
+                                "bool": {
+                                    "must": [
+                                        { "bool": { "should": [{ "term": { "a": "e" } }] } },
+                                        { "bool": { "should": [{ "term": { "c": "d" } }] } }
+                                    ]
+                                }
+                            }
+                        },
+                        "facet_bucket_a": {
+                            "aggs": {
+                                "a": {
+                                    "terms": {
+                                        "field": "a",
+                                        "size": 20,
+                                        "order": { "_count": "desc" }
+                                    }
+                                }
+                            },
+                            "filter": {
+                                "bool": {
+                                    "must": [
+                                        { "bool": { "should": [{ "term": { "c": "d" } }] } }
+                                    ]
+                                }
+                            }
+                        },
+                        "facet_bucket_b": {
+                            "aggs": {
+                                "b": {
+                                    "terms": {
+                                        "field": "b",
+                                        "size": 20,
+                                        "order": { "_key": "asc" }
+                                    }
+                                }
+                            },
+                            "filter": {
+                                "bool": {
+                                    "must": [
+                                        { "bool": { "should": [{ "term": { "a": "e" } }] } },
+                                        { "bool": { "should": [{ "term": { "c": "d" } }] } }
+                                    ]
+                                }
+                            }
+                        },
+                        "facet_bucket_c": {
+                            "aggs": {
+                                "c": {
+                                    "terms": {
+                                        "field": "c",
+                                        "size": 30,
+                                        "order": { "_count": "desc" }
+                                    }
+                                }
+                            },
+                            "filter": {
+                                "bool": {
+                                    "must": [
+                                        { "bool": { "should": [{ "term": { "a": "e" } }] } }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                    """
+                ),
+            ),
+        ),
     ],
 )
-def test_build_aggs(input, expected):
+def test_build_aggs_and_post_filter(input, expected):
     tmp = EsReqeust()
-    result = build_aggs(request=input, es_request=tmp)
+    result = build_aggs_and_post_filter(request=input, es_request=tmp)
     assert result == expected

@@ -9,6 +9,7 @@ from backend.es.searcher import EsResponse, HitItem, HitsData
 from backend.models import (
     FacetData,
     FacetItem,
+    Filter,
     SearchOptions,
     SearchQuery,
     SearchRequest,
@@ -246,7 +247,7 @@ def test_translate_results(es_res, expected):
 
 
 @pytest.mark.parametrize(
-    ("es_res", "expected"),
+    ("es_res", "search_req", "expected"),
     [
         (
             EsResponse(
@@ -291,6 +292,10 @@ def test_translate_results(es_res, expected):
                     },
                 },
             ),
+            SearchRequest(
+                query=SearchQuery(filters=[]),
+                options=SearchOptions(),
+            ),
             SearchResult(
                 facets={
                     "product_locale": [FacetItem(data=[FacetData(value="jp", count=5885)], type="value")],
@@ -323,11 +328,84 @@ def test_translate_results(es_res, expected):
                     ],
                 }
             ),
-        )
+        ),
+        (
+            EsResponse(
+                timed_out=False,
+                took=0,
+                _shards={},
+                hits=HitsData(total=0, max_score=0, hits=[]),
+                aggregations={
+                    "facet_bucket_product_locale": {
+                        "doc_count": 12,
+                        "product_locale": {
+                            "doc_count_error_upper_bound": 0,
+                            "sum_other_doc_count": 0,
+                            "buckets": [{"key": "jp", "doc_count": 12}],
+                        },
+                    },
+                    "facet_bucket_all": {"doc_count": 12},
+                    "facet_bucket_product_color": {
+                        "doc_count": 39,
+                        "product_color": {
+                            "doc_count_error_upper_bound": 0,
+                            "sum_other_doc_count": 0,
+                            "buckets": [
+                                {"key": "ホワイト", "doc_count": 12},
+                                {"key": "ピンクベージュ", "doc_count": 3},
+                                {"key": "シルクベージュ", "doc_count": 2},
+                                {"key": "ピンク(5枚入)", "doc_count": 2},
+                                {"key": "ブラック(5枚入)", "doc_count": 2},
+                                {"key": "1)ホワイト", "doc_count": 1},
+                                {"key": "2)グレー", "doc_count": 1},
+                                {"key": "ウォールナットブラウン", "doc_count": 1},
+                                {"key": "オリーブカーキ", "doc_count": 1},
+                                {"key": "グレー", "doc_count": 1},
+                                {"key": "ストームグレー", "doc_count": 1},
+                                {"key": "ネイビー", "doc_count": 1},
+                                {"key": "ホワイト(7枚入)", "doc_count": 1},
+                            ],
+                        },
+                    },
+                },
+            ),
+            SearchRequest(
+                query=SearchQuery(
+                    filters=[
+                        Filter(field="product_color", values=["ホワイト"], type="all"),
+                    ]
+                ),
+                options=SearchOptions(),
+            ),
+            SearchResult(
+                facets={
+                    "product_locale": [FacetItem(data=[FacetData(value="jp", count=12)], type="value")],
+                    "product_color": [
+                        FacetItem(
+                            data=[
+                                FacetData(value="ホワイト", count=12),
+                                FacetData(value="ピンクベージュ", count=3),
+                                FacetData(value="シルクベージュ", count=2),
+                                FacetData(value="ピンク(5枚入)", count=2),
+                                FacetData(value="ブラック(5枚入)", count=2),
+                                FacetData(value="1)ホワイト", count=1),
+                                FacetData(value="2)グレー", count=1),
+                                FacetData(value="ウォールナットブラウン", count=1),
+                                FacetData(value="オリーブカーキ", count=1),
+                                FacetData(value="グレー", count=1),
+                                FacetData(value="ストームグレー", count=1),
+                                FacetData(value="ネイビー", count=1),
+                                FacetData(value="ホワイト(7枚入)", count=1),
+                            ],
+                            type="value",
+                        )
+                    ],
+                }
+            ),
+        ),
     ],
 )
-def test_translate_facets(es_res, expected):
-    print(f"not impremented {expected}")
+def test_translate_facets(es_res, search_req, expected):
     tmp = SearchResult()
-    result = translate_facets(es_res=es_res, search_request=None, search_result=tmp)
+    result = translate_facets(es_res=es_res, search_request=search_req, search_result=tmp)
     assert result == expected

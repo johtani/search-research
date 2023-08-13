@@ -20,6 +20,7 @@ class EsHighlight:
 @dataclasses.dataclass
 class EsReqeust:
     query: Any | None = None
+    post_filter: Any | None = None
     aggs: Any | None = None
     from_: int = 0
     size: int = 20
@@ -43,16 +44,12 @@ class HitsData(TypedDict):
     hits: List[HitItem]
 
 
-class AggregationsData(TypedDict):
-    facet_bucket_all: Dict[str, Any]
-
-
 class EsResponse(TypedDict):
     timed_out: bool
     took: int
     _shards: Dict[str, Any]
     hits: HitsData
-    aggregations: Optional[AggregationsData]
+    aggregations: Optional[Dict[str, Dict[str, Any]]]
 
 
 class EsSearchRepository:
@@ -70,6 +67,7 @@ class EsSearchRepository:
             aggs=request.aggs,
             from_=request.from_,
             size=request.size,
+            post_filter=request.post_filter,
             highlight=None if request.highlight is None else dataclasses.asdict(request.highlight),
             source=dataclasses.asdict(request.source),
         )

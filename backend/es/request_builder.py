@@ -2,7 +2,12 @@ import json
 import logging
 
 from backend.es.searcher import EsHighlight, EsReqeust
-from backend.es.templates.aggs_template import BucketAllTemplate
+from backend.es.templates.aggs_template import (
+    BucketAllTemplate,
+    BucketAllWithFilterTemplate,
+    FilterTemplate,
+    PostFilterTemplate,
+)
 from backend.es.templates.query_template import (
     MatchAllQueryTemplate,
     SearchUIQueryTemplate,
@@ -23,19 +28,29 @@ def build_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
     return es_request
 
 
-def build_filter_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
+def build_aggs_and_post_filter(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
+    post_filters: dict[str, str] = {}
     if request.query.filters:
-        logger.error("build_filter_query not implemented yet")
-    return es_request
-
-
-def build_aggs(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
+        for filter in request.query.filters:
+            filter_template = FilterTemplate()
+            post_filters[filter.field] = filter_template.render(filter=filter)
+        post_filter_template = PostFilterTemplate()
+        post_filter = post_filter_template.render(filters=post_filters)
+        logger.debug(post_filter)
+        es_request.post_filter = json.loads(post_filter)
     if request.options.facets:
-        template = BucketAllTemplate()
-        aggs = template.render(request.options)
-        logger.debug(aggs)
-        es_request.aggs = json.loads(aggs)
-        logger.debug(aggs)
+        if post_filters:
+            bucket_with_filter_template = BucketAllWithFilterTemplate()
+            aggs = bucket_with_filter_template.render(post_filters=post_filters, options=request.options)
+            logger.debug(aggs)
+            es_request.aggs = json.loads(aggs)
+            logger.debug(aggs)
+        else:
+            bucket_template = BucketAllTemplate()
+            aggs = bucket_template.render(options=request.options)
+            logger.debug(aggs)
+            es_request.aggs = json.loads(aggs)
+            logger.debug(aggs)
     return es_request
 
 

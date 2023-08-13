@@ -1,0 +1,113 @@
+{
+  "aggs": {
+    "facet_bucket_all": {
+      "aggs": {
+        "product_locale": {
+          "terms": {
+            "field": "product_locale",
+            "size": 20,
+            "order": {
+              "_count": "desc"
+            }
+          }
+        },
+        "product_brand": {
+          "terms": {
+            "field": "product_brand",
+            "size": 20,
+            "order": {
+              "_count": "desc"
+            }
+          }
+        },
+        "product_color": {
+          "terms": {
+            "field": "product_color",
+            "size": 20,
+            "order": {
+              "_count": "desc"
+            }
+          }
+        }
+      },
+      "filter": {
+        "bool": {
+          "must": []
+        }
+      }
+    }
+  },
+  "size": 20,
+  "_source": {
+    "includes": [
+      "product_id",
+      "product_brand",
+      "product_title",
+      "product_title.ja",
+      "product_description.ja"
+    ]
+  },
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "multi_match": {
+            "query": "マスク",
+            "fields": [
+              "product_title.ja^3",
+              "product_description.ja^1",
+              "product_bullet_point.ja^1"
+            ],
+            "type": "best_fields",
+            "operator": "and"
+          }
+        },
+        {
+          "multi_match": {
+            "query": "マスク",
+            "fields": [
+              "product_title.ja^3",
+              "product_description.ja^1",
+              "product_bullet_point.ja^1"
+            ],
+            "type": "cross_fields"
+          }
+        },
+        {
+          "multi_match": {
+            "query": "マスク",
+            "fields": [
+              "product_title.ja^3",
+              "product_description.ja^1",
+              "product_bullet_point.ja^1"
+            ],
+            "type": "phrase"
+          }
+        },
+        {
+          "multi_match": {
+            "query": "マスク",
+            "fields": [
+              "product_title.ja^3",
+              "product_description.ja^1",
+              "product_bullet_point.ja^1"
+            ],
+            "type": "phrase_prefix"
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+    "fields": {
+      "product_title.ja": {},
+      "product_description.ja": {}
+    }
+  },
+  "from": 0,
+  "sort": [
+    {
+      "_score": "desc"
+    }
+  ]
+}

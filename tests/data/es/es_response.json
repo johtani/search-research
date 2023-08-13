@@ -1,5 +1,5 @@
 {
-  "took": 36,
+  "took": 33,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,129 +9,15 @@
   },
   "hits": {
     "total": {
-      "value": 5885,
+      "value": 3534,
       "relation": "eq"
     },
-    "max_score": 565.36646,
+    "max_score": 125.35679,
     "hits": [
       {
         "_index": "esci-products",
-        "_id": "B08X3LS1V5",
-        "_score": 565.36646,
-        "_source": {
-          "product_id": "B08X3LS1V5",
-          "product_title": "M’ｓカニカン 12ｍｍ 100個 シルバー マスクチェーン ネックレス メガネチェーン ハンドメイド チャーム",
-          "product_brand": "ノーブランド品"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "M’ｓカニカン 12ｍｍ 100個 シルバー <em>マスク</em><em>チェーン</em> ネックレス メガネ<em>チェーン</em> ハンドメイド チャーム"
-          ],
-          "product_description.ja": [
-            "ジュエリー修復、手作りアクセサリー、ハンドメイド作品への飾り付け、DIYなど様々な用途にお使いいただけます メガネチャーム、<em>マスク</em>チャーム、ネックレスの修理などにも最適です"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B08295VTDS",
-        "_score": 536.7439,
-        "_source": {
-          "product_id": "B08295VTDS",
-          "product_title": "【BEAUTY PLAYER】カニカン シルバー ゴールド 各50個 100個セット 10mm メガネチェーン マスクチェーン グラスチェーン メガネチェーン マスクチェーン グラスチェーン ネックレス ブレスレット アンクレット 金具 留め具 アクセサリー ストラップ パーツ ハンドメイド DIY材料 (10mm KCゴールド+KCシルバー",
-          "product_brand": "BEAUTY PLAYER"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "【BEAUTY PLAYER】カニカン シルバー ゴールド 各50個 100個セット 10mm メガネ<em>チェーン</em> <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> メガネ<em>チェーン</em> <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> ネックレス"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B08GWXQXZ8",
-        "_score": 456.65802,
-        "_ignored": ["product_bullet_point"],
-        "_source": {
-          "product_id": "B08GWXQXZ8",
-          "product_title": "マスクバンド 痛くない マスクフック マスクストラップ ネックストラップ マスクチェーン 大人 子供用 マスク用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め マスク紛失防止 3PCS",
-          "product_brand": "TOOVREN"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "<em>マスク</em>バンド 痛くない <em>マスク</em>フック マスクストラップ ネックストラップ <em>マスク</em><em>チェーン</em> 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め <em>マスク</em>紛失防止 3PCS"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B08GX8W7TW",
-        "_score": 456.65802,
-        "_ignored": ["product_bullet_point"],
-        "_source": {
-          "product_id": "B08GX8W7TW",
-          "product_title": "マスクバンド 痛くない マスクフック マスクストラップ ネックストラップ マスクチェーン 大人 子供用 マスク用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め マスク紛失防止 5PCS",
-          "product_brand": "TOOVREN"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "<em>マスク</em>バンド 痛くない <em>マスク</em>フック マスクストラップ ネックストラップ <em>マスク</em><em>チェーン</em> 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め <em>マスク</em>紛失防止 5PCS"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B0932VSRG8",
-        "_score": 434.60822,
-        "_ignored": ["product_bullet_point"],
-        "_source": {
-          "product_id": "B0932VSRG8",
-          "product_title": "【 新冷感マスク 】 ズレない冷感マスク　１SET 1マスクチェーン付 ひんやり超息しやすい UVカット 接触冷感 夏用 抗菌 冷感素材 (ピンク, 3)",
-          "product_brand": "株式会社富士グループ"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "【 新冷感<em>マスク</em> 】 ズレない冷感<em>マスク</em>　１SET 1<em>マスク</em><em>チェーン</em>付 ひんやり超息しやすい UVカット 接触冷感 夏用 抗菌 冷感素材 (ピンク, 3)"
-          ],
-          "product_description.ja": [
-            "冷感<em>マスク</em>　ズレない！に特化した高機能<em>マスク</em>!息のしやすさと日焼け対策に! 【2021 新冷感<em>マスク</em>7枚】ズレない 高機能 ひんやり UVカット 接触冷感 夏用 抗菌 冷感素材 ＃冷感<em>マスク</em>　＃夏"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B08KSZ4W87",
-        "_score": 423.3516,
-        "_source": {
-          "product_id": "B08KSZ4W87",
-          "product_title": "【BEAUTY PLAYER】カニカン シルバー 50個セット 21mm メガネチェーン マスクチェーン グラスチェーン ネックレス ブレスレット アンクレット 金具 留め具 アクセサリー ストラップ パーツ ハンドメイド DIY材料（21mm シルバー）",
-          "product_brand": "BEAUTY PLAYER"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "【BEAUTY PLAYER】カニカン シルバー 50個セット 21mm メガネ<em>チェーン</em> <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> ネックレス ブレスレット アンクレット 金具 留め具 アクセサリー ストラップ"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B08P1SSWXJ",
-        "_score": 416.62622,
-        "_source": {
-          "product_id": "B08P1SSWXJ",
-          "product_title": "【BEAUTY PLAYER】パール パーツ パールビーズ 6mm 約370個入り 封入用穴なしパール ノンホールパール ビーズ 樹脂パール ホワイト メガネチェーン マスクチェーン グラスチェーン DIY用品(6mm穴なし)",
-          "product_brand": "BEAUTY PLAYER"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "【BEAUTY PLAYER】パール パーツ パールビーズ 6mm 約370個入り 封入用穴なしパール ノンホールパール ビーズ 樹脂パール ホワイト メガネ<em>チェーン</em> <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> DIY"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
         "_id": "B096FSQ1LS",
-        "_score": 394.90616,
+        "_score": 125.35679,
         "_ignored": ["product_bullet_point"],
         "_source": {
           "product_id": "B096FSQ1LS",
@@ -140,230 +26,363 @@
         },
         "highlight": {
           "product_title.ja": [
-            "耳が痛くならない,<em>マスク</em>フック <em>マスク</em>バンド <em>マスク</em>留め <em>マスク</em>ベルト <em>マスク</em> メガネ <em>マスク</em>クリップ <em>マスク</em><em>チェーン</em> <em>マスク</em>グッズ イヤーフック <em>マスク</em> フックイヤー マスクストラップ メガネ ずれ落",
+            "耳が痛くならない,<em>マスク</em>フック <em>マスク</em>バンド <em>マスク</em>留め <em>マスク</em>ベルト <em>マスク</em> メガネ <em>マスク</em>クリップ <em>マスク</em>チェーン <em>マスク</em>グッズ イヤーフック <em>マスク</em> フックイヤー <em>マスクストラップ</em> メガネ ずれ落",
             "ち防止 シリコン <em>マスク</em> 耳が痛くない <em>マスク</em>補助具 メガネ固定 調整可能 <em>マスク</em> 耳の痛み軽"
           ]
         }
       },
       {
         "_index": "esci-products",
-        "_id": "B08294QMCR",
-        "_score": 380.42944,
+        "_id": "B09FLD5NV6",
+        "_score": 118.71333,
         "_source": {
-          "product_id": "B08294QMCR",
-          "product_title": "【BEAUTY PLAYER】カニカン シルバー ゴールド 各50個 100個セット 12mm メガネチェーン マスクチェーン グラスチェーン ネックレス ブレスレット アンクレット 金具 留め具 アクセサリー ストラップ パーツ ハンドメイド DIY材料 (12mm KCゴールド+KCシルバー)",
-          "product_brand": "BEAUTY PLAYER"
+          "product_id": "B09FLD5NV6",
+          "product_title": "［ミリュ］本革マスクフック／マスク補助バンド／耳が痛くならないグッズ／マスク用フックベルト／マスクストラップ (ハリネズミデザイン)",
+          "product_brand": "ミリュ"
         },
         "highlight": {
           "product_title.ja": [
-            "【BEAUTY PLAYER】カニカン シルバー ゴールド 各50個 100個セット 12mm メガネ<em>チェーン</em> <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> ネックレス ブレスレット アンクレット 金具 留め具 アクセサリー"
+            "［ミリュ］本革<em>マスク</em>フック／<em>マスク</em>補助バンド／耳が痛くならないグッズ／<em>マスク</em>用フックベルト／<em>マスクストラップ</em> (ハリネズミデザイン)"
+          ],
+          "product_description.ja": [
+            "<em>マスク</em>を装着することで起きる耳の痛みやかぶれ、頭痛などの体への負担を防止します。 耳の後ろに装着、または耳を通さず下からでも装着できます。 ヘアアレンジや装着感に合わせてお付け下さい。"
           ]
         }
       },
       {
         "_index": "esci-products",
-        "_id": "B097MSW7BT",
-        "_score": 378.51816,
+        "_id": "B09FLFNTSD",
+        "_score": 118.71333,
+        "_source": {
+          "product_id": "B09FLFNTSD",
+          "product_title": "［ミリュ］本革マスクフック／マスク補助バンド／耳が痛くならないグッズ／マスク用フックベルト／マスクストラップ (うさぎデザイン)",
+          "product_brand": "ミリュ"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "［ミリュ］本革<em>マスク</em>フック／<em>マスク</em>補助バンド／耳が痛くならないグッズ／<em>マスク</em>用フックベルト／<em>マスクストラップ</em> (うさぎデザイン)"
+          ],
+          "product_description.ja": [
+            "<em>マスク</em>を装着することで起きる耳の痛みやかぶれ、頭痛などの体への負担を防止します。 耳の後ろに装着、または耳を通さず下からでも装着できます。 ヘアアレンジや装着感に合わせてお付け下さい。"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B09FLGN15M",
+        "_score": 118.71333,
+        "_source": {
+          "product_id": "B09FLGN15M",
+          "product_title": "［ミリュ］本革マスクフック／マスク補助バンド／耳が痛くならないグッズ／マスク用フックベルト／マスクストラップ (ネコデザイン)",
+          "product_brand": "ミリュ"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "［ミリュ］本革<em>マスク</em>フック／<em>マスク</em>補助バンド／耳が痛くならないグッズ／<em>マスク</em>用フックベルト／<em>マスクストラップ</em> (ネコデザイン)"
+          ],
+          "product_description.ja": [
+            "<em>マスク</em>を装着することで起きる耳の痛みやかぶれ、頭痛などの体への負担を防止します。 耳の後ろに装着、または耳を通さず下からでも装着できます。 ヘアアレンジや装着感に合わせてお付け下さい。"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08MVMT2XB",
+        "_score": 117.08629,
         "_ignored": ["product_bullet_point"],
         "_source": {
-          "product_id": "B097MSW7BT",
-          "product_title": "【CRSHIP】ガラスストーン 7色14セット 花座ライン チャーム パーツ カン付き ガラス しずく 雫 ピアス イヤリング 金属ネックレス ブルー 緑 赤 アクセサリー 台座ゴールド ハンドメイド マスクチェーン メガネチェーン ストラップ (14点, 7色)",
-          "product_brand": "CRSHIP"
+          "product_id": "B08MVMT2XB",
+          "product_title": "【2020年改善版】紛失防止マスクバンド ネックマスクストラップ 5本入り ブラック マスク耳が痛くないマスクコード 子供兼用マスク補助具 ずれ落ち防止マスクフックベルト 長さ無段階調節 マスクスポーツ用ストラップ 食事 対応 首に掛けマスクストラップ",
+          "product_brand": "Verylove"
         },
         "highlight": {
           "product_title.ja": [
-            "CRSHIP】ガラスストーン 7色14セット 花座ライン チャーム パーツ カン付き ガラス しずく 雫 ピアス イヤリング 金属ネックレス ブルー 緑 赤 アクセサリー 台座ゴールド ハンドメイド <em>マスク</em><em>チェーン</em>",
-            "メガネ<em>チェーン</em> ストラップ (14点, 7色)"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B08T956Z9F",
-        "_score": 364.83777,
-        "_ignored": ["product_bullet_point", "product_description"],
-        "_source": {
-          "product_id": "B08T956Z9F",
-          "product_title": "UNICRAFTALE 約200個 20mm 眼鏡ホルダー メガネ留め マスクチェーン グラスチェーン メガネチェーン グラスコードパーツ クリア 眼鏡チェーン 接続用ゴム 眼鏡補助物 補修パーツ グラス部品 アクセサリーパーツ 手芸用品 クラフト用品 穴径5x2mm",
-          "product_brand": "UNICRAFTALE"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "UNICRAFTALE 約200個 20mm 眼鏡ホルダー メガネ留め <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> メガネ<em>チェーン</em> グラスコードパーツ クリア 眼鏡<em>チェーン</em> 接続用ゴム 眼鏡補助物 補修パーツ グラス"
+            "【2020年改善版】紛失防止<em>マスク</em>バンド ネック<em>マスクストラップ</em> 5本入り ブラック <em>マスク</em>耳が痛くない<em>マスク</em>コード 子供兼用<em>マスク</em>補助具 ずれ落ち防止<em>マスク</em>フックベルト 長さ無段階調節 <em>マスク</em>スポーツ",
+            "用ストラップ 食事 対応 首に掛け<em>マスクストラップ</em>"
           ],
           "product_description.ja": [
-            "UNICRAFTALE 眼鏡ホルダー メガネ留め <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> メガネ<em>チェーン</em> グラスコードパーツ クリア 眼鏡<em>チェーン</em></br>ジュエリー 手芸 DIY 手作り素材 ストリンギング材料",
-            "</br>メガネ<em>チェーン</em>の接続用ゴムとして手作りアクセサリー、ハンドメイド作品への飾り付け、DIYなど様々な用途にお使いいただけます</br>アクセサリーパーツの基本アイテム！",
-            "</br>UNICRAFTALEでは、他のペンダントや<em>チェーン</em>、各種パーツなどハンドメイド手芸用品をご用意していますので、お気に入る商品を選びましょう！</br>"
+            "<em>マスク</em>耳が痛くない　紛失防止<em>マスク</em>バンドです。"
           ]
         }
       },
       {
         "_index": "esci-products",
-        "_id": "B0831H2J9G",
-        "_score": 359.6461,
-        "_source": {
-          "product_id": "B0831H2J9G",
-          "product_title": "【BEAUTY PLAYER】丸カン 5mm 約200個入り ゴールド メガネチェーン マスクチェーン グラスチェーン ジャンプリング マルカン リング 金具セット 基礎パーツ ジュエリー DIY用 手芸用品 クラフト用品 アクセサリーパーツ ハンドメイド 手作り ブレスレット ピアス イヤリング ネックレスなど (ゴールド, 5",
-          "product_brand": "BEAUTY PLAYER"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "【BEAUTY PLAYER】丸カン 5mm 約200個入り ゴールド メガネ<em>チェーン</em> <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> ジャンプリング マルカン リング 金具セット 基礎パーツ ジュエリー DIY用 手芸用品"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B099X3LY8G",
-        "_score": 355.31793,
-        "_source": {
-          "product_id": "B099X3LY8G",
-          "product_title": "【BEAUTY PLAYER】24ペア/セット 21x4.2mm マスクチェーン グラスチェーン メガネチェーン メガネ留め具 グラスコードパーツ 眼鏡チェーン 接続用ゴム 眼鏡補助物 透明クリア 柔軟性あり 使用簡単 アクセサリーパーツ 手芸 クラフト DIY用品 (ネジ+丸カン ホワイト)",
-          "product_brand": "BEAUTY PLAYER"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "【BEAUTY PLAYER】24ペア/セット 21x4.2mm <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> メガネ<em>チェーン</em> メガネ留め具 グラスコードパーツ 眼鏡<em>チェーン</em> 接続用ゴム 眼鏡補助物 透明クリア 柔軟性"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B07LDD2GC4",
-        "_score": 324.29422,
-        "_source": {
-          "product_id": "B07LDD2GC4",
-          "product_title": "【BEAUTY PLAYER】ピアス パーツ セット 丸カン 直径3mm 4mm 5mm 6mm 7mm 8mm 10mm メガネチェーン マスクチェーン グラスチェーン ジャンプリング マルカン リング 金具セット 基礎パーツ ジュエリー DIY用 手芸用品 クラフト用品 アクセサリーパーツ ハンドメイド ブレスレット ラウンドケース付 (シルバー)",
-          "product_brand": "BEAUTY PLAYER"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "【BEAUTY PLAYER】ピアス パーツ セット 丸カン 直径3mm 4mm 5mm 6mm 7mm 8mm 10mm メガネ<em>チェーン</em> <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> ジャンプリング マルカン リング"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B07QV41X36",
-        "_score": 324.29422,
-        "_source": {
-          "product_id": "B07QV41X36",
-          "product_title": "【BEAUTY PLAYER】ピアス パーツ セット 丸カン 直径3mm 4mm 5mm 6mm 7mm 8mm 10mm メガネチェーン マスクチェーン グラスチェーン ジャンプリング マルカン リング 金具セット 基礎パーツ ジュエリー DIY用 手芸用品 クラフト用品 アクセサリーパーツ ハンドメイド ブレスレット ラウンドケース付 (ゴールド)",
-          "product_brand": "BEAUTY PLAYER"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "【BEAUTY PLAYER】ピアス パーツ セット 丸カン 直径3mm 4mm 5mm 6mm 7mm 8mm 10mm メガネ<em>チェーン</em> <em>マスク</em><em>チェーン</em> グラス<em>チェーン</em> ジャンプリング マルカン リング"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B09FG6B4ND",
-        "_score": 202.17847,
-        "_ignored": ["product_bullet_point", "product_description"],
-        "_source": {
-          "product_id": "B09FG6B4ND",
-          "product_title": "Youtaosd【5枚入】ストラップ バンド ベルト 5本入り ネックレスラップ 無段階で調節可能 フック 耳プロテクター 耳 痛くならない ゴム紐 紐 補助 フック 調整 大人子供OK マスクバンド マスクフック マスク みみ 痛くならない マスクストラップ (5色5個セット) マスクフックベルト 首掛け 耳が痛くな",
-          "product_brand": "InvaXe"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "Youtaosd【5枚入】ストラップ バンド ベルト 5本入り ネックレスラップ 無段階で調節可能 フック 耳プロテクター 耳 痛くならない ゴム紐 紐 補助 フック 調整 大人子供OK <em>マスク</em>バンド",
-            "<em>マスク</em>フック <em>マスク</em> みみ 痛くならない マスクストラップ (5色5個セット) <em>マスク</em>フックベルト 首掛け 耳が痛くな"
-          ],
-          "product_description.ja": [
-            "<em>マスク</em>使用時、外す時にも便利な<em>マスク</em>バンドです。<em>マスク</em>バンド    </p><p><em>マスク</em>外す時：外した<em>マスク</em>を首に掛けたままで便利で衛生的です。<em>マスク</em>の紛失や忘れの恐れない<em>マスク</em>バンドです。",
-            "<em>マスク</em>バンド 痛くない <em>マスク</em>フック マスクストラップ ネックストラップ <em>マスク</em><em>チェーン</em> 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め <em>マスク</em>紛失防止 人気のない",
-            "<em>マスク</em>の保管場所も困らないで、<em>マスク</em>を汚れるのは心配ありません、紛失防止に役に立ちます<em>マスク</em>バンドです。<em>マスク</em>使用時の不快感や耳の痛みを解消<em>マスク</em>バンドです。",
-            "<em>マスク</em>バンド  痛くない <em>マスク</em>フック マスクストラップ ネックストラップ <em>マスク</em><em>チェーン</em> 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め <em>マスク</em>紛失防止 今まで",
-            "<em>マスク</em>バンドのメリット    <em>マスク</em>バンド 痛くない <em>マスク</em>フック マスクストラップ ネックストラップ <em>マスク</em><em>チェーン</em> 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B09FL3FV4S",
-        "_score": 202.17847,
-        "_ignored": ["product_bullet_point", "product_description"],
-        "_source": {
-          "product_id": "B09FL3FV4S",
-          "product_title": "JDLSMGSS【11枚入】ストラップ バンド ベルト 11本入り ネックレスラップ 無段階で調節可能 フック 耳プロテクター 耳 痛くならない ゴム紐 紐 補助 フック 調整 大人子供OK マスクバンド マスクフック マスク みみ 痛くならない マスクストラップ (11色11個セット) マスクフックベルト 首掛け 耳が痛く",
-          "product_brand": "Pulopee"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "JDLSMGSS【11枚入】ストラップ バンド ベルト 11本入り ネックレスラップ 無段階で調節可能 フック 耳プロテクター 耳 痛くならない ゴム紐 紐 補助 フック 調整 大人子供OK <em>マスク</em>バンド",
-            "<em>マスク</em>フック <em>マスク</em> みみ 痛くならない マスクストラップ (11色11個セット) <em>マスク</em>フックベルト 首掛け 耳が痛く"
-          ],
-          "product_description.ja": [
-            "<em>マスク</em>使用時、外す時にも便利な<em>マスク</em>バンドです。<em>マスク</em>バンド    </p><p><em>マスク</em>外す時：外した<em>マスク</em>を首に掛けたままで便利で衛生的です。<em>マスク</em>の紛失や忘れの恐れない<em>マスク</em>バンドです。",
-            "<em>マスク</em>バンド 痛くない <em>マスク</em>フック マスクストラップ ネックストラップ <em>マスク</em><em>チェーン</em> 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め <em>マスク</em>紛失防止 人気のない",
-            "<em>マスク</em>の保管場所も困らないで、<em>マスク</em>を汚れるのは心配ありません、紛失防止に役に立ちます<em>マスク</em>バンドです。<em>マスク</em>使用時の不快感や耳の痛みを解消<em>マスク</em>バンドです。",
-            "<em>マスク</em>バンド  痛くない <em>マスク</em>フック マスクストラップ ネックストラップ <em>マスク</em><em>チェーン</em> 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め <em>マスク</em>紛失防止 今まで",
-            "<em>マスク</em>バンドのメリット    <em>マスク</em>バンド 痛くない <em>マスク</em>フック マスクストラップ ネックストラップ <em>マスク</em><em>チェーン</em> 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B093L2Q817",
-        "_score": 68.173836,
+        "_id": "B09CPWTMRF",
+        "_score": 116.85028,
         "_ignored": ["product_bullet_point"],
         "_source": {
-          "product_id": "B093L2Q817",
-          "product_title": "カニカン パーツ 12mm 16mm ゴールド シルバー ストラップ メガネチェーン バッグチェーン マスクチャーム ハンドメイド アクセサリー 金具 100個セット",
-          "product_brand": "MiYuffee"
+          "product_id": "B09CPWTMRF",
+          "product_title": "【Amazon限定ブランド】labato マスクフック 5点セット 耳が痛くない マスクバンド マスクベルト マスクストラップ シリコン ネックストラップ マスクベルト マスク補助具 マスク補助バンド 首にかける 調整可能 (ブラック, 5本)",
+          "product_brand": "Labato"
         },
         "highlight": {
           "product_title.ja": [
-            "カニカン パーツ 12mm 16mm ゴールド シルバー ストラップ メガネ<em>チェーン</em> バッグ<em>チェーン</em> <em>マスク</em>チャーム ハンドメイド アクセサリー 金具 100個セット"
-          ],
-          "product_description.ja": [
-            "ハンドメイドのストラップ・<em>マスク</em>チャーム・メガネ<em>チェーン</em>・バッグ<em>チェーン</em>・ネックレス・ブレスレットなどに欠かせない基礎金具パーツです。"
+            "【Amazon限定ブランド】labato <em>マスク</em>フック 5点セット 耳が痛くない <em>マスク</em>バンド <em>マスク</em>ベルト <em>マスクストラップ</em> シリコン ネックストラップ <em>マスク</em>ベルト <em>マスク</em>補助具 <em>マスク</em>補助バンド"
           ]
         }
       },
       {
         "_index": "esci-products",
-        "_id": "B08RYCNDWT",
-        "_score": 45.089622,
-        "_ignored": ["product_bullet_point", "product_description"],
-        "_source": {
-          "product_id": "B08RYCNDWT",
-          "product_title": "マスクどめクリップ,マスクフック，マスクフック，M&Y Crystal,マスクバンド,マスク用ストラップ,マスククリップ,マスク用 クリップ,マスク 耳 痛くならない,ハンドメイドマスク,ブレスレット レディース，マスク フック，マスク クリップ，マスクバンド ，’ピンクの宝石",
-          "product_brand": "M&Y Crystal"
-        },
-        "highlight": {
-          "product_title.ja": [
-            "<em>マスク</em>どめクリップ,<em>マスク</em>フック，<em>マスク</em>フック，M&Y Crystal,<em>マスク</em>バンド,<em>マスク</em>用ストラップ,<em>マスク</em>クリップ,<em>マスク</em>用 クリップ,<em>マスク</em> 耳 痛くならない,ハンドメイド<em>マスク</em>,ブレスレット",
-            "レディース，<em>マスク</em> フック，<em>マスク</em> クリップ，<em>マスク</em>バンド ，’ピンクの宝石"
-          ],
-          "product_description.ja": [
-            "<em>マスク</em>の両端につけていただき、お好みに合わせて長さを調節していただけます。<br>2. 長さ150mm 幅11mm 重さ6.64g。<em>マスク</em>の両端の<em>チェーン</em>は簡単につけ外し易いバックルを使用しています。",
-            "はじめに、画像の左側のバックルを<em>マスク</em>の紐に付け、次に右側部分を調節しながら、<em>マスク</em>紐に付けてください。<em>マスク</em>を付けたまま調節すると簡単に付けられます。<br>5. 贈り物にも便利な付属の箱と袋付き。"
-          ]
-        }
-      },
-      {
-        "_index": "esci-products",
-        "_id": "B071J4TRNW",
-        "_score": 28.356335,
+        "_id": "B08GWXQXZ8",
+        "_score": 116.57289,
         "_ignored": ["product_bullet_point"],
         "_source": {
-          "product_id": "B071J4TRNW",
-          "product_title": "自転車 チェーンクリーナー BeiLan 自転車 チェーン自転車 チェーン オイル 洗浄 掃除 チェーン洗浄器＋チェーンブラシ 3点セット",
-          "product_brand": "BeiLan"
+          "product_id": "B08GWXQXZ8",
+          "product_title": "マスクバンド 痛くない マスクフック マスクストラップ ネックストラップ マスクチェーン 大人 子供用 マスク用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め マスク紛失防止 3PCS",
+          "product_brand": "TOOVREN"
         },
         "highlight": {
           "product_title.ja": [
-            "自転車 <em>チェーン</em>クリーナー BeiLan 自転車 <em>チェーン</em>自転車 <em>チェーン</em> オイル 洗浄 掃除 <em>チェーン</em>洗浄器＋<em>チェーン</em>ブラシ 3点セット"
+            "<em>マスク</em>バンド 痛くない <em>マスク</em>フック <em>マスクストラップ</em> ネックストラップ <em>マスク</em>チェーン 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め <em>マスク</em>紛失防止 3PCS"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08GX8W7TW",
+        "_score": 116.57289,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B08GX8W7TW",
+          "product_title": "マスクバンド 痛くない マスクフック マスクストラップ ネックストラップ マスクチェーン 大人 子供用 マスク用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め マスク紛失防止 5PCS",
+          "product_brand": "TOOVREN"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "<em>マスク</em>バンド 痛くない <em>マスク</em>フック <em>マスクストラップ</em> ネックストラップ <em>マスク</em>チェーン 大人 子供用 <em>マスク</em>用 補助 ベルト 留め具 くびにかけるくん 痛くない 調整 滑り止め <em>マスク</em>紛失防止 5PCS"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B09BMT3CJF",
+        "_score": 115.45999,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B09BMT3CJF",
+          "product_title": "2021年新商品】紛失防止 マスクストラップ 耳が痛くならないマスクフックベルト ネックマスクストラップ マスクコード 首に掛けマスクストラップ マスクバンド フェース用マスク補助具 ズレ落ち防止 子供兼用 無段階調節 5本入り スポーツ適用 ブラック シンプル",
+          "product_brand": "Verylove"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "2021年新商品】紛失防止 <em>マスクストラップ</em> 耳が痛くならない<em>マスク</em>フックベルト ネック<em>マスクストラップ</em> <em>マスク</em>コード 首に掛け<em>マスクストラップ</em> <em>マスク</em>バンド フェース用<em>マスク</em>補助具 ズレ落ち防止 子供兼用"
           ],
           "product_description.ja": [
-            "<em>チェーン</em>洗浄器：<em>チェーン</em>を挟んで、洗浄剤をいれてペダルをまわして、簡単に自転車<em>チェーン</em>の洗浄ができます 。",
-            "<em>チェーン</em>ブラシ：適度なカーブの付いたギザ状の刃は、ギアの間に深く詰まった泥を確実にかき出し、ナイロンブラシはディレーラーや<em>チェーン</em>などの汚れ落としに。",
-            "<em>チェーン</em>のブラッシングから、拭き取らないに<em>チェーン</em>洗浄システム。手作業では行いにくい<em>チェーン</em>プレートの内側に入り込んだ汚れもかき出します。"
+            "弊店は<em>マスクストラップ</em>の専門店です、お客様の満足に目指して、毎日努力しております。"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08LYS1M55",
+        "_score": 115.21183,
+        "_ignored": ["product_bullet_point", "product_description"],
+        "_source": {
+          "product_id": "B08LYS1M55",
+          "product_title": "seOSTO マスク ストラップ マスクフック マスクストラップ マスク用フックベルトマスクバンド 耳掛けタイプのマスクに対応 固定マスク補助具 耳の痛みを軽減する 調整機能付き 再利用可能 マスクベルト大人 子供兼用 (黒, 5PC)",
+          "product_brand": "seOSTO"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "seOSTO <em>マスク</em> ストラップ <em>マスク</em>フック <em>マスクストラップ</em> <em>マスク</em>用フックベルト<em>マスク</em>バンド 耳掛けタイプの<em>マスク</em>に対応 固定<em>マスク</em>補助具 耳の痛みを軽減する 調整機能付き 再利用可能 <em>マスク</em>ベルト"
+          ],
+          "product_description.ja": [
+            "耳を痛めません： 長時間<em>マスク</em>を着用すると、<em>マスク</em>の紐がきつくなるため、耳が痛くなることがあります。",
+            "この製品は、<em>マスク</em>を長時間着用することによって引き起こされる痛みを効果的に軽減し、頭の後ろにフィットするため、<em>マスク</em>を長期間使用でき、<em>マスク</em>をより快適に着用できます 使用手順： 1.<em>マスク</em>の側面にある内側",
+            "のバックルにフックをかけます 2.<em>マスク</em>を口と鼻に付け、ロープの反対側を頭に固定します 3.<em>マスク</em>を調整して着用する 再利用可能： 無毒・無臭・シンプルで柔軟性に優れた素材で作られているため、360度曲",
+            "繰り返し洗える ほとんどの<em>マスク</em>に適しています： 市販のほとんどの<em>マスク</em>に適合します <em>マスク</em>のゴムに掛けるだけで簡単に貼れます"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08LVC6HS8",
+        "_score": 114.53029,
+        "_ignored": ["product_bullet_point", "product_description"],
+        "_source": {
+          "product_id": "B08LVC6HS8",
+          "product_title": "seOSTO マスク専用 マスクバンド やわらかなシリコンゴム 耳にかけない マスク マスクフック マスククリップ 耳が痛くない 耳が痛くならない 耳痛 肌荒れ ブラック 黒 マスクグッズ マスクストラップ みみ ゴム フック クリップ マスクベルト 子供 使い捨てマスク 快適 補助 調整 グッズ 再利用可能",
+          "product_brand": "seOSTO"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "seOSTO <em>マスク</em>専用 <em>マスク</em>バンド やわらかなシリコンゴム 耳にかけない <em>マスク</em> <em>マスク</em>フック <em>マスク</em>クリップ 耳が痛くない 耳が痛くならない 耳痛 肌荒れ ブラック 黒 <em>マスク</em>グッズ <em>マスクストラップ</em>",
+            "みみ ゴム フック クリップ <em>マスク</em>ベルト 子供 使い捨て<em>マスク</em> 快適 補助 調整 グッズ 再利用可能"
+          ],
+          "product_description.ja": [
+            "耳を痛めません： 長時間<em>マスク</em>を着用すると、<em>マスク</em>の紐がきつくなるため、耳が痛くなることがあります。",
+            "この製品は、<em>マスク</em>を長時間着用することによって引き起こされる痛みを効果的に軽減し、頭の後ろにフィットするため、<em>マスク</em>を長期間使用でき、<em>マスク</em>をより快適に着用できます 使用手順： 1.<em>マスク</em>の側面にある内側",
+            "のバックルにフックをかけます 2.<em>マスク</em>を口と鼻に付け、ロープの反対側を頭に固定します 3.<em>マスク</em>を調整して着用する 再利用可能： 無毒・無臭・シンプルで柔軟性に優れた素材で作られているため、360度曲",
+            "繰り返し洗える ほとんどの<em>マスク</em>に適しています： 市販のほとんどの<em>マスク</em>に適合します <em>マスク</em>のゴムに掛けるだけで簡単に貼れます"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08XQ4VYCD",
+        "_score": 114.430374,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B08XQ4VYCD",
+          "product_title": "マスクバンド マスクフック マスク みみ 痛くならない マスクストラップ (４色４個セット) マスクフックベルト 首掛け 耳が痛くならないマスク 留め具 調節可能 大人 子供 兼用 【Sim's】",
+          "product_brand": "Sim's"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "<em>マスク</em>バンド <em>マスク</em>フック <em>マスク</em> みみ 痛くならない <em>マスクストラップ</em> (４色４個セット) <em>マスク</em>フックベルト 首掛け 耳が痛くならない<em>マスク</em> 留め具 調節可能 大人 子供 兼用 【Sim's】"
+          ],
+          "product_description.ja": [
+            "<em>マスク</em> 着用時の『 耳の痛み 』『 不快感 』に『 <em>マスクストラップ</em> ４本セット 』を『 ブラック, ブルー, ワインレッド, ラベンダー 』でご用意させていただきました。",
+            "<em>マスク</em>着脱時には首にかけられる <em>マスクストラップ</em> は『 衛生的でストレスフリー 』です。また、大人の方から子供の方までご使用いただけるようになっておりますので、幅広い方にオススメです。"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B097BCX37C",
+        "_score": 113.249664,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B097BCX37C",
+          "product_title": "マスクバンド マスクフック マスクストラップ (５個セット) マスクフックベルト マスク フック 留め具 ５段階調節可能 大人 子供 兼用 イヤーフック 【N.M.JAPAN】 (ブラック)",
+          "product_brand": "N.M.JAPAN"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "<em>マスク</em>バンド <em>マスク</em>フック <em>マスクストラップ</em> (５個セット) <em>マスク</em>フックベルト <em>マスク</em> フック 留め具 ５段階調節可能 大人 子供 兼用 イヤーフック 【N.M.JAPAN】 (ブラック)"
+          ],
+          "product_description.ja": [
+            "<em>マスク</em>を１日中使用すると耳への違和感や、ズレが気になると思う方も多いのではないでしょうか？そんな方におすすめのアイテムが、<em>マスク</em>バンド（<em>マスク</em>フック）です！"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08F55731X",
+        "_score": 112.8591,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B08F55731X",
+          "product_title": "【Amazon限定ブランド】マスクストラップ マスクバンド Labato 【４本入り】マスク くびかけ 紛失防止 耳が痛くならない マスクフック マスクベルト 無段階調整 取付カンタン マスク用フックベルト マスク補助具 固定 滑り止め フェイス用フックベルト マスク補助バンド",
+          "product_brand": "Labato"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "【Amazon限定ブランド】<em>マスクストラップ</em> <em>マスク</em>バンド Labato 【４本入り】<em>マスク</em> くびかけ 紛失防止 耳が痛くならない <em>マスク</em>フック <em>マスク</em>ベルト 無段階調整 取付カンタン <em>マスク</em>用フックベルト",
+            "<em>マスク</em>補助具 固定 滑り止め フェイス用フックベルト <em>マスク</em>補助バンド"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08798JYMQ",
+        "_score": 112.35479,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B08798JYMQ",
+          "product_title": "マスクフック マスクバンド ベルト 5セット マスクイヤーフック マスクゴム延長バックル 固定 マスク補助用フック 耳掛けタイプのマスクに対応 耳が痛くない 再利用可能 柔らか 弾性 滑り止め 大人 子供兼用 (L(5セット）, ブラック)",
+          "product_brand": "JISONCASE"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "<em>マスク</em>フック <em>マスク</em>バンド ベルト 5セット <em>マスクイヤーフック</em> <em>マスク</em>ゴム延長バックル 固定 <em>マスク</em>補助用フック 耳掛けタイプの<em>マスク</em>に対応 耳が痛くない 再利用可能 柔らか 弾性 滑り止め 大人 子供兼用"
+          ],
+          "product_description.ja": [
+            "<em>マスク</em>の留め具 商品裏面にマイクロドット加工の滑り止めがあります。 材質が幅が広く柔らかい で、適切な長さに裁断できます。耳への負担をやわらげます。"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B0874XQZT5",
+        "_score": 111.38578,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B0874XQZT5",
+          "product_title": "【Amazon限定ブランド】labato マスクフック 5点セット 耳が痛くない マスクバンド ベルト マスクストラップ シリコン おしゃれ ネックストラップ かわいい マスクベルト マスク補助具 マスク補助バンド 首にかける 調整可能 (ブラック, 5個)",
+          "product_brand": "Labato"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "【Amazon限定ブランド】labato <em>マスク</em>フック 5点セット 耳が痛くない <em>マスク</em>バンド ベルト <em>マスクストラップ</em> シリコン おしゃれ ネックストラップ かわいい <em>マスク</em>ベルト <em>マスク</em>補助具 <em>マスク</em>"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08XJ4CH3H",
+        "_score": 111.38347,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B08XJ4CH3H",
+          "product_title": "マスクフック マスクバンド ベルト 5セット マスクイヤーフック マスクゴム延長バックル 固定 マスク補助用フック 耳掛けタイプのマスクに対応 耳が痛くない 再利用可能 柔らか 弾性 滑り止め 大人 子供兼用 (ブラックＸL, ＸL(5セット）)",
+          "product_brand": "JISONCASE"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "<em>マスク</em>フック <em>マスク</em>バンド ベルト 5セット <em>マスクイヤーフック</em> <em>マスク</em>ゴム延長バックル 固定 <em>マスク</em>補助用フック 耳掛けタイプの<em>マスク</em>に対応 耳が痛くない 再利用可能 柔らか 弾性 滑り止め 大人 子供兼用"
+          ],
+          "product_description.ja": [
+            "【適用対象】<em>マスク</em>をかけて、①耳が痛くなった方②耳が小さくてよく落ちる方③顔型に合わなくて使いにくい方。",
+            "【タイトネス調整】4段階調整可能なフック、快適なエクステンションバックル、市販の様々な<em>マスク</em>に適しています。",
+            "しかも適切な長さに裁断でき、フェイスが大きすぎて顔がきつすぎたり、薄い顔やお子様の<em>マスク</em>がゆるすぎて脱落しやすいなどの問題を解決します。"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B09B3GJ8VG",
+        "_score": 111.35637,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B09B3GJ8VG",
+          "product_title": "Labato マスクストラップ マスクバンド 【5本入り】マスク補助バンド くびかけ 紛失防止 耳が痛くならない マスクフック マスクベルト 無段階調整 取付カンタン マスク用フックベルト マスク補助具 固定 滑り止め フェイス用フックベルト マスク補助バンド (ブルー*5)",
+          "product_brand": "Labato"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "Labato <em>マスクストラップ</em> <em>マスク</em>バンド 【5本入り】<em>マスク</em>補助バンド くびかけ 紛失防止 耳が痛くならない <em>マスク</em>フック <em>マスク</em>ベルト 無段階調整 取付カンタン <em>マスク</em>用フックベルト <em>マスク</em>補助具",
+            "固定 滑り止め フェイス用フックベルト <em>マスク</em>補助バンド (ブルー*5)"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08863QJFS",
+        "_score": 111.24942,
+        "_ignored": ["product_bullet_point"],
+        "_source": {
+          "product_id": "B08863QJFS",
+          "product_title": "くびにかけるくん シリコン素材／マスク補助バンド／耳が痛くならないグッズ／マスク用フックベルト／マスクストラップ (ブラック)",
+          "product_brand": "Alameda"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "くびにかけるくん シリコン素材／<em>マスク</em>補助バンド／耳が痛くならないグッズ／<em>マスク</em>用フックベルト／<em>マスクストラップ</em> (ブラック)"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08BXYDTMT",
+        "_score": 110.63951,
+        "_ignored": ["product_bullet_point", "product_description"],
+        "_source": {
+          "product_id": "B08BXYDTMT",
+          "product_title": "【特許出願中】 マスクバンド シリコン素材 マスクフック マスク 耳が痛くない グッズ 6個入り三つ色 マスククリップ マスクストラップ 柔らかい 無臭無毒 首にかけるくん 大人 子供用 マスク みみが痛くならないグッズ マスク補助バンド（黒ピンク白）",
+          "product_brand": "CHILLSUNG"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "【特許出願中】 <em>マスク</em>バンド シリコン素材 <em>マスク</em>フック <em>マスク</em> 耳が痛くない グッズ 6個入り三つ色 <em>マスク</em>クリップ <em>マスクストラップ</em> 柔らかい 無臭無毒 首にかけるくん 大人 子供用 <em>マスク</em> みみが",
+            "痛くならないグッズ <em>マスク</em>補助バンド（黒ピンク白）"
+          ],
+          "product_description.ja": [
+            "<br>②<em>マスク</em> フックを調整することにより、フェイス<em>マスク</em>を緩めたり締めたりすることができ、<em>マスク</em>を長時間着用しても苦になりません。<em>マスク</em>フック補助具として耳の痛みを有効的に解消できます。",
+            "<br> ③<em>マスク</em>用フックベルトは柔らかいシリコン素材を採用した<em>マスク</em> ベルトなので、子供の場合は子ども <em>マスク</em> ゴム紐長さによって余裕の部分を切ればより頭の形をフィットします。",
+            "<br>くびにかけるくん、<em>マスク</em> クリップ等競争品より柔らかさと高弾力性がある<em>マスク</em>イヤープロテクターは、イヤーフックを引っ張ることを通して、耳に強い圧力を感じさせず、<em>マスク</em>を顔にしっかりと密着させます",
+            "耳が痛くならない<em>マスク</em>　クリップ補助具です。",
+            "<br><em>マスク</em> 補助バンド日本製とかみみが痛くならないゲッズ日本製とか<em>マスク</em>用フック等の現在発売されている様々な商品を評価し、比較した上て開発した<em>マスク</em>バンド おしゃれゲッズです。"
           ]
         }
       }
@@ -371,122 +390,118 @@
   },
   "aggregations": {
     "facet_bucket_all": {
-      "doc_count": 5885,
+      "doc_count": 3534,
       "product_locale": {
         "doc_count_error_upper_bound": 0,
         "sum_other_doc_count": 0,
         "buckets": [
           {
             "key": "jp",
-            "doc_count": 5885
+            "doc_count": 3534
           }
         ]
       },
       "product_color": {
         "doc_count_error_upper_bound": 0,
-        "sum_other_doc_count": 1985,
+        "sum_other_doc_count": 1151,
         "buckets": [
           {
-            "key": "ブラック",
-            "doc_count": 434
-          },
-          {
             "key": "ホワイト",
-            "doc_count": 416
+            "doc_count": 358
           },
           {
-            "key": "シルバー",
-            "doc_count": 164
+            "key": "ブラック",
+            "doc_count": 267
           },
           {
             "key": "グレー",
-            "doc_count": 118
-          },
-          {
-            "key": "ピンク",
-            "doc_count": 110
-          },
-          {
-            "key": "白",
             "doc_count": 97
           },
           {
-            "key": "ブルー",
-            "doc_count": 68
+            "key": "白",
+            "doc_count": 94
           },
           {
-            "key": "ゴールド",
-            "doc_count": 59
+            "key": "ピンク",
+            "doc_count": 86
           },
           {
             "key": "クリア",
-            "doc_count": 48
-          },
-          {
-            "key": "レッド",
-            "doc_count": 47
+            "doc_count": 38
           },
           {
             "key": "ネイビー",
-            "doc_count": 40
+            "doc_count": 32
+          },
+          {
+            "key": "ブルー",
+            "doc_count": 32
           },
           {
             "key": "ベージュ",
-            "doc_count": 34
+            "doc_count": 20
           },
           {
-            "key": "グリーン",
-            "doc_count": 31
-          },
-          {
-            "key": "黒",
-            "doc_count": 29
-          },
-          {
-            "key": "クリスタル · クリア",
-            "doc_count": 25
+            "key": "レッド",
+            "doc_count": 20
           },
           {
             "key": "パープル",
-            "doc_count": 24
+            "doc_count": 18
           },
           {
-            "key": "ブラウン",
-            "doc_count": 22
+            "key": "黒",
+            "doc_count": 18
           },
           {
-            "key": "イエロー",
-            "doc_count": 21
+            "key": "グリーン",
+            "doc_count": 14
           },
           {
-            "key": "オレンジ",
-            "doc_count": 17
+            "key": "ベビーピンク",
+            "doc_count": 14
           },
           {
-            "key": "赤",
-            "doc_count": 16
+            "key": "White",
+            "doc_count": 13
+          },
+          {
+            "key": "シルバー",
+            "doc_count": 13
+          },
+          {
+            "key": "ライトグレー",
+            "doc_count": 12
+          },
+          {
+            "key": "B",
+            "doc_count": 11
+          },
+          {
+            "key": "ダークグレー",
+            "doc_count": 11
+          },
+          {
+            "key": "ブラク",
+            "doc_count": 11
           }
         ]
       },
       "product_brand": {
         "doc_count_error_upper_bound": 0,
-        "sum_other_doc_count": 5048,
+        "sum_other_doc_count": 2908,
         "buckets": [
           {
             "key": "ノーブランド品",
-            "doc_count": 161
+            "doc_count": 86
           },
           {
             "key": "CHENSEN",
             "doc_count": 69
           },
           {
-            "key": "UNICRAFTALE",
-            "doc_count": 55
-          },
-          {
             "key": "アイリスオーヤマ(IRIS OHYAMA)",
-            "doc_count": 40
+            "doc_count": 39
           },
           {
             "key": "MASZONE",
@@ -497,28 +512,12 @@
             "doc_count": 35
           },
           {
-            "key": "ONES",
-            "doc_count": 35
-          },
-          {
             "key": "レワード(Reward)",
             "doc_count": 31
           },
           {
-            "key": "アールケー・エキセル/RK EXCEL",
-            "doc_count": 28
-          },
-          {
-            "key": "Artemis Classic(アルテミスクラシック)",
-            "doc_count": 26
-          },
-          {
             "key": "DUEN",
             "doc_count": 23
-          },
-          {
-            "key": "OWLGuardian",
-            "doc_count": 22
           },
           {
             "key": "Hellozebra",
@@ -533,16 +532,8 @@
             "doc_count": 19
           },
           {
-            "key": "新宿銀の蔵",
-            "doc_count": 19
-          },
-          {
             "key": "超快適マスク",
             "doc_count": 19
-          },
-          {
-            "key": "wileqep- 生活雑貨",
-            "doc_count": 18
           },
           {
             "key": "HYPER GUARD",
@@ -551,6 +542,34 @@
           {
             "key": "LULULUN(ルルルン)",
             "doc_count": 17
+          },
+          {
+            "key": "La CASTA(ラ・カスタ)",
+            "doc_count": 17
+          },
+          {
+            "key": "エスケーツー(SK-II)",
+            "doc_count": 17
+          },
+          {
+            "key": "医食同源ドットコム",
+            "doc_count": 17
+          },
+          {
+            "key": "クオリティファースト(Quality 1st)",
+            "doc_count": 16
+          },
+          {
+            "key": "クリアターン",
+            "doc_count": 16
+          },
+          {
+            "key": "TRENZADO",
+            "doc_count": 15
+          },
+          {
+            "key": "FunHoom",
+            "doc_count": 14
           }
         ]
       }

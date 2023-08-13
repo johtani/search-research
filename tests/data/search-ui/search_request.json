@@ -1,0 +1,38 @@
+{
+  "query": {
+    "current": 1,
+    "filters": [
+      { "field": "product_color", "values": ["ホワイト"], "type": "all" },
+      {
+        "field": "product_brand",
+        "values": ["アイリスオーヤマ(IRIS OHYAMA)"],
+        "type": "all"
+      }
+    ],
+    "resultsPerPage": 20,
+    "searchTerm": "マスク",
+    "sortDirection": "",
+    "sortField": "",
+    "sortList": []
+  },
+  "options": {
+    "search_fields": {
+      "product_title.ja": { "weight": 3 },
+      "product_description.ja": {},
+      "product_bullet_point.ja": {}
+    },
+    "result_fields": {
+      "product_id": {},
+      "product_brand": {},
+      "product_title": {},
+      "product_title.ja": { "snippet": { "size": 3, "fallback": true } },
+      "product_description.ja": { "snippet": { "size": 100, "fallback": true } }
+    },
+    "disjunctiveFacets": ["product_color", "product_brand", "product_locale"],
+    "facets": {
+      "product_locale": { "type": "value" },
+      "product_brand": { "type": "value" },
+      "product_color": { "type": "value" }
+    }
+  }
+}

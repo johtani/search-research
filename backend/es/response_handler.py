@@ -1,7 +1,7 @@
 import json
 import logging
 import math
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from backend.es.searcher import EsResponse, HitItem
 from backend.models import FacetData, FacetItem, SearchRequest, SearchResult
@@ -54,15 +54,38 @@ def translate_results(es_res: EsResponse, search_result: SearchResult) -> Search
 
 def translate_facets(es_res: EsResponse, search_request: SearchRequest, search_result: SearchResult) -> SearchResult:
     if es_res["aggregations"]:
-        facets: Dict[str, List[FacetItem]] = {}
-        for label in es_res["aggregations"]["facet_bucket_all"].keys():
-            if label != "doc_count":
-                buckets = []
-                for bucket in es_res["aggregations"]["facet_bucket_all"][label]["buckets"]:
-                    buckets.append(FacetData(value=bucket["key"], count=bucket["doc_count"]))
-                facet_item = FacetItem(data=buckets, type="value")
-                facets[label] = [facet_item]
-        search_result.facets = facets
+        if search_request.query.filters:
+            search_result = translate_facets_with_post_filter(aggs=es_res["aggregations"], search_result=search_result)
+        else:
+            search_result = translate_facets_all(aggs=es_res["aggregations"], search_result=search_result)
     else:
         logger.debug("No aggregations")
+    return search_result
+
+
+def translate_facets_all(aggs: Dict[str, Dict[str, Any]], search_result: SearchResult) -> SearchResult:
+    facets: Dict[str, List[FacetItem]] = {}
+    for label in aggs["facet_bucket_all"].keys():
+        if label != "doc_count":
+            buckets = []
+            for bucket in aggs["facet_bucket_all"][label]["buckets"]:
+                buckets.append(FacetData(value=bucket["key"], count=bucket["doc_count"]))
+            facet_item = FacetItem(data=buckets, type="value")
+            facets[label] = [facet_item]
+    search_result.facets = facets
+    return search_result
+
+
+def translate_facets_with_post_filter(aggs: Dict[str, Dict[str, Any]], search_result: SearchResult) -> SearchResult:
+    facets: Dict[str, List[FacetItem]] = {}
+    for label, item in aggs.items():
+        if label != "facet_bucket_all":
+            for field, value in item.items():
+                if field != "doc_count":
+                    buckets = []
+                    for bucket in value["buckets"]:
+                        buckets.append(FacetData(value=bucket["key"], count=bucket["doc_count"]))
+                    facet_item = FacetItem(data=buckets, type="value")
+                    facets[field] = [facet_item]
+    search_result.facets = facets
     return search_result
