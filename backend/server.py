@@ -27,13 +27,12 @@ app.add_middleware(
 
 logger = logging.getLogger("uvicorn")
 
-
 translator = EsTranslator()
 
 
 @app.post("/search")
 async def search(request: SearchRequest):
-    logger.info(f"{request=}")
+    logger.debug(f"{request=}")
     return translator.translate_and_search(request)
 
 

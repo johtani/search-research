@@ -1,5 +1,4 @@
 import React from "react";
-import CustomConnector from "./connector"
 import {
   ErrorBoundary,
   Facet,
@@ -14,8 +13,16 @@ import {
 } from "@elastic/react-search-ui";
 import { Layout } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
-
+import CustomConnector from "./connector"
 const connector = new CustomConnector();
+
+/*
+import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
+const connector = new ElasticsearchAPIConnector({
+  host: "http://localhost:9200",
+  index: "esci-products"
+});
+*/
 
 const config = {
   searchQuery: {

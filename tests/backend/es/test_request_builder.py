@@ -29,8 +29,17 @@ def test_build_size_offset(input, expected):
     ("input", "expected"),
     [
         (
-            SearchOptions(result_fields={"a": {}, "b": {"snippet": {"size": 3, "fallback": True}}, "c": {}}),
-            EsReqeust(source=EsRequestSource(includes=["a", "b", "c"]), highlight=EsHighlight(fields={"b": {}})),
+            SearchOptions(
+                result_fields={
+                    "a": {},
+                    "b": {"snippet": {"size": 3, "fallback": True}},
+                    "c": {},
+                    "d": {"snippet": {"size": 3, "fallback": True}},
+                }
+            ),
+            EsReqeust(
+                source=EsRequestSource(includes=["a", "b", "c", "d"]), highlight=EsHighlight(fields={"b": {}, "d": {}})
+            ),
         )
     ],
 )

@@ -52,7 +52,7 @@ def build_source(options: SearchOptions, es_request: EsReqeust) -> EsReqeust:
             if type(options.result_fields[field]) is ResultField and options.result_fields[field].snippet:
                 if es_request.highlight is None:
                     es_request.highlight = EsHighlight()
-                    es_request.highlight.fields[field] = {}
+                es_request.highlight.fields[field] = {}
 
     return es_request
 

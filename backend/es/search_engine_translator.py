@@ -16,6 +16,7 @@ class EsTranslator:
 
     def translate_and_search(self, request: SearchRequest) -> SearchResult:
         es_request = self._translate_request(request=request)
+        self.logger.debug(f"{es_request=}")
         es_response = self.searcher.search(request=es_request)
         return self._translate_response(request=request, es_response=es_response)
 
