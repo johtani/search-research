@@ -24,12 +24,10 @@ class EsTranslator:
         es_req = EsReqeust()
         # qeury rewrite
         es_req = rb.build_query(request=request, es_request=es_req)
-        # filter query
-        es_req = rb.build_filter_query(request=request, es_request=es_req)
         # knn query?
 
-        # aggs
-        es_req = rb.build_aggs(request=request, es_request=es_req)
+        # aggs & post filter
+        es_req = rb.build_aggs_and_post_filter(request=request, es_request=es_req)
         # size & offset
         es_req = rb.build_size_offset(query=request.query, es_request=es_req)
         # source

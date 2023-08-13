@@ -1,0 +1,367 @@
+{
+  "took": 49,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 12,
+      "relation": "eq"
+    },
+    "max_score": 89.411095,
+    "hits": [
+      {
+        "_index": "esci-products",
+        "_id": "B07VYT97KS",
+        "_score": 89.411095,
+        "_source": {
+          "product_id": "B07VYT97KS",
+          "product_title": "アイリスオーヤマ マスク 美フィットマスク 小さめ 7枚 個包装 ホワイト",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ <em>マスク</em> 美フィット<em>マスク</em> 小さめ 7枚 個包装 ホワイト"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08ZSDJS1Z",
+        "_score": 87.91026,
+        "_source": {
+          "product_id": "B08ZSDJS1Z",
+          "product_title": "アイリスオーヤマ マスク 不織布 120枚 ディスポーザブル プリーツ型マスク 不織布マスク ふつうサイズ 20PN-120PM",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ <em>マスク</em> 不織布 120枚 ディスポーザブル プリーツ型<em>マスク</em> 不織布<em>マスク</em> ふつうサイズ 20PN-120PM"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B0979YV1KN",
+        "_score": 79.69911,
+        "_source": {
+          "product_id": "B0979YV1KN",
+          "product_title": "アイリスオーヤマ マスク 不織布 プリーツマスク ゆったり大きめサイズ 65枚入 PN-NV65LL ホワイト",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ <em>マスク</em> 不織布 プリーツ<em>マスク</em> ゆったり大きめサイズ 65枚入 PN-NV65LL ホワイト"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B0979Z6988",
+        "_score": 78.481285,
+        "_source": {
+          "product_id": "B0979Z6988",
+          "product_title": "アイリスオーヤマ マスク 不織布 個包装 プリーツマスク ゆったり大きめサイズ 40枚入 PK-NV40LL",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ <em>マスク</em> 不織布 個包装 プリーツ<em>マスク</em> ゆったり大きめサイズ 40枚入 PK-NV40LL"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B0936T6KHW",
+        "_score": 76.15398,
+        "_source": {
+          "product_id": "B0936T6KHW",
+          "product_title": "アイリスオーヤマ マスク 不織布 子供用 65枚 プリーツマスク 不織布 PN-NV65G 学童サイズ キッズ",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ <em>マスク</em> 不織布 子供用 65枚 プリーツ<em>マスク</em> 不織布 PN-NV65G 学童サイズ キッズ"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08NHWRF17",
+        "_score": 72.85094,
+        "_source": {
+          "product_id": "B08NHWRF17",
+          "product_title": "アイリスオーヤマ ディスポーザブル マスク 不織布 120枚 ふつう",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ ディスポーザブル <em>マスク</em> 不織布 120枚 ふつう"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08QD6XRZZ",
+        "_score": 67.13726,
+        "_source": {
+          "product_id": "B08QD6XRZZ",
+          "product_title": "アイリスオーヤマ やわらかマスク ふつうサイズ 30枚入 PN-YW30M",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ やわらか<em>マスク</em> ふつうサイズ 30枚入 PN-YW30M"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08ZSHT849",
+        "_score": 65.426796,
+        "_source": {
+          "product_id": "B08ZSHT849",
+          "product_title": "アイリスオーヤマ ふんわりやさしいマスク ふつうサイズ 30枚入 PK-FY30L",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ ふんわりやさしい<em>マスク</em> ふつうサイズ 30枚入 PK-FY30L"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B08HQ9PH53",
+        "_score": 63.801323,
+        "_source": {
+          "product_id": "B08HQ9PH53",
+          "product_title": "アイリスオーヤマ ディスポーザブル プリーツ型マスク ふつうサイズ 30枚入 20PN-30PM",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "アイリスオーヤマ ディスポーザブル プリーツ型<em>マスク</em> ふつうサイズ 30枚入 20PN-30PM"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B09BPL8SGL",
+        "_score": 56.751587,
+        "_source": {
+          "product_id": "B09BPL8SGL",
+          "product_title": "【3個セット】アイリスオーヤマ マスク 不織布 日本製 やわらか 小さめ 30枚入 PN-YW30S",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "【3個セット】アイリスオーヤマ <em>マスク</em> 不織布 日本製 やわらか 小さめ 30枚入 PN-YW30S"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B09BQ3S553",
+        "_score": 56.751587,
+        "_source": {
+          "product_id": "B09BQ3S553",
+          "product_title": "【3個セット】アイリスオーヤマ マスク 不織布 日本製 やわらか ふつう 30枚入 PN-YW30M",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "【3個セット】アイリスオーヤマ <em>マスク</em> 不織布 日本製 やわらか ふつう 30枚入 PN-YW30M"
+          ]
+        }
+      },
+      {
+        "_index": "esci-products",
+        "_id": "B09BQFW1VK",
+        "_score": 54.349445,
+        "_source": {
+          "product_id": "B09BQFW1VK",
+          "product_title": "【10個セット】アイリスオーヤマ マスク 日本製 不織布 ナノエアーマスク ふつう 個包装 7枚入 PK-NI7L",
+          "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+        },
+        "highlight": {
+          "product_title.ja": [
+            "【10個セット】アイリスオーヤマ <em>マスク</em> 日本製 不織布 ナノエアーマスク ふつう 個包装 7枚入 PK-NI7L"
+          ]
+        }
+      }
+    ]
+  },
+  "aggregations": {
+    "facet_bucket_product_brand": {
+      "doc_count": 358,
+      "product_brand": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 237,
+        "buckets": [
+          {
+            "key": "Hellozebra",
+            "doc_count": 19
+          },
+          {
+            "key": "アイリスオーヤマ(IRIS OHYAMA)",
+            "doc_count": 12
+          },
+          {
+            "key": "フィッティ",
+            "doc_count": 11
+          },
+          {
+            "key": "レワード(Reward)",
+            "doc_count": 8
+          },
+          {
+            "key": "Brodio",
+            "doc_count": 7
+          },
+          {
+            "key": "AIRQUEEN",
+            "doc_count": 6
+          },
+          {
+            "key": "DUEN",
+            "doc_count": 6
+          },
+          {
+            "key": "エリエール",
+            "doc_count": 5
+          },
+          {
+            "key": "ベスパ",
+            "doc_count": 5
+          },
+          {
+            "key": "幕末～BAKUMATSU E-JUICE～",
+            "doc_count": 5
+          },
+          {
+            "key": "Briskyjp",
+            "doc_count": 4
+          },
+          {
+            "key": "ナノＡＧ＋",
+            "doc_count": 4
+          },
+          {
+            "key": "ノーブランド品",
+            "doc_count": 4
+          },
+          {
+            "key": "ビホウマスク",
+            "doc_count": 4
+          },
+          {
+            "key": "三次元マスク",
+            "doc_count": 4
+          },
+          {
+            "key": "3Q-Mat",
+            "doc_count": 3
+          },
+          {
+            "key": "BMC(ビー・エム・シー)",
+            "doc_count": 3
+          },
+          {
+            "key": "BREATH SILVER MASK",
+            "doc_count": 3
+          },
+          {
+            "key": "Kenichi",
+            "doc_count": 3
+          },
+          {
+            "key": "Magfine",
+            "doc_count": 3
+          }
+        ]
+      }
+    },
+    "facet_bucket_all": {
+      "doc_count": 12
+    },
+    "facet_bucket_product_color": {
+      "doc_count": 39,
+      "product_color": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": "ホワイト",
+            "doc_count": 12
+          },
+          {
+            "key": "ピンクベージュ",
+            "doc_count": 3
+          },
+          {
+            "key": "シルクベージュ",
+            "doc_count": 2
+          },
+          {
+            "key": "ピンク(5枚入)",
+            "doc_count": 2
+          },
+          {
+            "key": "ブラック(5枚入)",
+            "doc_count": 2
+          },
+          {
+            "key": "1)ホワイト",
+            "doc_count": 1
+          },
+          {
+            "key": "2)グレー",
+            "doc_count": 1
+          },
+          {
+            "key": "ウォールナットブラウン",
+            "doc_count": 1
+          },
+          {
+            "key": "オリーブカーキ",
+            "doc_count": 1
+          },
+          {
+            "key": "グレー",
+            "doc_count": 1
+          },
+          {
+            "key": "ストームグレー",
+            "doc_count": 1
+          },
+          {
+            "key": "ネイビー",
+            "doc_count": 1
+          },
+          {
+            "key": "ホワイト(7枚入)",
+            "doc_count": 1
+          }
+        ]
+      }
+    },
+    "facet_bucket_product_locale": {
+      "doc_count": 12,
+      "product_locale": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": "jp",
+            "doc_count": 12
+          }
+        ]
+      }
+    }
+  }
+}

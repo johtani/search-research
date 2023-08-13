@@ -25,9 +25,15 @@ class BaseReqResModel(BaseModel):
     )
 
 
+class Filter(BaseReqResModel):
+    field: str
+    values: List[str]
+    type: str
+
+
 class SearchQuery(BaseReqResModel):
     current: int = 1
-    filters: Any = []
+    filters: List[Filter] = []
     results_per_page: int = 20
     search_term: str = ""
     sort_direction: str = ""
