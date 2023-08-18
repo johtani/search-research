@@ -22,7 +22,7 @@ class Processor:
         pass
 
 
-class PipelineManager:
+class Pipeline:
     processors: List[Processor]
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)

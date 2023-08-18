@@ -2,7 +2,7 @@ from typing import Any, Dict, List
 
 import pytest
 
-from backend.processor import PipelineManager, Processor
+from backend.processor import Pipeline, Processor
 
 
 # Test for apply_pipelines
@@ -25,7 +25,7 @@ class BProcesssor(Processor):
     ("pipeline", "input_doc", "expected_doc"), [([AProcessor()], {"C": "C"}, {"A": "A", "C": "C"})]
 )
 def test_single_processor(pipeline: List[Processor], input_doc: Dict[str, Any], expected_doc: Dict[str, Any]):
-    target = PipelineManager(pipeline)
+    target = Pipeline(pipeline)
 
     actual = target.apply_pipelines(input_doc)
 
@@ -37,7 +37,7 @@ def test_single_processor(pipeline: List[Processor], input_doc: Dict[str, Any], 
     [([AProcessor(), BProcesssor()], {"C": "C"}, {"A": "A", "B": "B", "C": "C"})],
 )
 def test_multi_processors(pipeline: List[Processor], input_doc: Dict[str, Any], expected_doc: Dict[str, Any]):
-    target = PipelineManager(pipeline)
+    target = Pipeline(pipeline)
 
     actual = target.apply_pipelines(input_doc)
 

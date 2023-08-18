@@ -1,6 +1,7 @@
 from typing import List
 
-from backend.es.processors import JaClipEncodeProcessor, SetIdProcessor
+from backend.es.processors import SetIdProcessor
+from backend.pipelines import JaClipEncodeProcessor
 from backend.processor import Processor
 
 

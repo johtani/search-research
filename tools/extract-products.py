@@ -9,7 +9,6 @@ logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
 
-
 INPUT_DIR = "./esci-data/shopping_queries_dataset"
 PRODUCT_FILENAME = "shopping_queries_dataset_products.parquet"
 OUTPUT_DIR = "./esci-jsonl/raw-products"
