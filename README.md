@@ -67,7 +67,21 @@ docker compose up <サービス名>
 
 ## データの準備 
 
-Elasticsearchにデータを登録する処理は以下の通りです。
+### JSONデータの生成
+
+esci-dataをgit cloneした後にまずは、JSONLのデータを生成します。
+あとで加工したり、他のシーンでの利用の容易さを考えていったん1データ（1行）1JSONの形で出力しておきます。
+
+```
+python -m tools.extract-products
+```
+
+`esci-jsonl/raw-products`にロケールごとのjsonファイルとして出力されます。内容としては、1行1JSONの形式となっています。
+
+
+### 検索エンジンへのデータ登録
+
+上記のJSONデータをElasticsearchにデータを登録する処理は以下の通りです。
 現時点では、esci-dataのpruductデータのうち、`product_locale=jp`のものだけが登録されます。
 
 ```

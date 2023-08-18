@@ -8,4 +8,6 @@
 # esciのリポジトリ
 esci-data
 # esci-dataのデータから生成したJSONファイルの保存ディレクトリ
+## 旧（次に消す）
 esci-raw-jsonl
+esci-jsonl
