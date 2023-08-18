@@ -4,13 +4,16 @@ from typing import Any, Dict
 import japanese_clip as ja_clip
 import torch
 
-from backend.processor import Processor
+from backend.processor import Metadata, Processor
 
 
 class SetIdProcessor(Processor):
     """
     _idを設定するドキュメントプロセッサー
     """
+
+    def metadata(self) -> Metadata:
+        return Metadata(description="ID付与", inputs="product_id")
 
     def apply(self, doc: Dict[str, Any]) -> Dict[str, Any]:
         return doc | {"_id": doc["product_id"]}
@@ -33,6 +36,9 @@ class JaClipEncodeProcessor(Processor):
         self.model, preprocess = ja_clip.load(self._MODEL_NAME, device=self.device)
         self.tokenizer = ja_clip.load_tokenizer()
         self.target_field = target_field
+
+    def metadata(self) -> Any:
+        return Metadata(description=f"embeddings using {self._MODEL_NAME}", inputs="product_title")
 
     def apply(self, doc: Dict[str, Any]) -> Dict[str, Any]:
         """
