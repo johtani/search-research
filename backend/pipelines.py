@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import japanese_clip as ja_clip
 import torch
@@ -47,4 +47,10 @@ class JaClipEncodeProcessor(Processor):
 
 
 class PipelineManager:
-    registory: Dict[str, Pipeline] = {"ja_clip": Pipeline(processors=[JaClipEncodeProcessor("products_dense_vector")])}
+    _registory: Dict[str, Pipeline] = {"ja_clip": Pipeline(processors=[JaClipEncodeProcessor("products_dense_vector")])}
+
+    def pipeline_names(self) -> List[str]:
+        return list(self._registory.keys())
+
+    def get_pipeline(self, name: str) -> Pipeline | None:
+        return self._registory.get(name)
