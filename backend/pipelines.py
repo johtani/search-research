@@ -1,10 +1,31 @@
 import logging
+from dataclasses import asdict
 from typing import Any, Dict, List
 
 import japanese_clip as ja_clip
 import torch
 
-from backend.processor import Metadata, Pipeline, Processor
+from backend.processor import Metadata, Processor
+
+
+class Pipeline:
+    processors: List[Processor]
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    def __init__(self, processors: List[Processor]):
+        self.processors = processors
+
+    def apply_pipelines(self, doc: Dict[str, Any]) -> Dict[str, Any]:
+        for processor in self.processors:
+            doc = processor.apply(doc)
+        return doc
+
+    def metadatas_asdict(self) -> Dict[str, List[Dict[str, Any]]]:
+        metadatas: List[Dict[str, Any]] = []
+        for processor in self.processors:
+            metadatas.append(asdict(processor.metadata()))
+        return {"metadatas": metadatas}
 
 
 class JaClipEncodeProcessor(Processor):
@@ -26,7 +47,12 @@ class JaClipEncodeProcessor(Processor):
         self.target_field = target_field
 
     def metadata(self) -> Any:
-        return Metadata(description=f"embeddings using {self._MODEL_NAME}", inputs="product_title")
+        return Metadata(
+            name=self.__class__.__name__,
+            description=f"embeddings using {self._MODEL_NAME}",
+            inputs="product_title",
+            vector_size=512,
+        )
 
     def apply(self, doc: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -47,7 +73,10 @@ class JaClipEncodeProcessor(Processor):
 
 
 class PipelineManager:
-    _registory: Dict[str, Pipeline] = {"ja_clip": Pipeline(processors=[JaClipEncodeProcessor("products_dense_vector")])}
+    _registory: Dict[str, Pipeline] = {}
+
+    def __init__(self, registory: Dict[str, Pipeline]) -> None:
+        self._registory = registory
 
     def pipeline_names(self) -> List[str]:
         return list(self._registory.keys())

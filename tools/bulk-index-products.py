@@ -11,7 +11,7 @@ import backend.es.config
 from backend.es.indexer import EsIndexRepository
 from backend.es.pipelines import ja_clip_es_pipeline, raw_es_pipeline
 from backend.indexer import Indexer
-from backend.processor import Pipeline
+from backend.pipelines import Pipeline
 
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
 LOGGER = logging.getLogger(__name__)
