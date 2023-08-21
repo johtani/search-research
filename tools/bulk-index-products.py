@@ -9,17 +9,25 @@ from pandas import DataFrame
 
 import backend.es.config
 from backend.es.indexer import EsIndexRepository
-from backend.es.pipelines import ja_clip_es_pipeline, raw_es_pipeline
+from backend.es.processors import SetIdProcessor
 from backend.indexer import Indexer
-from backend.pipelines import Pipeline
+from backend.pipelines import Pipeline, PipelineManager
+from backend.processor import MergeProcessor
 
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
 
 # JSONL形式のデータファイル
-FILE = pathlib.Path("./esci-raw-jsonl/products/esci-data-products-jp.json")
+FILE = pathlib.Path("./esci-jsonl/raw-products/esci-data-products-jp.json")
 BULK_SIZE = 500
+pipeline_mgr = PipelineManager(
+    # TODO define 'ja_clip' somewhere for standardization
+    registory={
+        "ja_clip": Pipeline(processors=[SetIdProcessor(), MergeProcessor("ja_clip")]),
+        "raw": Pipeline(processors=[SetIdProcessor()]),
+    }
+)
 
 
 @dataclass
@@ -32,7 +40,7 @@ class Args:
 def parse_args() -> Args:
     parser = argparse.ArgumentParser(description="Bulk loader for search engine")
     parser.add_argument("search_engine", type=str, choices=["elasticsearch", "es"], help="search engine type")
-    parser.add_argument("pipeline", type=str, choices=["raw", "with_vector_by_ja_clip"], help="Pipeline type")
+    parser.add_argument("pipeline", type=str, choices=pipeline_mgr.pipeline_names(), help="Pipeline type")
     parser.add_argument(
         "-d",
         "--delete_if_exists",
@@ -59,13 +67,7 @@ def main():
     else:
         LOGGER.error(f"Does not support {args.search_engine} yet...")
         quit()
-    if args.pipeline == "raw":
-        pipeline = Pipeline(raw_es_pipeline())
-    elif args.pipeline == "with_vector_by_ja_clip":
-        pipeline = Pipeline(ja_clip_es_pipeline())
-    else:
-        LOGGER.error(f"Does not support {args.pipeline} yet...")
-        quit()
+    pipeline = pipeline_mgr.get_pipeline(args.pipeline)
     LOGGER.info(f"{args.pipeline=}")
     LOGGER.info(f"{args.delete_if_exists=}")
 

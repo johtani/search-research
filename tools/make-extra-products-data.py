@@ -20,6 +20,7 @@ LOGGER.setLevel(logging.INFO)
 INPUT_FILE = pathlib.Path("./esci-jsonl/raw-products/esci-data-products-jp.json")
 BASE_OUTPUT_DIR = pathlib.Path("./esci-jsonl/")
 pipeline_mgr = PipelineManager(
+    # TODO define 'ja_clip' somewhere for standardization
     registory={"ja_clip": Pipeline(processors=[JaClipEncodeProcessor("products_dense_vector")])}
 )
 
