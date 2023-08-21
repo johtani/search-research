@@ -96,6 +96,7 @@ python -m tools.make-extra-products-data -h
 
 上記のJSONデータをElasticsearchにデータを登録する処理は以下の通りです。
 現時点では、esci-dataのpruductデータのうち、`product_locale=jp`のものだけが登録されます。
+「中間データの生成」処理で作成したデータをproductデータにマージしながら追加する処理もあります。
 
 ```
 python -m tools.bulk-index-products elasticsearch raw
