@@ -11,7 +11,7 @@ import backend.es.config
 from backend.es.indexer import EsIndexRepository
 from backend.es.pipelines import ja_clip_es_pipeline, raw_es_pipeline
 from backend.indexer import Indexer
-from backend.processor import PipelineManager
+from backend.pipelines import Pipeline
 
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
 LOGGER = logging.getLogger(__name__)
@@ -43,7 +43,7 @@ def parse_args() -> Args:
     return Args(**vars(parser.parse_args()))
 
 
-def generate_bulk_actions(df: DataFrame, pipeline: PipelineManager):
+def generate_bulk_actions(df: DataFrame, pipeline: Pipeline):
     for row in df.itertuples():
         product = row._asdict()
         doc = pipeline.apply_pipelines(product)
@@ -60,9 +60,9 @@ def main():
         LOGGER.error(f"Does not support {args.search_engine} yet...")
         quit()
     if args.pipeline == "raw":
-        pipeline = PipelineManager(raw_es_pipeline())
+        pipeline = Pipeline(raw_es_pipeline())
     elif args.pipeline == "with_vector_by_ja_clip":
-        pipeline = PipelineManager(ja_clip_es_pipeline())
+        pipeline = Pipeline(ja_clip_es_pipeline())
     else:
         LOGGER.error(f"Does not support {args.pipeline} yet...")
         quit()
