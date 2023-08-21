@@ -3,6 +3,7 @@ import json
 import logging
 import pathlib
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Dict
 
 import pandas as pd
@@ -44,16 +45,7 @@ def to_extra_dict(target: Dict[str, Any]) -> Dict[str, Any]:
     return target
 
 
-def main():
-    args: Args = parse_args()
-    pipeline = pipeline_mgr.get_pipeline(args.pipeline)
-    LOGGER.info(f"{args.pipeline=}")
-    output_dir = BASE_OUTPUT_DIR.joinpath(args.pipeline)
-    # if output_dir exists, print error and finish
-    if output_dir.exists():
-        LOGGER.error(f"Already exists {args.pipeline} directory. Please remove it before run this batch.")
-        quit()
-    output_dir.mkdir()
+def making_extra_data(pipeline: Pipeline, output_dir: Path):
     LOGGER.info("Start making extra data...")
     df_data_jsonl = pd.read_json(INPUT_FILE, orient="records", lines=True)
     progress = tqdm.tqdm(unit="docs", total=len(df_data_jsonl))
@@ -65,10 +57,27 @@ def main():
             json.dump(to_extra_dict(doc), f)
             f.write("\n")
             progress.update()
+
+
+def making_metadata(pipeline: Pipeline, output_dir: Path):
     LOGGER.info("Making _metadata.json file...")
     output_meta_file = output_dir.joinpath("_metadata.json")
     with open(output_meta_file, "w") as f:
         json.dump(pipeline.metadatas_asdict(), f)
+
+
+def main():
+    args: Args = parse_args()
+    pipeline = pipeline_mgr.get_pipeline(args.pipeline)
+    LOGGER.info(f"{args.pipeline=}")
+    output_dir = BASE_OUTPUT_DIR.joinpath(args.pipeline)
+    # if output_dir exists, print error and finish
+    if output_dir.exists():
+        LOGGER.error(f"Already exists {args.pipeline} directory. Please remove it before run this batch.")
+        quit()
+    output_dir.mkdir()
+    making_extra_data(pipeline, output_dir)
+    making_metadata(pipeline, output_dir)
     LOGGER.info("Finish making extra products data!")
 
 
