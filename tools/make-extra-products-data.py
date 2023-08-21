@@ -69,7 +69,7 @@ def main():
     output_meta_file = output_dir.joinpath("_metadata.json")
     with open(output_meta_file, "w") as f:
         json.dump(pipeline.metadatas_asdict(), f)
-    LOGGER.info("Finish making extra data!")
+    LOGGER.info("Finish making extra products data!")
 
 
 if __name__ == "__main__":
