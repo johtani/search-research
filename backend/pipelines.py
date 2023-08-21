@@ -39,7 +39,7 @@ class JaClipEncodeProcessor(Processor):
     _MODEL_NAME = "rinna/japanese-clip-vit-b-16"
 
     def __init__(self, target_field: str):
-        self.logger.info("Creating Model and Tokenizer...")
+        self.logger.debug("Creating Model and Tokenizer...")
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.logger.debug(f"device is {self.device}")
         self.model, preprocess = ja_clip.load(self._MODEL_NAME, device=self.device)
