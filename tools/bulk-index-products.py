@@ -44,7 +44,7 @@ def parse_args() -> Args:
     parser.add_argument(
         "-d",
         "--delete_if_exists",
-        action="store_true",
+        action="store_false",
         help="If true, delete the index before indexing if the index exists.",
     )
 
@@ -55,6 +55,8 @@ def generate_bulk_actions(df: DataFrame, pipeline: Pipeline):
     for row in df.itertuples():
         product = row._asdict()
         doc = pipeline.apply_pipelines(product)
+        # DataFrameにより付与されている項目を削除
+        doc.pop("Index", None)
         yield doc
 
 
@@ -71,7 +73,7 @@ def main():
     LOGGER.info(f"{args.pipeline=}")
     LOGGER.info(f"{args.delete_if_exists=}")
 
-    LOGGER.info("Start bulk indexing to raw index...")
+    LOGGER.info("Start bulk indexing to the index...")
     indexer = Indexer(repository=repository)
     error = indexer.create_index(args.delete_if_exists)
 

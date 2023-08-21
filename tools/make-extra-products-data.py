@@ -37,7 +37,7 @@ def parse_args() -> Args:
 
 
 def to_extra_dict(target: Dict[str, Any]) -> Dict[str, Any]:
-    # Index from dataframe...
+    # DataFrameにより付与されている項目を削除
     target.pop("Index", None)
     for key in Product.__annotations__.keys():
         # Need key
