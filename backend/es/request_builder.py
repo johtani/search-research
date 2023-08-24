@@ -1,7 +1,7 @@
 import json
 import logging
 
-from backend.es.searcher import EsHighlight, EsReqeust
+from backend.es.searcher import EsHighlight, EsRequest
 from backend.es.templates.aggs_template import (
     BucketAllTemplate,
     BucketAllWithFilterTemplate,
@@ -17,7 +17,7 @@ from backend.models import ResultField, SearchOptions, SearchQuery, SearchReques
 logger = logging.getLogger(__file__)
 
 
-def build_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
+def build_query(request: SearchRequest, es_request: EsRequest) -> EsRequest:
     if request.query.search_term:
         template = SearchUIQueryTemplate()
         query = template.render(request)
@@ -28,7 +28,7 @@ def build_query(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
     return es_request
 
 
-def build_aggs_and_post_filter(request: SearchRequest, es_request: EsReqeust) -> EsReqeust:
+def build_aggs_and_post_filter(request: SearchRequest, es_request: EsRequest) -> EsRequest:
     post_filters: dict[str, str] = {}
     if request.query.filters:
         for filter in request.query.filters:
@@ -54,16 +54,16 @@ def build_aggs_and_post_filter(request: SearchRequest, es_request: EsReqeust) ->
     return es_request
 
 
-def build_size_offset(query: SearchQuery, es_request: EsReqeust) -> EsReqeust:
+def build_size_offset(query: SearchQuery, es_request: EsRequest) -> EsRequest:
     es_request.from_ = (query.current - 1) * query.results_per_page
     es_request.size = query.results_per_page
     return es_request
 
 
-def build_source(options: SearchOptions, es_request: EsReqeust) -> EsReqeust:
+def build_source(options: SearchOptions, es_request: EsRequest) -> EsRequest:
     if options.result_fields:
         for field in options.result_fields.keys():
-            es_request.source.includes.append(field)
+            es_request._source.includes.append(field)
             if type(options.result_fields[field]) is ResultField and options.result_fields[field].snippet:
                 if es_request.highlight is None:
                     es_request.highlight = EsHighlight()
@@ -72,7 +72,9 @@ def build_source(options: SearchOptions, es_request: EsReqeust) -> EsReqeust:
     return es_request
 
 
-def build_sort(query: SearchQuery, es_request: EsReqeust) -> EsReqeust:
-    if query.sort_list is not None:
-        logger.error("build_sort not implemented yet")
+def build_sort(query: SearchQuery, es_request: EsRequest) -> EsRequest:
+    if query.sort_list:
+        logger.warn("build_sort not implemented yet")
+    else:
+        es_request.sort = [{"_score": "desc"}]
     return es_request

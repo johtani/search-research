@@ -3,7 +3,7 @@ import logging
 import backend.es.request_builder as rb
 import backend.es.response_handler as rh
 from backend.es.config import Config, load_config
-from backend.es.searcher import EsReqeust, EsResponse, EsSearchRepository
+from backend.es.searcher import EsRequest, EsResponse, EsSearchRepository
 from backend.models import SearchRequest, SearchResult
 
 
@@ -20,8 +20,8 @@ class EsTranslator:
         es_response = self.searcher.search(request=es_request)
         return self._translate_response(request=request, es_response=es_response)
 
-    def _translate_request(self, request: SearchRequest) -> EsReqeust:
-        es_req = EsReqeust()
+    def _translate_request(self, request: SearchRequest) -> EsRequest:
+        es_req = EsRequest()
         # qeury rewrite
         es_req = rb.build_query(request=request, es_request=es_req)
         # knn query?

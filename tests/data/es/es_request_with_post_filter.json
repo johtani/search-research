@@ -9,14 +9,22 @@
               "bool": {
                 "should": [
                   {
-                    "term": { "product_brand": "アイリスオーヤマ(IRIS OHYAMA)" }
+                    "term": {
+                      "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+                    }
                   }
                 ]
               }
             },
             {
               "bool": {
-                "should": [{ "term": { "product_color": "ホワイト" } }]
+                "should": [
+                  {
+                    "term": {
+                      "product_color": "ホワイト"
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -29,7 +37,9 @@
           "terms": {
             "field": "product_locale",
             "size": 20,
-            "order": { "_count": "desc" }
+            "order": {
+              "_count": "desc"
+            }
           }
         }
       },
@@ -40,14 +50,22 @@
               "bool": {
                 "should": [
                   {
-                    "term": { "product_brand": "アイリスオーヤマ(IRIS OHYAMA)" }
+                    "term": {
+                      "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+                    }
                   }
                 ]
               }
             },
             {
               "bool": {
-                "should": [{ "term": { "product_color": "ホワイト" } }]
+                "should": [
+                  {
+                    "term": {
+                      "product_color": "ホワイト"
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -60,7 +78,9 @@
           "terms": {
             "field": "product_brand",
             "size": 20,
-            "order": { "_count": "desc" }
+            "order": {
+              "_count": "desc"
+            }
           }
         }
       },
@@ -69,7 +89,13 @@
           "must": [
             {
               "bool": {
-                "should": [{ "term": { "product_color": "ホワイト" } }]
+                "should": [
+                  {
+                    "term": {
+                      "product_color": "ホワイト"
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -82,7 +108,9 @@
           "terms": {
             "field": "product_color",
             "size": 20,
-            "order": { "_count": "desc" }
+            "order": {
+              "_count": "desc"
+            }
           }
         }
       },
@@ -93,7 +121,9 @@
               "bool": {
                 "should": [
                   {
-                    "term": { "product_brand": "アイリスオーヤマ(IRIS OHYAMA)" }
+                    "term": {
+                      "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+                    }
                   }
                 ]
               }
@@ -170,17 +200,38 @@
         {
           "bool": {
             "should": [
-              { "term": { "product_brand": "アイリスオーヤマ(IRIS OHYAMA)" } }
+              {
+                "term": {
+                  "product_brand": "アイリスオーヤマ(IRIS OHYAMA)"
+                }
+              }
             ]
           }
         },
-        { "bool": { "should": [{ "term": { "product_color": "ホワイト" } }] } }
+        {
+          "bool": {
+            "should": [
+              {
+                "term": {
+                  "product_color": "ホワイト"
+                }
+              }
+            ]
+          }
+        }
       ]
     }
   },
   "highlight": {
-    "fields": { "product_title.ja": {}, "product_description.ja": {} }
+    "fields": {
+      "product_title.ja": {},
+      "product_description.ja": {}
+    }
   },
   "from": 0,
-  "sort": [{ "_score": "desc" }]
+  "sort": [
+    {
+      "_score": "desc"
+    }
+  ]
 }
