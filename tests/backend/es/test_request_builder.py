@@ -8,19 +8,19 @@ from backend.es.request_builder import (
     build_size_offset,
     build_source,
 )
-from backend.es.searcher import EsHighlight, EsReqeust, EsRequestSource
+from backend.es.searcher import EsHighlight, EsRequest, EsRequestSource
 from backend.models import Filter, SearchOptions, SearchQuery, SearchRequest
 
 
 @pytest.mark.parametrize(
     ("input", "expected"),
     [
-        (SearchQuery(current=1, results_per_page=20), EsReqeust(size=20, from_=0)),
-        (SearchQuery(current=2, results_per_page=20), EsReqeust(size=20, from_=20)),
+        (SearchQuery(current=1, results_per_page=20), EsRequest(size=20, from_=0)),
+        (SearchQuery(current=2, results_per_page=20), EsRequest(size=20, from_=20)),
     ],
 )
 def test_build_size_offset(input, expected):
-    tmp = EsReqeust()
+    tmp = EsRequest()
     result = build_size_offset(query=input, es_request=tmp)
     assert result == expected
 
@@ -37,14 +37,14 @@ def test_build_size_offset(input, expected):
                     "d": {"snippet": {"size": 3, "fallback": True}},
                 }
             ),
-            EsReqeust(
-                source=EsRequestSource(includes=["a", "b", "c", "d"]), highlight=EsHighlight(fields={"b": {}, "d": {}})
+            EsRequest(
+                _source=EsRequestSource(includes=["a", "b", "c", "d"]), highlight=EsHighlight(fields={"b": {}, "d": {}})
             ),
         )
     ],
 )
 def test_build_source(input, expected):
-    tmp = EsReqeust()
+    tmp = EsRequest()
     result = build_source(options=input, es_request=tmp)
     assert result == expected
 
@@ -57,7 +57,7 @@ def test_build_source(input, expected):
                 query=SearchQuery(search_term="マスク　チェーン"),
                 options=SearchOptions(search_fields={"a": {"weight": 3}, "b": {}, "c": {}}),
             ),
-            EsReqeust(
+            EsRequest(
                 query=json.loads(
                     """
                 {
@@ -97,7 +97,7 @@ def test_build_source(input, expected):
                 query=SearchQuery(search_term=""),
                 options=SearchOptions(search_fields={"a": {"weight": 3}, "b": {}, "c": {}}),
             ),
-            EsReqeust(
+            EsRequest(
                 query=json.loads(
                     """
     { "match_all": {}}
@@ -108,7 +108,7 @@ def test_build_source(input, expected):
     ],
 )
 def test_build_query(input, expected):
-    tmp = EsReqeust()
+    tmp = EsRequest()
     result = build_query(request=input, es_request=tmp)
     assert result == expected
 
@@ -127,7 +127,7 @@ def test_build_query(input, expected):
                     }
                 ),
             ),
-            EsReqeust(
+            EsRequest(
                 aggs=json.loads(
                     """
                     {
@@ -178,7 +178,7 @@ def test_build_query(input, expected):
                     }
                 ),
             ),
-            EsReqeust(
+            EsRequest(
                 post_filter=json.loads(
                     """
                     {
@@ -268,6 +268,6 @@ def test_build_query(input, expected):
     ],
 )
 def test_build_aggs_and_post_filter(input, expected):
-    tmp = EsReqeust()
+    tmp = EsRequest()
     result = build_aggs_and_post_filter(request=input, es_request=tmp)
     assert result == expected

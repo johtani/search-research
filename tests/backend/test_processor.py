@@ -2,7 +2,8 @@ from typing import Any, Dict, List
 
 import pytest
 
-from backend.processor import Pipeline, Processor
+from backend.pipelines import Pipeline
+from backend.processor import Processor
 
 
 # Test for apply_pipelines

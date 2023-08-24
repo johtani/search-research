@@ -1,32 +1,32 @@
-import dataclasses
-from dataclasses import field
+from dataclasses import asdict, dataclass, field
 from typing import Any, Dict, List, Optional, TypedDict, Union
 
+from dataclasses_json import DataClassJsonMixin, config
 from elasticsearch import Elasticsearch
 
 from backend.es.config import Config
 
 
-@dataclasses.dataclass
+@dataclass
 class EsRequestSource:
     includes: List[str] = field(default_factory=list)
 
 
-@dataclasses.dataclass
+@dataclass
 class EsHighlight:
     fields: Dict[str, Any] = field(default_factory=dict)
 
 
-@dataclasses.dataclass
-class EsReqeust:
+@dataclass
+class EsRequest(DataClassJsonMixin):
     query: Any | None = None
     post_filter: Any | None = None
     aggs: Any | None = None
-    from_: int = 0
+    from_: int = field(metadata=config(field_name="from"), default=0)
     size: int = 20
     sort: Any | None = None
     highlight: EsHighlight | None = None
-    source: EsRequestSource = field(default_factory=EsRequestSource)
+    _source: EsRequestSource = field(default_factory=EsRequestSource)
 
 
 class HitItem(TypedDict, total=False):
@@ -60,7 +60,7 @@ class EsSearchRepository:
         self.config = config
         self.esclient = Elasticsearch(config.url)
 
-    def search(self, request: EsReqeust) -> EsResponse:
+    def search(self, request: EsRequest) -> EsResponse:
         res = self.esclient.search(
             index=self.config.index,
             query=request.query,
@@ -68,8 +68,8 @@ class EsSearchRepository:
             from_=request.from_,
             size=request.size,
             post_filter=request.post_filter,
-            highlight=None if request.highlight is None else dataclasses.asdict(request.highlight),
-            source=dataclasses.asdict(request.source),
+            highlight=None if request.highlight is None else asdict(request.highlight),
+            source=asdict(request._source),
         )
         es_res: EsResponse = res.body
         return es_res
