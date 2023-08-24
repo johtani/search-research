@@ -30,6 +30,7 @@ def main():
     esci_path = pathlib.Path(INPUT_DIR)
     LOGGER.info(" Reading parquet file...")
     df_products = pd.read_parquet(esci_path.joinpath(PRODUCT_FILENAME))
+    df_products.sort_values(by="product_id", inplace=True)
 
     LOGGER.info(" Making output path...")
     output_path = pathlib.Path(OUTPUT_DIR)
