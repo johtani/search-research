@@ -6,6 +6,7 @@ echo "START Install"
 sudo apt update
 sudo apt-get install cmake -y
 sudo apt-get install git-lfs
+sudo apt-get install zstd
 sudo chown -R vscode:vscode .
 
 pip install poetry
