@@ -41,6 +41,16 @@ git clone https://github.com/amazon-science/esci-data.git
 
 [shuttie/esci-s： Extra product metadata for the Amazon ESCI dataset](https://github.com/shuttie/esci-s)も利用予定です。
 
+サンプルデータを利用する場合はリポジトリをクローンします。
+
+```
+git clone https://github.com/shuttie/esci-s.git
+```
+
+全データを利用する場合は、[esci-sのリポジトリ](https://github.com/shuttie/esci-s)に記載のある`zst`ファイルをダウンロードして、`esci-s-full`というディレクトリを作って保存してください。
+このファイル用の前処理のプログラム（`tools/extract-esci-s.py`）で想定しているディレクトリになります。
+
+
 ## 対象検索エンジン
 
 検索エンジンは[docker-compose.yml](./docker-compose.yml)でそれぞれサービスとして定義します。
