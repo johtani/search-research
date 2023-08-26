@@ -60,9 +60,16 @@
         "dims": 512,
         "index": true,
         "similarity": "cosine"
+      },
+      "type": {
+        "type": "keyword"
+      },
+      "image": {
+        "type": "keyword",
+        "index": false,
+        "doc_values": false
       }
     }
   },
-  "settings": {
-  }
+  "settings": {}
 }
