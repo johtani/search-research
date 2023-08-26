@@ -1,6 +1,8 @@
 import json
 import logging
+import os
 import pathlib
+import subprocess
 from io import TextIOWrapper
 from pathlib import Path
 from typing import Any, Dict, List
@@ -79,10 +81,13 @@ def main():
             metadata = json.loads(line)
             output_mgr.output_metadata(metadata)
             progress.update()
-
-    # asinを先頭に持ってきたい（どうやる？）
-    # 最後にファイルをソート？
     output_mgr.fp_closes()
+    # 最後にファイルをソート？
+    for file in output_mgr.output_dir.glob("*.json"):
+        file_path = str(file.resolve())
+        subprocess.run(["sort", "-o", file_path.replace(".json", "_sorted.json"), file_path])
+        os.remove(file_path)
+
     LOGGER.info("Finish extract-esci-s")
 
 

@@ -12,7 +12,7 @@ from backend.es.indexer import EsIndexRepository
 from backend.es.processors import SetIdProcessor
 from backend.indexer import Indexer
 from backend.pipelines import Pipeline, PipelineManager
-from backend.processor import MergeProcessor
+from backend.processor import MergeESCISMetadataProcessor, MergeProcessor
 
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
 LOGGER = logging.getLogger(__name__)
@@ -24,8 +24,14 @@ BULK_SIZE = 500
 pipeline_mgr = PipelineManager(
     # TODO define 'ja_clip' somewhere for standardization
     registory={
-        "ja_clip": Pipeline(processors=[SetIdProcessor(), MergeProcessor("ja_clip")]),
-        "raw": Pipeline(processors=[SetIdProcessor()]),
+        "ja_clip": Pipeline(
+            processors=[
+                SetIdProcessor(),
+                MergeESCISMetadataProcessor(target_fields=["image", "type"]),
+                MergeProcessor("ja_clip"),
+            ]
+        ),
+        "raw": Pipeline(processors=[SetIdProcessor(), MergeESCISMetadataProcessor(target_fields=["image", "type"])]),
     }
 )
 
@@ -44,7 +50,8 @@ def parse_args() -> Args:
     parser.add_argument(
         "-d",
         "--delete_if_exists",
-        action="store_false",
+        default=False,
+        action="store_true",
         help="If true, delete the index before indexing if the index exists.",
     )
 
