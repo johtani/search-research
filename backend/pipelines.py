@@ -28,6 +28,19 @@ class Pipeline:
         return {"metadatas": metadatas}
 
 
+class PipelineManager:
+    _registory: Dict[str, Pipeline] = {}
+
+    def __init__(self, registory: Dict[str, Pipeline]) -> None:
+        self._registory = registory
+
+    def pipeline_names(self) -> List[str]:
+        return list(self._registory.keys())
+
+    def get_pipeline(self, name: str) -> Pipeline | None:
+        return self._registory.get(name)
+
+
 class JaClipEncodeProcessor(Processor):
     """
     rinna/japanese-clipを利用して、embeddingsのベクトルを生成してMappingに設定する。
@@ -70,16 +83,3 @@ class JaClipEncodeProcessor(Processor):
             embeddings = self.model.get_text_features(**encodings)[0].tolist()
         doc[self.target_field] = embeddings
         return doc
-
-
-class PipelineManager:
-    _registory: Dict[str, Pipeline] = {}
-
-    def __init__(self, registory: Dict[str, Pipeline]) -> None:
-        self._registory = registory
-
-    def pipeline_names(self) -> List[str]:
-        return list(self._registory.keys())
-
-    def get_pipeline(self, name: str) -> Pipeline | None:
-        return self._registory.get(name)

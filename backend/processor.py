@@ -4,7 +4,10 @@ import json
 import logging
 import pathlib
 from abc import abstractmethod
+from io import TextIOWrapper
 from typing import Any, Dict
+
+import tqdm
 
 
 @dataclasses.dataclass
@@ -69,3 +72,48 @@ class MergeProcessor(Processor):
             self.logger.error(f"Not exist target file[{self.target_dir}/data.json]")
             raise IOError("Cannot read the target file")
         self.fp = open(data_file, "r")
+
+
+class MergeESCISMetadataProcessor(Processor):
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+    BASE_INPUT_DIR = pathlib.Path("./esci-jsonl/raw-esci-s/")
+    fps: Dict[str, TextIOWrapper] = {}
+    target_fields: list[str]
+    skipped: bool = False
+    line: str
+
+    def __init__(self, target_fields: list[str]) -> None:
+        self.target_fields = target_fields
+        self.skip_counter = tqdm.tqdm(desc="skip doc count...", unit="docs")
+
+    def metadata(self) -> Metadata:
+        # TODO No need metadata for MergeProcessor...
+        return Metadata()
+
+    def _find_target_file(self, locale: str) -> TextIOWrapper:
+        fp = self.fps.get(locale, None)
+        if fp is None:
+            fp = open(self.BASE_INPUT_DIR.joinpath(f"esci-s-metadata-{locale}_sorted.json"), "r")
+            self.fps[locale] = fp
+        return fp
+
+    def apply(self, doc: Dict[str, Any]) -> Dict[str, Any]:
+        locale = doc["product_locale"]
+        fp = self._find_target_file(locale)
+        if not self.skipped:
+            self.line = fp.readline()
+        if self.line:
+            product_id = doc["product_id"]
+            esci_s_metadata = json.loads(self.line)
+            if product_id == esci_s_metadata["asin"]:
+                self.skipped = False
+                for key in self.target_fields:
+                    doc[key] = esci_s_metadata.get(key, None)
+            else:
+                self.skipped = True
+                self.logger.debug(f"Difference the product_id: input[{product_id}]  read[{esci_s_metadata['asin']}]")
+                self.skip_counter.update()
+        else:
+            self.logger.info("The end of file...")
+        return doc
