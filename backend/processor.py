@@ -34,10 +34,11 @@ class MergeProcessor(Processor):
     logger.setLevel(logging.INFO)
     BASE_INPUT_DIR = pathlib.Path("./esci-jsonl/")
     target_dir: str
-    skipped: bool = False
+    skipped: bool
     line: str
 
     def __init__(self, target_dir: str):
+        self.skipped = False
         self.target_dir = target_dir
         self._load_data_file()
 
@@ -78,12 +79,14 @@ class MergeESCISMetadataProcessor(Processor):
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
     BASE_INPUT_DIR = pathlib.Path("./esci-jsonl/raw-esci-s/")
-    fps: Dict[str, TextIOWrapper] = {}
+    fps: Dict[str, TextIOWrapper]
     target_fields: list[str]
-    skipped: bool = False
+    skipped: bool
     line: str
 
     def __init__(self, target_fields: list[str]) -> None:
+        self.fps = {}
+        self.skipped = False
         self.target_fields = target_fields
         self.skip_counter = tqdm.tqdm(desc="skip doc count...", unit="docs")
 
