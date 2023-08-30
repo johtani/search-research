@@ -29,9 +29,9 @@ class Pipeline:
 
 
 class PipelineManager:
-    _registory: Dict[str, Pipeline] = {}
+    _registory: Dict[str, Pipeline]
 
-    def __init__(self, registory: Dict[str, Pipeline]) -> None:
+    def __init__(self, registory: Dict[str, Pipeline] = {}) -> None:
         self._registory = registory
 
     def pipeline_names(self) -> List[str]:

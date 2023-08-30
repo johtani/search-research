@@ -22,11 +22,14 @@ METADATA_FILENAME = "esci.json"
 
 
 class OutputManager:
-    output_dir: Path = pathlib.Path("./esci-jsonl/raw-esci-s")
-    review_fp: Dict[str, TextIOWrapper] = {}
-    metadata_fp: Dict[str, TextIOWrapper] = {}
+    output_dir: Path
+    review_fp: Dict[str, TextIOWrapper]
+    metadata_fp: Dict[str, TextIOWrapper]
 
     def __init__(self):
+        self.output_dir = pathlib.Path("./esci-jsonl/raw-esci-s")
+        self.review_fp = {}
+        self.metadata_fp = {}
         LOGGER.info(" Making output path...")
         self.output_dir.mkdir(exist_ok=True, parents=True)
 
