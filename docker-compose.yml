@@ -41,6 +41,16 @@ services:
     entrypoint: >
       sh -c "./bin/elasticsearch-plugin list | grep -q analysis-kuromoji || ./bin/elasticsearch-plugin install analysis-kuromoji; /usr/local/bin/docker-entrypoint.sh"
 
+  vespa:
+    image: vespaengine/vespa:8.216.8
+    container_name: vespa
+    ports:
+      - 8080:8080
+      - 19071:19071
+    volumes:
+      - ./search-engine/vespa/data:/opt/vespa/var
+      - ./search-engine/vespa/logs:/opt/vespa/logs
+
 volumes:
   venv-search-research-backend:
   node-modules-search-research:
