@@ -1,0 +1,6 @@
+schema esci-products {
+    document product {
+        
+    }
+
+}
