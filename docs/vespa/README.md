@@ -38,6 +38,12 @@ Container at http://vespa:19071 is ready
 * hosts.xml：これは複数台構成の時のみ必要
 * schemas/*.sd：スキーマの[設定ファイル](https://docs.vespa.ai/en/reference/schema-reference.html)。どんなフィールドがあって、どんな使い方をするのか？
 
+### スキーマ設計
+
+documentタイプごとに設計できそう？
+
+[フィールドに指定する項目がいくつかある。](https://docs.vespa.ai/en/schemas.html)
+
 
 ## データ登録
 
@@ -53,4 +59,5 @@ Container at http://vespa:19071 is ready
 * コンテントのIDに対して、複数のドキュメントのタイプのデータを入れた場合に、内部のデータ構造がどんな感じで構築されるのか？
 * 親子関係とかJoinのようなものはあるのか？
 * VS Code用の設定ファイル系のプラグインがほしい
+* schema名、document type、content clusterのIDの関係がよくわかっていない
 

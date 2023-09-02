@@ -1,6 +1,44 @@
 schema esci-products {
     document product {
+        field product_id type string {
+            indexing: summary | index
+        }
+
+        field product_title type string {
+            indexing: summary | index
+        }
+
+        field product_description type string {
+            indexing: summary | index
+        }
+
+        field product_description type string {
+            indexing: summary | index
+        }
+
+        field product_bullet_point type string {
+            indexing: summary | index
+        }
+
+        field product_brand type string {
+            indexing: summary | attribute | index
+        }
+
+        field product_color type string {
+            indexing: summary | attribute | index
+        }
+
+        field product_locale type string {
+            indexing: summary | attribute | index
+        }
         
+        field type type string {
+            indexing: summary | attribute | index
+        }
+        
+        field image type string {
+            indexing: summary
+        }
     }
 
 }

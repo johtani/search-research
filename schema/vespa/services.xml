@@ -9,7 +9,7 @@
     </container>
     <content id="esci-products" version="1.0">
         <documents>
-            <document type="mproduct" mode="index" />
+            <document type="product" mode="index" />
         </documents>
         <nodes>
             <node hostalias="node1" distribution-key="0" />
