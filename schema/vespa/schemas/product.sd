@@ -1,14 +1,10 @@
-schema esci-products {
+schema product {
     document product {
         field product_id type string {
             indexing: summary | index
         }
 
         field product_title type string {
-            indexing: summary | index
-        }
-
-        field product_description type string {
             indexing: summary | index
         }
 
@@ -29,7 +25,7 @@ schema esci-products {
         }
 
         field product_locale type string {
-            indexing: summary | attribute | index
+            indexing: summary | attribute 
         }
         
         field type type string {

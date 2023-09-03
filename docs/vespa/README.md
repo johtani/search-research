@@ -44,12 +44,61 @@ documentタイプごとに設計できそう？
 
 [フィールドに指定する項目がいくつかある。](https://docs.vespa.ai/en/schemas.html)
 
+### スキーマなどの登録
+
+Application PackageをVespaのクラスターにデプロイすることで、スキーマなどを登録してデータ登録できるようになる。
+
 
 ## データ登録
 
+vespa cliでデータを登録してみる。
+サンプルドキュメントを[jsonファイル](./sample.json)として用意した。
+登録コマンドは以下の通り（search-researchのディレクトリから実行した場合）。
+
+```
+$ vespa document put docs/vespa/sample.json -t http://vespa:8080
+```
+
+問題なく登録できれば以下の表示がされる（試しに動作させた時に、WSL2のディスク残量が20%を切っていたため、507のエラーが返ってきた。WSL2のディスクを増やすことで暫定対処をした）。
+
+```
+Success: put id:product:product::1
+```
+
+登録データの確認にドキュメントの取得を行ってみる。
+
+```
+$ vespa document get id:product:product::1 -t http://vespa:8080
+```
 
 
 ## 検索
+
+
+検索もしてみる。まずは、全件取得。
+
+```
+$ vespa query "select * from product where true" -t http://vespa:8080
+```
+
+条件指定検索もしてみる。
+
+```
+$ vespa query "select * from product where product_title contains 'title'" -t http://vespa:8080
+```
+
+```
+$ vespa query "select * from product where product_color matches 'yellow'" -t http://vespa:8080
+```
+
+ファセットクエリも書いてみる。
+
+```
+$ vespa query "select * from product where product_title contains 'title' | all(group(product_locale) each(output(count())))"
+ -t http://vespa:8080
+```
+
+サンプルが1件しかないので複数のデータを登録できるようにして再度試してみる予定。
 
 ## まだよくわからないこと
 
@@ -60,4 +109,6 @@ documentタイプごとに設計できそう？
 * 親子関係とかJoinのようなものはあるのか？
 * VS Code用の設定ファイル系のプラグインがほしい
 * schema名、document type、content clusterのIDの関係がよくわかっていない
+* attributeとindexの使い分け方、メモリの使用量などはどうやって決めればいいの？
+* Exact matchとfull-text searchの使い分け方などがまだよくわからない。
 
