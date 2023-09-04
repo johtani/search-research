@@ -1,0 +1,12 @@
+{
+  "put": "id:product:product::1",
+  "fields": {
+    "product_id": "1",
+    "product_title": "product title",
+    "product_description": "description is none",
+    "product_bullet_point": "1. hoge, 2: fuga",
+    "product_brand": "original brand",
+    "product_color": "yellow",
+    "product_locale": "jp"
+  }
+}
