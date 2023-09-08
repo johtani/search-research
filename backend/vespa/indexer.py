@@ -24,7 +24,7 @@ class VespaIndexRepository(IndexRepository):
         self.config = config
         self.client = Vespa(url=self.config.document_url)
 
-    def get_index_name(self):
+    def get_index_name(self) -> str:
         return self.config.index
 
     def create_index(self):
