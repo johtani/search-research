@@ -60,17 +60,18 @@ Docker Desktop、docker composeがインストールされていることを想�
 docker compose up <サービス名>
 ```
 
-で起動します。
+で起動します。DockerコマンドはVS Codeのターミナル（Dev Container内部）ではなく、ホストマシン上での起動を想定しています。
 
 ### 対応済み
 
 * Elasticsearch：サービス名 `es`
   * kuromojiプラグインをインストール済み
+* Vespa：サービス名 `vespa`
+  * Application Packageのデプロイは現在、未対応
 
 ### 対応予定？ 
  
 * OpenSearch
-* Vespa
 * Apache Solr
 * Weaviate
 * Qdrant
@@ -120,6 +121,16 @@ python -m tools.bulk-index-products -h
 
 データ登録処理はElasticsearchのI/Fを元に作っていることもあり、他の検索エンジンでは使いにくい点があるかも知れないです。
 また、用語の違いもあります。
+
+> Vespaを利用する場合
+>
+> Elasticsearchの場合、インデックスが存在しなければ自動で作成する処理が`tools.bulk-index-products`により行われます。
+> Vespaの場合は、現在`vespa`コマンドを利用してApplication Packageをデプロイする必要があります。
+> デプロイコマンドは次の通りです。Application Packageは`schema/vespa`にあります。
+>
+> ```
+> $ vespa deploy -t http://vespa:19071 ./schema/vespa
+> ```
 
 ## サンプル画面で検索
 
