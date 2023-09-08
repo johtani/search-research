@@ -5,7 +5,7 @@ from typing import Any, Callable, Iterable
 
 class IndexRepository:
     @abstractmethod
-    def get_index_name(self):
+    def get_index_name(self) -> str:
         pass
 
     @abstractmethod

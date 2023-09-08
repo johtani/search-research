@@ -16,7 +16,7 @@ class EsIndexRepository(IndexRepository):
         self.config = config
         self.esclient = Elasticsearch(config.url)
 
-    def get_index_name(self):
+    def get_index_name(self) -> str:
         return self.config.index
 
     def create_index(self):
