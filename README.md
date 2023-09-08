@@ -118,6 +118,9 @@ python -m tools.bulk-index-products elasticsearch raw
 python -m tools.bulk-index-products -h
 ```
 
+データ登録処理はElasticsearchのI/Fを元に作っていることもあり、他の検索エンジンでは使いにくい点があるかも知れないです。
+また、用語の違いもあります。
+
 ## サンプル画面で検索
 
 フロントエンド（React + Search UI）からバックエンド（Fast API/Python）を経由して、検索エンジンに検索をするサンプル画面を用意してあります。以下の手順で、バックエンド、フロントエンドを起動して、`http://localhost:3000/`にアクセスすると検索できるようになります。

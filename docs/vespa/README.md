@@ -100,12 +100,24 @@ $ vespa query "select * from product where product_title contains 'title' | all(
 
 サンプルが1件しかないので複数のデータを登録できるようにして再度試してみる予定。
 
+## 構成
+
+Document APIを利用する際に必要な要素がある。
+
+
+```
+GET http://localhost:8080/document/v1/product/product/docid?cluster=esci-products
+```
+
+* cluster : services.xmlのContent ClusterのID
+* namespace : /v1/直後の`product`（**schemaの名前？**）
+* document-type : 2つ目の`product`(schemaのdocumentにつけた名前)
+
 ## まだよくわからないこと
 
 * どんなコンポーネントが存在しているのか？
   * stateless container = 計算資源 = ingest nodeやquery builderなどに相当？返却データの書き換えなどもできそう？
   * contents cluster = データ資源 = shardに相当？
-  * 
 * Vespaの外でやるほうがいいか、document-processorのようなところでやるのがいいのか？
 * どの設定値が動的に変更可能か？
 * コンテントのIDに対して、複数のドキュメントのタイプのデータを入れた場合に、内部のデータ構造がどんな感じで構築されるのか？

@@ -37,6 +37,7 @@ class VespaIndexRepository(IndexRepository):
 
     def delete_index(self):
         # これもできない？
+        # 代わりに全データ削除がいいか？
         pass
 
     def bulk_index(self, actions: Iterable[Any], progress: Callable[..., Any]):
