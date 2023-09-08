@@ -17,11 +17,11 @@ schema product {
         }
 
         field product_brand type string {
-            indexing: summary | attribute | index
+            indexing: summary | attribute
         }
 
         field product_color type string {
-            indexing: summary | attribute | index
+            indexing: summary | attribute
         }
 
         field product_locale type string {
@@ -29,7 +29,7 @@ schema product {
         }
         
         field type type string {
-            indexing: summary | attribute | index
+            indexing: summary | attribute 
         }
         
         field image type string {
