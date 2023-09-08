@@ -2,17 +2,21 @@ import argparse
 import logging
 import pathlib
 from dataclasses import dataclass
+from typing import Dict
 
 import pandas as pd
 import tqdm
 from pandas import DataFrame
 
 import backend.es.config
+import backend.vespa.config
 from backend.es.indexer import EsIndexRepository
 from backend.es.processors import SetIdProcessor
-from backend.indexer import Indexer
+from backend.indexer import Indexer, IndexRepository
 from backend.pipelines import Pipeline, PipelineManager
 from backend.processor import MergeESCISMetadataProcessor, MergeProcessor
+from backend.vespa.indexer import VespaIndexRepository
+from backend.vespa.processor import ConvertVespaDocProcessor
 
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
 LOGGER = logging.getLogger(__name__)
@@ -32,8 +36,27 @@ pipeline_mgr = PipelineManager(
             ]
         ),
         "raw": Pipeline(processors=[SetIdProcessor(), MergeESCISMetadataProcessor(target_fields=["image", "type"])]),
+        "vespa-raw": Pipeline(
+            processors=[MergeESCISMetadataProcessor(target_fields=["image", "type"]), ConvertVespaDocProcessor()]
+        ),
     }
 )
+
+
+_engines: Dict[str, IndexRepository] = {
+    "es": EsIndexRepository(config=backend.es.config.load_config()),
+    "elasticsearch": EsIndexRepository(config=backend.es.config.load_config()),
+    "vespa": VespaIndexRepository(config=backend.vespa.config.load_config()),
+}
+
+
+def get_engines() -> list[str]:
+    return list(_engines.keys())
+
+
+def get_indexer(engine: str) -> Indexer:
+    repository: IndexRepository = _engines[engine]
+    return Indexer(repository=repository)
 
 
 @dataclass
@@ -45,7 +68,7 @@ class Args:
 
 def parse_args() -> Args:
     parser = argparse.ArgumentParser(description="Bulk loader for search engine")
-    parser.add_argument("search_engine", type=str, choices=["elasticsearch", "es"], help="search engine type")
+    parser.add_argument("search_engine", type=str, choices=get_engines(), help="search engine type")
     parser.add_argument("pipeline", type=str, choices=pipeline_mgr.pipeline_names(), help="Pipeline type")
     parser.add_argument(
         "-d",
@@ -69,19 +92,14 @@ def generate_bulk_actions(df: DataFrame, pipeline: Pipeline):
 
 def main():
     args: Args = parse_args()
-    if args.search_engine in ["elasticsearch", "es"]:
-        LOGGER.info(f"Creating {args.search_engine} repository...")
-        config = backend.es.config.load_config()
-        repository = EsIndexRepository(config)
-    else:
-        LOGGER.error(f"Does not support {args.search_engine} yet...")
-        quit()
+    LOGGER.info(f"Creating {args.search_engine} repository...")
+    indexer: Indexer = get_indexer(args.search_engine)
+
     pipeline = pipeline_mgr.get_pipeline(args.pipeline)
     LOGGER.info(f"{args.pipeline=}")
     LOGGER.info(f"{args.delete_if_exists=}")
 
     LOGGER.info("Start bulk indexing to the index...")
-    indexer = Indexer(repository=repository)
     error = indexer.create_index(args.delete_if_exists)
 
     if not error:

@@ -83,12 +83,13 @@ class MergeESCISMetadataProcessor(Processor):
     target_fields: list[str]
     skipped: bool
     line: str
+    skip_counter: tqdm.tqdm
 
     def __init__(self, target_fields: list[str]) -> None:
         self.fps = {}
         self.skipped = False
         self.target_fields = target_fields
-        self.skip_counter = tqdm.tqdm(desc="skip doc count...", unit="docs")
+        self.skip_counter = None
 
     def metadata(self) -> Metadata:
         # TODO No need metadata for MergeProcessor...
@@ -102,6 +103,8 @@ class MergeESCISMetadataProcessor(Processor):
         return fp
 
     def apply(self, doc: Dict[str, Any]) -> Dict[str, Any]:
+        if self.skip_counter is None:
+            self.skip_counter = tqdm.tqdm(desc="skip doc count...", unit="docs")
         locale = doc["product_locale"]
         fp = self._find_target_file(locale)
         if not self.skipped:

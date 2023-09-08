@@ -19,6 +19,7 @@ fastapi = "^0.100.1"
 uvicorn = "^0.23.1"
 pep8-naming = "^0.13.3"
 dataclasses-json = "^0.5.14"
+pyvespa = "^0.37.1"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.3"

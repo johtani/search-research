@@ -26,8 +26,6 @@ Container at http://vespa:19071 is ready
 [アプリケーションパッケージ](https://docs.vespa.ai/en/application-packages.html)には、設定や機械学習のモデルなどが含まれる。
 最低限、services.xmlが必要。そのほかのものは[Application Package Reference](https://docs.vespa.ai/en/reference/application-packages-reference.html)に一覧がある。
 
-
-
 ## インデックス作成
 
 ### Application Packageの用意
@@ -47,6 +45,8 @@ documentタイプごとに設計できそう？
 ### スキーマなどの登録
 
 Application PackageをVespaのクラスターにデプロイすることで、スキーマなどを登録してデータ登録できるようになる。
+
+> ただし、[pyvespa](https://pyvespa.readthedocs.io/en/latest/index.html)はConfig(Deploy) APIを利用するためのクラスがローカル起動した[Dockerコンテナか、VespaCloud](https://github.com/vespa-engine/pyvespa/blob/master/vespa/deployment.py)しか実装されていないように見える。
 
 
 ## データ登録
@@ -100,15 +100,33 @@ $ vespa query "select * from product where product_title contains 'title' | all(
 
 サンプルが1件しかないので複数のデータを登録できるようにして再度試してみる予定。
 
+## 構成
+
+Document APIを利用する際に必要な要素がある。
+
+
+```
+GET http://localhost:8080/document/v1/product/product/docid?cluster=esci-products
+```
+
+* cluster : services.xmlのContent ClusterのID
+* namespace : /v1/直後の`product`（**schemaの名前？**）
+* document-type : 2つ目の`product`(schemaのdocumentにつけた名前)
+
 ## まだよくわからないこと
 
 * どんなコンポーネントが存在しているのか？
+  * stateless container = 計算資源 = ingest nodeやquery builderなどに相当？返却データの書き換えなどもできそう？
+  * contents cluster = データ資源 = shardに相当？
 * Vespaの外でやるほうがいいか、document-processorのようなところでやるのがいいのか？
 * どの設定値が動的に変更可能か？
 * コンテントのIDに対して、複数のドキュメントのタイプのデータを入れた場合に、内部のデータ構造がどんな感じで構築されるのか？
 * 親子関係とかJoinのようなものはあるのか？
 * VS Code用の設定ファイル系のプラグインがほしい
-* schema名、document type、content clusterのIDの関係がよくわかっていない
 * attributeとindexの使い分け方、メモリの使用量などはどうやって決めればいいの？
 * Exact matchとfull-text searchの使い分け方などがまだよくわからない。
+* Application Packageは1つだけが普通なのか？マルチノード構成というものと、マルチテナントの考え方がよくわからない。
+  * tenant=appliaction?
+  * appliaction=index?
+  * schema名、document type、content clusterのIDの関係がよくわかっていない
 
