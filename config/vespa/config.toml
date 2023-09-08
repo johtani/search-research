@@ -1,0 +1,8 @@
+# 管理用接続文字列。
+"admin_url" = "http://vespa:19071"
+# ドキュメント操作用接続文字列。
+"document_url" = "http://vespa:8080"
+# インデックス名
+"index" = "product"
+# スキーマファイルのパス
+"application_package_path" = "./schema/vespa"

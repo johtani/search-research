@@ -9,11 +9,14 @@ import tqdm
 from pandas import DataFrame
 
 import backend.es.config
+import backend.vespa.config
 from backend.es.indexer import EsIndexRepository
 from backend.es.processors import SetIdProcessor
 from backend.indexer import Indexer, IndexRepository
 from backend.pipelines import Pipeline, PipelineManager
 from backend.processor import MergeESCISMetadataProcessor, MergeProcessor
+from backend.vespa.indexer import VespaIndexRepository
+from backend.vespa.processor import ConvertVespaDocProcessor
 
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
 LOGGER = logging.getLogger(__name__)
@@ -33,6 +36,9 @@ pipeline_mgr = PipelineManager(
             ]
         ),
         "raw": Pipeline(processors=[SetIdProcessor(), MergeESCISMetadataProcessor(target_fields=["image", "type"])]),
+        "vespa-raw": Pipeline(
+            processors=[MergeESCISMetadataProcessor(target_fields=["image", "type"]), ConvertVespaDocProcessor()]
+        ),
     }
 )
 
@@ -40,6 +46,7 @@ pipeline_mgr = PipelineManager(
 _engines: Dict[str, IndexRepository] = {
     "es": EsIndexRepository(config=backend.es.config.load_config()),
     "elasticsearch": EsIndexRepository(config=backend.es.config.load_config()),
+    "vespa": VespaIndexRepository(config=backend.vespa.config.load_config()),
 }
 
 
