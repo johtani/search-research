@@ -20,15 +20,15 @@ class TestDocTemplate:
                     id="id_str",
                     raw={"hoge": 1, "fuga": True},
                     fields={
-                        "a": Field(raw="a_str", snippets=None),
-                        "b": Field(raw="b_str", snippets=["b_str_1", "b_str_2"]),
+                        "a": Field(raw='"a_str"', snippets=None),
+                        "b": Field(raw='"b_str"', snippets=['"b_str_1"', "b_str_2"]),
                     },
                 ),
                 {
                     "id": {"raw": "id_str"},
                     "_meta": {"id": "id_str", "rawHit": {"hoge": 1, "fuga": True}},
-                    "a": {"raw": "a_str"},
-                    "b": {"snippet": ["b_str_1", "b_str_2"]},
+                    "a": {"raw": '"a_str"'},
+                    "b": {"snippet": ['"b_str_1"', "b_str_2"]},
                 },
             )
         ],

@@ -30,7 +30,7 @@ class DocTemplate:
         {% if value['snippets'] %}
         "snippet": {{ value.snippets|tojson }}
         {% elif value['raw'] %}
-        "raw": "{{ value.raw }}"
+        "raw": {{ value.raw|tojson }}
         {% endif %}
       }
       {% if not loop.last %}
