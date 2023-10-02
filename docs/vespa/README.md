@@ -106,6 +106,13 @@ $ vespa query "select * from product where product_title contains 'title' | all(
 
 サンプルが1件しかないので複数のデータを登録できるようにして再度試してみる予定。
 
+### フロントエンドとのつなぎこみ
+
+Esでは、検索時に複数のフィールドの条件の組み立てが、リクエストごとに楽にできたがVespaでは[`fieldset`](https://docs.vespa.ai/en/schemas.html#fieldset)という仕組みを用いるとよさそう。
+
+ただし、スキーマの設定として登録する形となるので、フロントエンドからのリクエストにある`search_fields`は現時点では使用しないものとする。
+
+
 ## 構成
 
 Document APIを利用する際に必要な要素がある。

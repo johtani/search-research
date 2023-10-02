@@ -10,14 +10,22 @@ logger = logging.getLogger(__file__)
 
 class YQLTemplate:
     template: Template = Template(
-        source="select {% for field in fields -%}{{field}}{%+ if not loop.last %}, {% endif %}{%- endfor %} from {{index}} where true"
+        source="select {% for field in fields -%}{{field}}{%+ if not loop.last %}, {% endif %}{%- endfor %} from {{index}} where {{condition}}"
     )
 
-    def render(self, index: str, fields: list[str]) -> str:
-        if len(fields) > 0:
-            return self.template.render(index=index, fields=fields).replace("\n", "")
+    def _build_where_conditions(self, search_term: str) -> str:
+        if len(search_term) > 0:
+            return f"default contains {search_term}"
         else:
-            return self.template.render(index=index, fields=["*"]).replace("\n", "")
+            # 条件指定なしという意味のtrue
+            return "true"
+
+    def render(self, index: str, fields: list[str], search_term: str) -> str:
+        condition: str = self._build_where_conditions(search_term=search_term)
+        if len(fields) > 0:
+            return self.template.render(index=index, condition=condition, fields=fields).replace("\n", "")
+        else:
+            return self.template.render(index=index, condition=condition, fields=["*"]).replace("\n", "")
 
 
 class VespaRequestBuilder:
@@ -25,6 +33,7 @@ class VespaRequestBuilder:
     offset: int
     fields: list[str]
     index: str
+    search_term: str
     yql_template: YQLTemplate
 
     def __init__(self, index: str):
@@ -32,11 +41,14 @@ class VespaRequestBuilder:
         self.hits = 0
         self.fields = []
         self.index = index
+        self.search_term = ""
         self.yql_template = YQLTemplate()
 
     def build(self) -> VespaRequest:
         req = VespaRequest(
-            offset=self.offset, hits=self.hits, yql=self.yql_template.render(index=self.index, fields=self.fields)
+            offset=self.offset,
+            hits=self.hits,
+            yql=self.yql_template.render(index=self.index, fields=self.fields, search_term=self.search_term),
         )
         return req
 
@@ -48,9 +60,8 @@ class VespaRequestBuilder:
         for field in options.result_fields.keys():
             self.fields.append(field)
 
-    def conditions(self, request: SearchRequest):
-        # parse and build where clauses
-        pass
+    def conditions(self, query: SearchQuery):
+        self.search_term = query.search_term
 
     def grouping(self, request: SearchRequest):
         # parse and build grouping

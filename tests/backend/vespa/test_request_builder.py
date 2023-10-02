@@ -49,3 +49,18 @@ def test_only_summary_fields(target: VespaRequestBuilder, input, expected):
     target.summary_fields(options=input)
     result = target.build()
     assert result == expected
+
+
+@pytest.mark.parametrize(
+    ("input", "expected"),
+    [
+        (
+            SearchQuery(search_term="term"),
+            VespaRequest(yql="select * from index where default contains term", offset=0, hits=0),
+        )
+    ],
+)
+def test_only_conditions(target: VespaRequestBuilder, input, expected):
+    target.conditions(query=input)
+    result = target.build()
+    assert result == expected

@@ -25,7 +25,7 @@ class VespaTranslator(SearchEngineTranslator):
         # set summary fields
         builder.summary_fields(options=request.options)
         # build where condition
-        builder.conditions(request=request)
+        builder.conditions(query=request.query)
         # set limit / offset
         builder.limit_offset(query=request.query)
         # grouping (facets)
