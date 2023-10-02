@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.es.search_engine_translator import EsTranslator
 from backend.models import SearchRequest
+from backend.search_engine_translator import SearchEngineTranslator
 
 app = FastAPI()
 
@@ -27,12 +28,13 @@ app.add_middleware(
 
 logger = logging.getLogger("uvicorn")
 
-translator = EsTranslator()
+_translators: dict[str, SearchEngineTranslator] = {"es": EsTranslator()}
 
 
 @app.post("/search")
 async def search(request: SearchRequest):
     logger.debug(f"{request=}")
+    translator = _translators["es"]
     return translator.translate_and_search(request)
 
 

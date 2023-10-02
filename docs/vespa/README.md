@@ -48,6 +48,12 @@ Application PackageをVespaのクラスターにデプロイすることで、�
 
 > ただし、[pyvespa](https://pyvespa.readthedocs.io/en/latest/index.html)はConfig(Deploy) APIを利用するためのクラスがローカル起動した[Dockerコンテナか、VespaCloud](https://github.com/vespa-engine/pyvespa/blob/master/vespa/deployment.py)しか実装されていないように見える。
 
+今はvespa CLIのdeployで登録することとする
+
+```
+vespa -t http://vespa:19071 deploy schema/vespa/
+```
+
 
 ## データ登録
 

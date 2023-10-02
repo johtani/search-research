@@ -36,5 +36,7 @@ schema product {
             indexing: summary
         }
     }
-
+    fieldset default {
+        fields: product_title, product_description, product_bullet_point
+    }
 }

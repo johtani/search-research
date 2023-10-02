@@ -5,9 +5,10 @@ import backend.es.response_handler as rh
 from backend.es.config import Config, load_config
 from backend.es.searcher import EsRequest, EsResponse, EsSearchRepository
 from backend.models import SearchRequest, SearchResult
+from backend.search_engine_translator import SearchEngineTranslator
 
 
-class EsTranslator:
+class EsTranslator(SearchEngineTranslator):
     logger = logging.getLogger("EsTranslator")
 
     def __init__(self) -> None:
