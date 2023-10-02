@@ -2,7 +2,7 @@ import logging
 
 from jinja2 import Template
 
-from backend.models import SearchOptions, SearchQuery, SearchRequest
+from backend.models import SearchOptions, SearchQuery
 from backend.vespa.searcher import VespaRequest
 
 logger = logging.getLogger(__file__)
@@ -28,13 +28,36 @@ class YQLTemplate:
             return self.template.render(index=index, condition=condition, fields=["*"]).replace("\n", "")
 
 
+class GroupingTemplate:
+    template: Template = Template(source="all(group({{field}}) order(-count()) each(output(count())))")
+
+    def render(self, field: str) -> str:
+        return self.template.render(field=field)
+
+
+class GroupingAllTemplate:
+    template: Template = Template(source="all({% for grouping in groupings %}{{grouping}} {% endfor %})")
+
+    def render(self, facets: list[str]) -> str:
+        if facets is None or len(facets) == 0:
+            return ""
+        else:
+            grouping_template: GroupingTemplate = GroupingTemplate()
+            groupings: list[str] = []
+            for facet in facets:
+                groupings.append(grouping_template.render(facet))
+            return self.template.render(groupings=groupings)
+
+
 class VespaRequestBuilder:
     hits: int
     offset: int
     fields: list[str]
     index: str
     search_term: str
+    facets: list[str]
     yql_template: YQLTemplate
+    grouping_template: GroupingAllTemplate
 
     def __init__(self, index: str):
         self.offset = 0
@@ -42,13 +65,16 @@ class VespaRequestBuilder:
         self.fields = []
         self.index = index
         self.search_term = ""
+        self.facets = []
         self.yql_template = YQLTemplate()
+        self.grouping_template = GroupingAllTemplate()
 
     def build(self) -> VespaRequest:
         req = VespaRequest(
             offset=self.offset,
             hits=self.hits,
             yql=self.yql_template.render(index=self.index, fields=self.fields, search_term=self.search_term),
+            select=self.grouping_template.render(facets=self.facets),
         )
         return req
 
@@ -63,6 +89,7 @@ class VespaRequestBuilder:
     def conditions(self, query: SearchQuery):
         self.search_term = query.search_term
 
-    def grouping(self, request: SearchRequest):
-        # parse and build grouping
-        pass
+    def grouping(self, options: SearchOptions):
+        # TODO need type?
+        for facet in options.facets.keys():
+            self.facets.append(facet)

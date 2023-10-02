@@ -29,7 +29,7 @@ class VespaTranslator(SearchEngineTranslator):
         # set limit / offset
         builder.limit_offset(query=request.query)
         # grouping (facets)
-        builder.grouping(request=request)
+        builder.grouping(options=request.options)
 
         return builder.build()
 

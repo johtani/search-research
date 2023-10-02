@@ -13,6 +13,7 @@ class VespaRequest(DataClassJsonMixin):
     offset: int = 0
     type_: str = field(metadata=config(field_name="type"), default="all")
     ranking: str = ""
+    select: str = ""
 
 
 @dataclass

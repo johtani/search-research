@@ -64,3 +64,51 @@ def test_only_conditions(target: VespaRequestBuilder, input, expected):
     target.conditions(query=input)
     result = target.build()
     assert result == expected
+
+
+@pytest.mark.parametrize(
+    ("input", "expected"),
+    [
+        (
+            SearchOptions(facets={"a": {"type": "value"}}),
+            VespaRequest(
+                yql="select * from index where true",
+                offset=0,
+                hits=0,
+                select="all(all(group(a) order(-count()) each(output(count()))) )",
+            ),
+        )
+    ],
+)
+def test_a_grouping(target: VespaRequestBuilder, input, expected):
+    target.grouping(options=input)
+    result = target.build()
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    ("input", "expected"),
+    [
+        (
+            SearchOptions(
+                facets={
+                    "a": {"type": "value"},
+                    "b": {"type": "value", "sort": {"key": "asc"}},
+                    "c": {"type": "value", "size": 30},
+                }
+            ),
+            VespaRequest(
+                yql="select * from index where true",
+                offset=0,
+                hits=0,
+                select="all(all(group(a) order(-count()) each(output(count()))) \
+                    all(group(b) order(-count()) each(output(count()))) all(group(c) order(-count()) each(output(count()))) )",
+            ),
+        )
+    ],
+)
+def test_groupings(target: VespaRequestBuilder, input, expected):
+    # TODO do not support sort option in facet currently
+    target.grouping(options=input)
+    result = target.build()
+    assert result == expected
