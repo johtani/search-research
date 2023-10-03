@@ -15,7 +15,7 @@ class YQLTemplate:
 
     def _build_where_conditions(self, search_term: str) -> str:
         if len(search_term) > 0:
-            return f"default contains {search_term}"
+            return f'default contains "{search_term}"'
         else:
             # 条件指定なしという意味のtrue
             return "true"

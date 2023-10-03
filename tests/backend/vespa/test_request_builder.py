@@ -56,7 +56,7 @@ def test_only_summary_fields(target: VespaRequestBuilder, input, expected):
     [
         (
             SearchQuery(search_term="term"),
-            VespaRequest(yql="select * from index where default contains term", offset=0, hits=0),
+            VespaRequest(yql='select * from index where default contains "term"', offset=0, hits=0),
         )
     ],
 )
@@ -102,7 +102,7 @@ def test_a_grouping(target: VespaRequestBuilder, input, expected):
                 offset=0,
                 hits=0,
                 select="all(all(group(a) order(-count()) each(output(count()))) \
-                    all(group(b) order(-count()) each(output(count()))) all(group(c) order(-count()) each(output(count()))) )",
+all(group(b) order(-count()) each(output(count()))) all(group(c) order(-count()) each(output(count()))) )",
             ),
         )
     ],
