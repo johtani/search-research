@@ -1,5 +1,6 @@
 import logging
 
+import backend.vespa.response_handler as rh
 from backend.models import SearchRequest, SearchResult
 from backend.search_engine_translator import SearchEngineTranslator
 from backend.vespa.config import Config, load_config
@@ -18,7 +19,7 @@ class VespaTranslator(SearchEngineTranslator):
         vespa_req = self._translate_request(request=request)
         self.logger.debug(f"{vespa_req=}")
         vespa_res = self.searcher.search(request=vespa_req)
-        return self._translate_response(response=vespa_res)
+        return self._translate_response(search_request=request, response=vespa_res)
 
     def _translate_request(self, request: SearchRequest) -> VespaRequest:
         builder: VespaRequestBuilder = VespaRequestBuilder(index=self.config.index)
@@ -34,9 +35,10 @@ class VespaTranslator(SearchEngineTranslator):
 
         return builder.build()
 
-    def _translate_response(self, response: VespaResponse) -> SearchResult:
+    def _translate_response(self, search_request: SearchRequest, response: VespaResponse) -> SearchResult:
         res = SearchResult()
         # build summary
-        # build hits
-        # build facets
+        res = rh.translate_summary(search_request=search_request, vespa_res=response, search_result=res)
+        # build hits and facets
+        res = rh.translate_results_and_facets(vespa_res=response, search_request=search_request, search_result=res)
         return res

@@ -1,7 +1,9 @@
 from dataclasses import asdict, dataclass, field
+from typing import Dict, List
 
 from dataclasses_json import DataClassJsonMixin, config
 from vespa.application import Vespa
+from vespa.io import VespaQueryResponse
 
 from backend.vespa.config import Config
 
@@ -18,8 +20,18 @@ class VespaRequest(DataClassJsonMixin):
 
 @dataclass
 class VespaResponse:
+    orig_res: VespaQueryResponse
+
     def __init__(self, orig_res):
-        pass
+        self.orig_res = orig_res
+
+    @property
+    def number_of_hits(self) -> int:
+        return self.orig_res.number_documents_retrieved
+
+    @property
+    def hits(self) -> List[Dict]:
+        return self.orig_res.hits
 
 
 class VespaSearchRepository:
